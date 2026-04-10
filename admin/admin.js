@@ -136,7 +136,10 @@ document.getElementById('searchInput')?.addEventListener('input', function(e) {
     searchTerm = e.target.value;
     renderUsersTable();
 });
-
+// أضف هذا الكود في admin.js
+document.getElementById('manageAppointmentsBtn')?.addEventListener('click', () => {
+    window.location.href = 'appointments.html';
+});
 // ============================================
 // تهيئة الصفحة
 // ============================================
