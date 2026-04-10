@@ -39,10 +39,28 @@
         <div class="stat-label">تحميلات الكتيبات</div>
       </div>
     </div>
-    <!-- في admin.html، أضف هذا الزر -->
-<button class="admin-action-btn" id="manageAppointmentsBtn">
-    <i class="fas fa-calendar-alt"></i> إدارة المواعيد
-</button>
+ <!-- Admin Actions Section -->
+<div class="admin-actions">
+  <button class="admin-action-btn" id="manageAppointmentsBtn">
+    <i class="fas fa-calendar-alt"></i> 
+    <span>إدارة المواعيد</span>
+  </button>
+  
+  <button class="admin-action-btn" id="exportDataBtn">
+    <i class="fas fa-file-export"></i> 
+    <span>تصدير البيانات</span>
+  </button>
+  
+  <button class="admin-action-btn" id="clearAllDataBtn">
+    <i class="fas fa-trash-alt"></i> 
+    <span>مسح جميع البيانات</span>
+  </button>
+  
+  <button class="admin-action-btn" id="backupDataBtn">
+    <i class="fas fa-database"></i> 
+    <span>نسخ احتياطي</span>
+  </button>
+</div>
     <!-- Users Table -->
     <div class="users-table-container">
       <h3><i class="fas fa-users"></i> قائمة المستخدمين المسجلين</h3>
