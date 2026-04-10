@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة المستخدم - قلب السكري</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <div class="logo">
+        <span class="logo-heart">❤️</span>
+        <h1>قلب السكري</h1>
+      </div>
+      <div class="user-info">
+        <i class="fas fa-user-circle"></i>
+        <span id="userName"></span>
+        <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+      </div>
+    </div>
+    
+    <div class="dashboard-content">
+      <!-- Health Stats Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-chart-line"></i> متابعة القراءات الطبية</h3>
+        <div class="reading-item">
+          <span>السكري التراكمي HBA1c:</span>
+          <span id="hba1c">--</span>%
+        </div>
+        <div class="reading-item">
+          <span>ضغط الدم:</span>
+          <span id="bp">--</span> mmHg
+        </div>
+        <div class="reading-item">
+          <span>الكوليسترول LDL:</span>
+          <span id="cholesterol">--</span> mg/dL
+        </div>
+        <div class="reading-item">
+          <span>سكر الصائم:</span>
+          <span id="fastingSugar">--</span> mg/dL
+        </div>
+        <button class="card-btn" id="updateReadingsBtn">تحديث القراءات</button>
+      </div>
+      
+      <!-- Risk Test Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-exclamation-triangle"></i> اختبار سريع</h3>
+        <p>هل أنت في خطر؟ أجب عن الأسئلة التالية لتقييم خطر الإصابة بأمراض القلب</p>
+        <button class="card-btn" id="riskTestBtn">ابدأ الاختبار</button>
+      </div>
+      
+      <!-- BMI Calculator Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-calculator"></i> حاسبة BMI</h3>
+        <p>احسب وزنك المثالي ومعرفة مؤشر كتلة الجسم</p>
+        <button class="card-btn" id="bmiBtn">احسب BMI</button>
+      </div>
+      
+      <!-- Appointments Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-calendar-alt"></i> مفكرة المواعيد</h3>
+        <ul class="appointments-list" id="appointmentsList">
+          <li style="text-align: center; color: #999;">لا توجد مواعيد مسجلة</li>
+        </ul>
+        <button class="card-btn" id="addAppointmentBtn">+ إضافة موعد جديد</button>
+      </div>
+      
+      <!-- Daily Tips Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-lightbulb"></i> نصائح يومية</h3>
+        <div class="tip-text" id="dailyTip"></div>
+        <button class="card-btn" id="newTipBtn">نصيحة جديدة</button>
+      </div>
+      
+      <!-- Downloads Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-download"></i> تحميلات مفيدة</h3>
+        <div class="download-buttons">
+          <button class="download-btn" data-download="guide">📄 دليل الأزمة القلبية الصامتة</button>
+          <button class="download-btn" data-download="carte">🪪 بطاقة المريض</button>
+          <button class="download-btn" data-download="alimentation">🥗 دليل التغذية</button>
+        </div>
+      </div>
+      
+      <!-- Stats Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-chart-simple"></i> إحصائياتك</h3>
+        <div class="reading-item">
+          <span>عدد مرات تسجيل الدخول:</span>
+          <span id="loginCount">0</span>
+        </div>
+        <div class="reading-item">
+          <span>آخر تسجيل دخول:</span>
+          <span id="lastLogin"></span>
+        </div>
+        <div class="reading-item">
+          <span>عضو منذ:</span>
+          <span id="memberSince"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="dashboard.js"></script>
+</body>
+</html>

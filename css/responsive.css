@@ -1,0 +1,241 @@
+/* Responsive Styles */
+
+/* Tablet View */
+@media (max-width: 1024px) {
+  :root {
+    --container-padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .hero .container {
+    flex-direction: column;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .about-content {
+    flex-direction: column;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .about-text .section-header {
+    text-align: center;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-actions {
+    gap: var(--spacing-2);
+  }
+
+  .login-btn, .register-btn {
+    display: none;
+  }
+
+  /* This mobile menu will be controlled by JavaScript */
+  .nav-links.mobile-active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-white);
+    padding: var(--spacing-4);
+    box-shadow: var(--shadow-md);
+    z-index: var(--z-30);
+  }
+
+  /* Menu active state */
+  .menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .charity-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--spacing-4);
+    text-align: center;
+  }
+
+  .medications-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: var(--spacing-3);
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+  }
+
+  .pharmacy-map {
+    height: 300px;
+  }
+
+  .about-stats {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+}
+
+/* Small Mobile View */
+@media (max-width: 480px) {
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-btn {
+    position: static;
+    width: 100%;
+    margin-top: var(--spacing-2);
+    border-radius: var(--border-radius-md);
+  }
+
+  .search-input {
+    border-radius: var(--border-radius-md);
+  }
+
+  .location-btn {
+    position: absolute;
+    right: var(--spacing-3);
+  }
+
+  .medications-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    max-width: 90%;
+  }
+}
+
+/* Dark Mode - This will be toggled by JavaScript */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-white: #1A1A1A;
+    --color-black: #FFFFFF;
+    --color-gray-100: #333333;
+    --color-gray-200: #444444;
+    --color-gray-300: #555555;
+    --color-gray-400: #666666;
+    --color-gray-500: #777777;
+    --color-gray-600: #999999;
+    --color-gray-700: #BBBBBB;
+    --color-gray-800: #DDDDDD;
+    --color-gray-900: #EEEEEE;
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-gray-900);
+  }
+
+  .hero {
+    background: linear-gradient(135deg, white 0%, white 100%);
+  }
+
+  .header {
+    background-color: rgba(26, 26, 26, 0.9);
+  }
+
+  .modal {
+    background-color: var(--color-gray-100);
+  }
+
+  .form-divider span {
+    background-color: var(--color-gray-100);
+  }
+
+  .notification {
+    background-color: var(--color-gray-100);
+  }
+
+  /* Other dark mode specific overrides */
+}

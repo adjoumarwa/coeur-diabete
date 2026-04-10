@@ -1,0 +1,143 @@
+.auth-main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.auth-container {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.auth-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #dc2626, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 30px;
+}
+
+.auth-container h2 i {
+  color: #dc2626;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.auth-container input:focus {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #dc2626, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  display: none;
+  background: #fee2e2;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.auth-link {
+  margin-top: 20px;
+  color: #64748b;
+}
+
+.auth-link a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.show-password {
+  text-align: left;
+  margin-top: 5px;
+}
+
+.show-password button {
+  background: none;
+  border: none;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.demo-users {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.demo-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.demo-btn {
+  padding: 8px 15px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+}
+
+.demo-btn.admin {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.demo-btn.user {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.demo-btn:hover {
+  transform: scale(1.05);
+}

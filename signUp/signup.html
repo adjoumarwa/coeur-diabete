@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب - قلب السكري</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-main">
+    <div class="auth-container">
+      <h2><i class="fas fa-heart"></i> قلب السكري</h2>
+      <h3 style="margin-bottom: 20px; color: #1e293b;">📝 إنشاء حساب جديد</h3>
+      
+      <form id="signupForm">
+        <input type="text" id="name" placeholder="الاسم الكامل" required>
+        <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+        <input type="password" id="password" placeholder="كلمة المرور (6 أحرف على الأقل)" required>
+        <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+        
+        <div id="errorMessage" class="error-message"></div>
+        
+        <button type="submit" class="auth-btn">
+          <i class="fas fa-user-plus"></i> إنشاء حساب
+        </button>
+      </form>
+      
+      <div class="auth-link">
+        لديك حساب بالفعل؟ <a href="login.html">تسجيل دخول</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const errorDiv = document.getElementById('errorMessage');
+      
+      if (!name) {
+        errorDiv.textContent = "❌ الرجاء إدخال الاسم الكامل";
+        errorDiv.style.display = "block";
+        return;
+      }
+      
+      if (!email.includes("@") || !email.includes(".")) {
+        errorDiv.textContent = "❌ البريد الإلكتروني غير صحيح";
+        errorDiv.style.display = "block";
+        return;
+      }
+      
+      if (password.length < 6) {
+        errorDiv.textContent = "❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
+        errorDiv.style.display = "block";
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        errorDiv.textContent = "❌ كلمة المرور وتأكيدها غير متطابقين";
+        errorDiv.style.display = "block";
+        return;
+      }
+      
+      let users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      
+      if (users.find(u => u.email === email)) {
+        errorDiv.textContent = "❌ هذا البريد الإلكتروني مسجل مسبقاً";
+        errorDiv.style.display = "block";
+        return;
+      }
+      
+      users.push({
+        name: name,
+        email: email,
+        password: password,
+        type: 'user',
+        registeredAt: new Date().toISOString()
+      });
+      
+      localStorage.setItem('registeredUsers', JSON.stringify(users));
+      
+      alert('✅ تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

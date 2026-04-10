@@ -1,0 +1,353 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fef2f2 0%, #eff6ff 100%);
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+  color: white;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(185, 28, 28, 0.3);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #fff, #fca5a5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo-heart {
+  font-size: 2rem;
+  animation: heartbeat 1.5s ease infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.nav-link:hover {
+  color: #fca5a5;
+  transform: translateY(-2px);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.login-btn, .register-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.login-btn {
+  background: transparent;
+  border: 2px solid #fca5a5;
+  color: white;
+}
+
+.login-btn:hover {
+  background: #fca5a5;
+  color: #7f1d1d;
+}
+
+.register-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.register-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.btn-urgence {
+  background: #dc2626;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+}
+
+.btn-urgence:hover {
+  background: #991b1b;
+  transform: scale(1.05);
+  animation: none;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  border: 1px solid rgba(220, 38, 38, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  background: linear-gradient(135deg, #dc2626, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  border-right: 5px solid #dc2626;
+  padding-right: 1rem;
+}
+
+.symptoms-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.symptom-box {
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+.symptom-classique {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-right: 5px solid #dc2626;
+}
+
+.symptom-atypique {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-right: 5px solid #2563eb;
+}
+
+.symptom-box h3 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.symptom-box ul {
+  list-style: none;
+  padding-right: 0;
+}
+
+.symptom-box li {
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.symptom-classique li i { color: #dc2626; }
+.symptom-atypique li i { color: #2563eb; }
+
+.monitoring-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.monitoring-table th, .monitoring-table td {
+  border: 1px solid #e2e8f0;
+  padding: 12px;
+  text-align: center;
+}
+
+.monitoring-table th {
+  background: linear-gradient(135deg, #dc2626, #2563eb);
+  color: white;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.tool-card {
+  background: linear-gradient(135deg, #fef2f2, #eff6ff);
+  padding: 1.5rem;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.tool-card:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #fee2e2, #dbeafe);
+}
+
+.tool-card i {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #dc2626, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 1rem;
+}
+
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.download-card {
+  background: linear-gradient(135deg, #dc2626, #2563eb);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.download-card:hover {
+  transform: translateY(-5px);
+}
+
+.footer {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: white;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.date-input {
+  padding: 10px;
+  margin-left: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.save-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #dc2626, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+    flex-direction: column;
+    padding: 1rem;
+    text-align: center;
+    gap: 1rem;
+  }
+  .nav-links.active { display: flex; }
+  .menu-toggle { display: flex; }
+  .symptoms-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 1.8rem; }
+}

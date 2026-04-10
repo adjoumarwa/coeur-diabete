@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة المدير - قلب السكري</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <div class="admin-header">
+      <div class="logo">
+        <span class="logo-heart">❤️</span>
+        <h1>قلب السكري - مدير النظام</h1>
+      </div>
+      <div class="user-info">
+        <i class="fas fa-crown"></i>
+        <span id="adminName"></span>
+        <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+      </div>
+    </div>
+    
+    <!-- Statistics -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <div class="stat-number" id="totalUsers">0</div>
+        <div class="stat-label">إجمالي المستخدمين</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-calendar-check"></i>
+        <div class="stat-number" id="totalAppointments">0</div>
+        <div class="stat-label">مواعيد مسجلة</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-download"></i>
+        <div class="stat-number" id="totalDownloads">0</div>
+        <div class="stat-label">تحميلات الكتيبات</div>
+      </div>
+    </div>
+    
+    <!-- Users Table -->
+    <div class="users-table-container">
+      <h3><i class="fas fa-users"></i> قائمة المستخدمين المسجلين</h3>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 بحث عن مستخدم...">
+      </div>
+      <table class="users-table">
+        <thead>
+          <tr><th>#</th><th>المستخدم</th><th>البريد الإلكتروني</th><th>تاريخ التسجيل</th><th>مرات الدخول</th><th>إجراءات</th></tr>
+        </thead>
+        <tbody id="usersTableBody"></tbody>
+       </table>
+    </div>
+  </div>
+  
+  <script src="admin.js"></script>
+</body>
+</html>

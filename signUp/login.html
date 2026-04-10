@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول - قلب السكري</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-main">
+    <div class="auth-container">
+      <h2><i class="fas fa-heart"></i> قلب السكري</h2>
+      <h3 style="margin-bottom: 20px; color: #1e293b;">🔐 تسجيل الدخول</h3>
+      
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+        <input type="password" id="password" placeholder="كلمة المرور" required>
+        
+        <div class="show-password">
+          <button type="button" onclick="window.authHelpers.togglePassword()">
+            <i class="fas fa-eye"></i> إظهار/إخفاء كلمة المرور
+          </button>
+        </div>
+        
+        <div id="errorMessage" class="error-message"></div>
+        
+        <button type="submit" class="auth-btn">
+          <i class="fas fa-sign-in-alt"></i> دخول
+        </button>
+      </form>
+      
+      <div class="auth-link">
+        ليس لديك حساب؟ <a href="signup.html">إنشاء حساب جديد</a>
+      </div>
+      
+      <div class="demo-users">
+        <h4><i class="fas fa-user-friends"></i> حسابات تجريبية</h4>
+        <div class="demo-buttons">
+          <button class="demo-btn admin" onclick="window.authHelpers.fillAdminCredentials()">
+            <i class="fas fa-crown"></i> مدير
+          </button>
+          <button class="demo-btn user" onclick="window.authHelpers.fillUserCredentials()">
+            <i class="fas fa-user"></i> مستخدم عادي
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('errorMessage');
+      
+      if (!email.includes("@") || !email.includes(".")) {
+        errorDiv.textContent = "❌ البريد الإلكتروني غير صحيح!";
+        errorDiv.style.display = "block";
+        return;
+      }
+      
+      if (password.length < 6) {
+        errorDiv.textContent = "❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
+        errorDiv.style.display = "block";
+        return;
+      }
+      
+      const result = window.authHelpers.login(email, password);
+      
+      if (result.success) {
+        errorDiv.style.display = "none";
+        alert(`✅ مرحباً ${result.userName}! تم تسجيل الدخول بنجاح`);
+        
+        if (result.userType === 'admin') {
+          window.location.href = "../admin/admin.html";
+        } else {
+          window.location.href = "../dashboard/dashboard.html";
+        }
+      } else {
+        errorDiv.textContent = "❌ " + result.message;
+        errorDiv.style.display = "block";
+      }
+    });
+    
+    // التحقق من وجود مستخدم مسجل دخول مسبقاً
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      const user = JSON.parse(currentUser);
+      if (user.type === 'admin') window.location.href = "../admin/admin.html";
+      else window.location.href = "../dashboard/dashboard.html";
+    }
+  </script>
+</body>
+</html>
