@@ -112,7 +112,7 @@ document.getElementById('userName').textContent = user.name;
 // ============================================
 document.getElementById('logoutBtn').addEventListener('click', () => {
     localStorage.removeItem('currentUser');
-    window.location.href = '../Signup/login.html';
+    window.location.href = '../index.html';
 });
 
 // ============================================
