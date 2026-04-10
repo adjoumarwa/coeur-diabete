@@ -172,3 +172,12 @@
   transform: scaleX(1);
   transform-origin: left;
 }
+/* أزرار دائرية */
+.admin-action-btn.circle {
+  border-radius: 50px;
+  padding: 12px 24px;
+}
+
+.admin-action-btn.circle i {
+  font-size: 1.3rem;
+}
