@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>قلب السكري | التوعية بمخاطر القلب والسكري</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <header class="header">
@@ -13,19 +13,23 @@
       <nav class="navbar">
         <div class="logo">
           <span class="logo-heart">❤️</span>
-          <span class="logo-text">قلب السكري</span>
+          <span class="logo-text" id="logoText">قلب السكري</span>
         </div>
         <div class="nav-links">
-          <a href="#home" class="nav-link">الرئيسية</a>
-          <a href="#comprendre" class="nav-link">افهم مرضك</a>
-          <a href="#signes" class="nav-link">علامات الخطر</a>
-          <a href="#prevention" class="nav-link">الوقاية</a>
-          <a href="#outils" class="nav-link">أدوات تفاعلية</a>
-          <a href="#telechargements" class="nav-link">تحميلات</a>
+          <a href="#home" class="nav-link" id="navHome">الرئيسية</a>
+          <a href="#comprendre" class="nav-link" id="navComprendre">افهم مرضك</a>
+          <a href="#signes" class="nav-link" id="navSignes">علامات الخطر</a>
+          <a href="#prevention" class="nav-link" id="navPrevention">الوقاية</a>
+          <a href="#outils" class="nav-link" id="navOutils">أدوات تفاعلية</a>
+          <a href="#telechargements" class="nav-link" id="navTelechargements">تحميلات</a>
         </div>
         <div class="nav-actions">
-          <button class="login-btn" id="loginBtn"><a href="signUp/login.html" style="color: inherit; text-decoration: none;">دخول</a></button>
-          <button class="register-btn" id="registerBtn"><a href="signUp/signup.html" style="color: inherit; text-decoration: none;">تسجيل</a></button>
+          <button class="lang-btn" id="langBtn">
+            <i class="fas fa-globe"></i>
+            <span id="langText">FR</span>
+          </button>
+          <button class="login-btn" id="loginBtn"><a href="signup/login.html" id="loginLink" style="color: inherit; text-decoration: none;">دخول</a></button>
+          <button class="register-btn" id="registerBtn"><a href="signup/signup.html" id="registerLink" style="color: inherit; text-decoration: none;">تسجيل</a></button>
         </div>
         <button class="menu-toggle" id="menuToggle">
           <span class="bar"></span>
@@ -40,10 +44,10 @@
     <!-- Hero Section with Emergency Button -->
     <section class="hero" id="home">
       <div class="container">
-        <h1 class="hero-title">❤️ قلب السكري</h1>
-        <p class="hero-subtitle">اعرف قلبك.. تحكم بسكريك</p>
+        <h1 class="hero-title" id="heroTitle">❤️ قلب السكري</h1>
+        <p class="hero-subtitle" id="heroSubtitle">اعرف قلبك.. تحكم بسكريك</p>
         <button class="btn-urgence" id="urgenceBtn">
-          🚨 زر الطوارئ: ماذا أفعل عند ظهور أعراض؟
+          <span id="urgenceText">🚨 زر الطوارئ: ماذا أفعل عند ظهور أعراض؟</span>
         </button>
       </div>
     </section>
@@ -51,32 +55,32 @@
     <div class="container">
       <!-- Comprendre votre maladie -->
       <div class="card" id="comprendre">
-        <h2>📘 افهم مرضك (Comprendre le risque)</h2>
-        <p><strong>العلاقة بين السكري وأمراض القلب:</strong> السكري يرفع نسبة السكر في الدم مما يؤدي إلى تلف الأوعية الدموية وتصلب الشرايين.</p>
-        <p style="margin-top: 1rem;"><strong>لماذا الخطر أكبر عند مريض السكري؟</strong> ارتفاع السكر المزمن يزيد الالتهابات ويضعف جدران الأوعية الدموية، ويسرع من تصلب الشرايين.</p>
-        <p style="margin-top: 1rem;"><strong>⚠️ مفهوم "الجلطة الصامتة":</strong> عند مريض السكري، قد تحدث نوبة قلبية دون ألم صدر، فقط تعب شديد أو غثيان أو عسر هضم. هذا يجعلها خطيرة لأن المريض قد لا يطلب المساعدة في الوقت المناسب.</p>
+        <h2 id="comprendreTitle">📘 افهم مرضك (Comprendre le risque)</h2>
+        <p id="comprendreText1"><strong>العلاقة بين السكري وأمراض القلب:</strong> السكري يرفع نسبة السكر في الدم مما يؤدي إلى تلف الأوعية الدموية وتصلب الشرايين.</p>
+        <p style="margin-top: 1rem;" id="comprendreText2"><strong>لماذا الخطر أكبر عند مريض السكري؟</strong> ارتفاع السكر المزمن يزيد الالتهابات ويضعف جدران الأوعية الدموية، ويسرع من تصلب الشرايين.</p>
+        <p style="margin-top: 1rem;" id="comprendreText3"><strong>⚠️ مفهوم "الجلطة الصامتة":</strong> عند مريض السكري، قد تحدث نوبة قلبية دون ألم صدر، فقط تعب شديد أو غثيان أو عسر هضم. هذا يجعلها خطيرة لأن المريض قد لا يطلب المساعدة في الوقت المناسب.</p>
       </div>
 
       <!-- Signes d'alerte -->
       <div class="card" id="signes">
-        <h2>⚠️ علامات الخطر (Signes d'alerte)</h2>
+        <h2 id="signesTitle">⚠️ علامات الخطر (Signes d'alerte)</h2>
         <div class="symptoms-grid">
           <div class="symptom-box symptom-classique">
-            <h3>📍 الأعراض الكلاسيكية</h3>
+            <h3 id="classicTitle">📍 الأعراض الكلاسيكية</h3>
             <ul>
-              <li><i class="fas fa-heartbeat"></i> ألم أو ضغط في منتصف الصدر</li>
-              <li><i class="fas fa-lungs"></i> ضيق في التنفس</li>
-              <li><i class="fas fa-tint"></i> تعرق بارد وغزير</li>
-              <li><i class="fas fa-dizzy"></i> دوار أو إغماء</li>
+              <li><i class="fas fa-heartbeat"></i> <span id="classic1">ألم أو ضغط في منتصف الصدر</span></li>
+              <li><i class="fas fa-lungs"></i> <span id="classic2">ضيق في التنفس</span></li>
+              <li><i class="fas fa-tint"></i> <span id="classic3">تعرق بارد وغزير</span></li>
+              <li><i class="fas fa-dizzy"></i> <span id="classic4">دوار أو إغماء</span></li>
             </ul>
           </div>
           <div class="symptom-box symptom-atypique">
-            <h3>⚠️ الأعراض غير النمطية (الأكثر شيوعاً عند مرضى السكري)</h3>
+            <h3 id="atypicalTitle">⚠️ الأعراض غير النمطية (الأكثر شيوعاً عند مرضى السكري)</h3>
             <ul>
-              <li><i class="fas fa-bed"></i> تعب مفاجئ شديد غير مبرر</li>
-              <li><i class="fas fa-stomach"></i> غثيان أو عسر هضم أو حرقة معدة</li>
-              <li><i class="fas fa-backward"></i> آلام في الظهر بين الكتفين</li>
-              <li><i class="fas fa-tooth"></i> آلام في الفك أو الرقبة</li>
+              <li><i class="fas fa-bed"></i> <span id="atypical1">تعب مفاجئ شديد غير مبرر</span></li>
+              <li><i class="fas fa-stomach"></i> <span id="atypical2">غثيان أو عسر هضم أو حرقة معدة</span></li>
+              <li><i class="fas fa-backward"></i> <span id="atypical3">آلام في الظهر بين الكتفين</span></li>
+              <li><i class="fas fa-tooth"></i> <span id="atypical4">آلام في الفك أو الرقبة</span></li>
             </ul>
           </div>
         </div>
@@ -84,68 +88,68 @@
 
       <!-- Conseils Préventifs -->
       <div class="card" id="prevention">
-        <h2>🥗 ركن الوقاية (Conseils Préventifs)</h2>
-        <p><strong>🥗 التغذية:</strong> نظام DASH أو البحر الأبيض المتوسط - إكثار من الخضروات والفواكه والحبوب الكاملة، زيت الزيتون، الأسماك الدهنية، وتقليل الملح والسكريات.</p>
-        <p style="margin-top: 1rem;"><strong>🏃 النشاط البدني:</strong> مشي 30 دقيقة يومياً، تمارين مقاومة خفيفة مرتين في الأسبوع، تمارين المرونة والتوازن.</p>
-        <p style="margin-top: 1rem;"><strong>📊 متابعة الأرقام:</strong></p>
+        <h2 id="preventionTitle">🥗 ركن الوقاية (Conseils Préventifs)</h2>
+        <p id="preventionText1"><strong>🥗 التغذية:</strong> نظام DASH أو البحر الأبيض المتوسط - إكثار من الخضروات والفواكه والحبوب الكاملة، زيت الزيتون، الأسماك الدهنية، وتقليل الملح والسكريات.</p>
+        <p style="margin-top: 1rem;" id="preventionText2"><strong>🏃 النشاط البدني:</strong> مشي 30 دقيقة يومياً، تمارين مقاومة خفيفة مرتين في الأسبوع، تمارين المرونة والتوازن.</p>
+        <p style="margin-top: 1rem;" id="preventionText3"><strong>📊 متابعة الأرقام:</strong></p>
         <table class="monitoring-table">
           <thead>
-            <tr><th>القياس</th><th>الهدف الموصى به</th><th>متى أقيسه؟</th></tr>
+            <tr><th id="tableHeader1">القياس</th><th id="tableHeader2">الهدف الموصى به</th><th id="tableHeader3">متى أقيسه؟</th></tr>
           </thead>
           <tbody>
-            <tr><td>ضغط الدم الانقباضي</td><td>&lt; 130 مم زئبق</td><td>يومياً</td></tr>
-            <tr><td>السكري التراكمي HBA1c</td><td>&lt; 7%</td><td>كل 3 شهور</td></tr>
-            <tr><td>الكوليسترول الضار LDL</td><td>&lt; 100 mg/dL</td><td>كل 6 شهور</td></tr>
-            <tr><td>سكر الصائم</td><td>80-130 mg/dL</td><td>يومياً</td></tr>
+            <tr><td id="row1Col1">ضغط الدم الانقباضي</td><td id="row1Col2">&lt; 130 مم زئبق</td><td id="row1Col3">يومياً</td></tr>
+            <tr><td id="row2Col1">السكري التراكمي HBA1c</td><td id="row2Col2">&lt; 7%</td><td id="row2Col3">كل 3 شهور</td></tr>
+            <tr><td id="row3Col1">الكوليسترول الضار LDL</td><td id="row3Col2">&lt; 100 mg/dL</td><td id="row3Col3">كل 6 شهور</td></tr>
+            <tr><td id="row4Col1">سكر الصائم</td><td id="row4Col2">80-130 mg/dL</td><td id="row4Col3">يومياً</td></tr>
           </tbody>
         </table>
       </div>
 
       <!-- Outils Interactifs -->
       <div class="card" id="outils">
-        <h2>🛠️ أدوات تفاعلية (Outils)</h2>
+        <h2 id="outilsTitle">🛠️ أدوات تفاعلية (Outils)</h2>
         <div class="tools-grid">
           <div class="tool-card" id="testRisqueBtn">
             <i class="fas fa-exclamation-triangle"></i>
-            <h3>اختبار سريع</h3>
-            <p>هل أنت في خطر؟</p>
+            <h3 id="testTitle">اختبار سريع</h3>
+            <p id="testSubtitle">هل أنت في خطر؟</p>
           </div>
           <div class="tool-card" id="calculerIMCBtn">
             <i class="fas fa-calculator"></i>
-            <h3>حاسبة BMI</h3>
-            <p>احسب وزنك المثالي</p>
+            <h3 id="bmiTitle">حاسبة BMI</h3>
+            <p id="bmiSubtitle">احسب وزنك المثالي</p>
           </div>
           <div class="tool-card" id="ajouterRappelBtn">
             <i class="fas fa-calendar-alt"></i>
-            <h3>مفكرة المواعيد</h3>
-            <p>تذكير بفحص القلب</p>
+            <h3 id="calendarTitle">مفكرة المواعيد</h3>
+            <p id="calendarSubtitle">تذكير بفحص القلب</p>
           </div>
         </div>
         <div id="rappel-container" style="margin-top: 1rem; display: none;">
           <input type="date" id="rappel-date" class="date-input">
-          <button id="saveRappelBtn" class="save-btn">حفظ التذكير</button>
+          <button id="saveRappelBtn" class="save-btn" id="saveBtn">حفظ التذكير</button>
           <p id="rappel-message" style="margin-top: 10px; color: #1a472a;"></p>
         </div>
       </div>
 
       <!-- Téléchargements -->
       <div class="card" id="telechargements">
-        <h2>📥 قسم التحميل (Téléchargements)</h2>
+        <h2 id="downloadsTitle">📥 قسم التحميل (Téléchargements)</h2>
         <div class="downloads-grid">
           <div class="download-card" data-download="guide">
             <i class="fas fa-file-pdf" style="font-size: 2rem;"></i>
-            <h3>دليل التعرف على الأزمة القلبية الصامتة</h3>
-            <p>PDF قابل للطباعة</p>
+            <h3 id="guideTitle">دليل التعرف على الأزمة القلبية الصامتة</h3>
+            <p id="guideText">PDF قابل للطباعة</p>
           </div>
           <div class="download-card" data-download="carte">
             <i class="fas fa-id-card" style="font-size: 2rem;"></i>
-            <h3>بطاقة المريض</h3>
-            <p>احملها معك في محفظتك</p>
+            <h3 id="carteTitle">بطاقة المريض</h3>
+            <p id="carteText">احملها معك في محفظتك</p>
           </div>
           <div class="download-card" data-download="alimentation">
             <i class="fas fa-utensils" style="font-size: 2rem;"></i>
-            <h3>دليل التغذية لمرضى السكري والقلب</h3>
-            <p>نظام DASH + المتوسطي</p>
+            <h3 id="alimTitle">دليل التغذية لمرضى السكري والقلب</h3>
+            <p id="alimText">نظام DASH + المتوسطي</p>
           </div>
         </div>
       </div>
@@ -154,11 +158,11 @@
 
   <footer class="footer">
     <div class="container">
-      <p class="footer-text">© 2026 قلب السكري - موقع توعوي لمرضى السكري وأمراض القلب</p>
-      <p class="footer-emergency">في حالة الطوارئ، اتصل بالإسعاف فوراً: 14 أو 997</p>
+      <p class="footer-text" id="footerText">© 2026 قلب السكري - موقع توعوي لمرضى السكري وأمراض القلب</p>
+      <p class="footer-emergency" id="footerEmergency">في حالة الطوارئ، اتصل بالإسعاف فوراً: 14 أو 997</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
