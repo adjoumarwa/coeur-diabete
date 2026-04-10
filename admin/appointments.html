@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إدارة المواعيد - قلب السكري</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="appointments.css">
+</head>
+<body>
+  <div class="appointments-container">
+    <!-- Header -->
+    <div class="appointments-header">
+      <div class="logo">
+        <span class="logo-heart">❤️</span>
+        <h1>قلب السكري - إدارة المواعيد</h1>
+      </div>
+      <div class="header-actions">
+        <button class="back-btn" id="backBtn">
+          <i class="fas fa-arrow-right"></i> رجوع للوحة الرئيسية
+        </button>
+        <button class="logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> تسجيل خروج
+        </button>
+      </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <i class="fas fa-calendar-alt"></i>
+        <div class="stat-number" id="totalAppointments">0</div>
+        <div class="stat-label">إجمالي المواعيد</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <div class="stat-number" id="totalUsers">0</div>
+        <div class="stat-label">المستخدمين النشطين</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-chart-line"></i>
+        <div class="stat-number" id="appointmentsThisMonth">0</div>
+        <div class="stat-label">مواعيد هذا الشهر</div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-section">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="بحث عن مستخدم أو نوع الموعد...">
+      </div>
+      <div class="filter-box">
+        <select id="filterType">
+          <option value="all">جميع المواعيد</option>
+          <option value="فحص قلب ECG">فحص قلب ECG</option>
+          <option value="تحليل دم شامل">تحليل دم شامل</option>
+          <option value="موعد مع طبيب القلب">موعد مع طبيب القلب</option>
+          <option value="فحص السكري التراكمي">فحص السكري التراكمي</option>
+          <option value="موعد مع أخصائي تغذية">موعد مع أخصائي تغذية</option>
+        </select>
+      </div>
+      <button class="add-appointment-btn" id="addGlobalAppointmentBtn">
+        <i class="fas fa-plus"></i> إضافة موعد لجميع المستخدمين
+      </button>
+    </div>
+
+    <!-- Appointments Table -->
+    <div class="appointments-table-container">
+      <h3><i class="fas fa-list"></i> قائمة المواعيد</h3>
+      <table class="appointments-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>المستخدم</th>
+            <th>البريد الإلكتروني</th>
+            <th>تاريخ الموعد</th>
+            <th>نوع الموعد</th>
+            <th>الحالة</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="appointmentsTableBody">
+          <tr><td colspan="7" style="text-align: center;">جاري التحميل...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Export Section -->
+    <div class="export-section">
+      <button class="export-btn" id="exportExcelBtn">
+        <i class="fas fa-file-excel"></i> تصدير إلى Excel
+      </button>
+      <button class="export-btn" id="exportPdfBtn">
+        <i class="fas fa-file-pdf"></i> تصدير إلى PDF
+      </button>
+      <button class="export-btn" id="printBtn">
+        <i class="fas fa-print"></i> طباعة
+      </button>
+    </div>
+  </div>
+
+  <!-- Add/Edit Appointment Modal -->
+  <div id="appointmentModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">إضافة موعد جديد</h3>
+        <button class="modal-close" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>المستخدم:</label>
+          <select id="modalUserEmail" class="form-control">
+            <option value="">اختر المستخدم</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>تاريخ الموعد:</label>
+          <input type="date" id="modalDate" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>نوع الموعد:</label>
+          <select id="modalType" class="form-control">
+            <option value="فحص قلب ECG">فحص قلب ECG</option>
+            <option value="تحليل دم شامل">تحليل دم شامل</option>
+            <option value="موعد مع طبيب القلب">موعد مع طبيب القلب</option>
+            <option value="فحص السكري التراكمي">فحص السكري التراكمي</option>
+            <option value="موعد مع أخصائي تغذية">موعد مع أخصائي تغذية</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>الحالة:</label>
+          <select id="modalStatus" class="form-control">
+            <option value="قادم">قادم</option>
+            <option value="مكتمل">مكتمل</option>
+            <option value="ملغي">ملغي</option>
+          </select>
+        </div>
+        <div class="modal-buttons">
+          <button id="saveAppointmentBtn" class="save-btn">حفظ</button>
+          <button id="cancelModalBtn" class="cancel-btn">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="appointments.js"></script>
+</body>
+</html>
