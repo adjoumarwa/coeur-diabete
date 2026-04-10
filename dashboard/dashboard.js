@@ -123,9 +123,10 @@ let riskAnswers = [];
 let currentRiskQuestion = 0;
 
 const riskQuestions = [
-    { text: "هل عمرك أكثر من 45 سنة؟", field: "العمر", yesScore: 1, noScore: 0 },
+    { text: "هل عمرك بين 40 و 50 سنة؟", field: "العمر", yesScore: 1, noScore: 0 },
     { text: "هل لديك تاريخ عائلي لأمراض القلب؟", field: "تاريخ عائلي", yesScore: 1, noScore: 0 },
     { text: "هل تعاني من ارتفاع ضغط الدم؟", field: "ضغط الدم", yesScore: 1, noScore: 0 },
+    { text: "هل تعاني من مرض السكري؟", field: "ضغط الدم", yesScore: 1, noScore: 0 },
     { text: "هل تدخن؟", field: "التدخين", yesScore: 1, noScore: 0 },
     { text: "هل تعاني من السمنة أو الوزن الزائد؟", field: "الوزن", yesScore: 1, noScore: 0 },
     { text: "هل تمارس الرياضة بانتظام (30 دقيقة يومياً على الأقل 3 أيام أسبوعياً)؟", field: "الرياضة", yesScore: 0, noScore: 1 }
