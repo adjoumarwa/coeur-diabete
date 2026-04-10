@@ -664,3 +664,113 @@ document.querySelectorAll('.nav-link').forEach(link => {
         }
     });
 });
+
+
+
+
+// ============================================
+// استخدام نظام الترجمة الديناميكي
+// ============================================
+
+// زر تبديل اللغة
+document.getElementById('langBtn')?.addEventListener('click', () => {
+  window.langManager.toggleLanguage();
+  // تحديث النصوص الديناميكية بعد تغيير اللغة
+  updateDynamicAlerts();
+});
+
+// تحديث التنبيهات الديناميكية
+function updateDynamicAlerts() {
+  const t = window.langManager.getText;
+  
+  // تحديث دالة الطوارئ
+  const emergencyBtn = document.getElementById('emergency_btn');
+  if (emergencyBtn) {
+    const oldClick = emergencyBtn.onclick;
+    emergencyBtn.onclick = () => {
+      alert(window.langManager.getText('emergency_alert'));
+    };
+  }
+}
+
+// ============================================
+// اختبار الخطر (ديناميكي)
+// ============================================
+function riskTest() {
+  const t = window.langManager.getText;
+  let score = 0;
+  let answers = [];
+  
+  let q1 = confirm(t('risk_q1'));
+  if (q1) { score++; answers.push('✓'); } else { answers.push('✗'); }
+  
+  let q2 = confirm(t('risk_q2'));
+  if (q2) { score++; answers.push('✓'); } else { answers.push('✗'); }
+  
+  let q3 = confirm(t('risk_q3'));
+  if (q3) { score++; answers.push('✓'); } else { answers.push('✗'); }
+  
+  let q4 = confirm(t('risk_q4'));
+  if (q4) { score++; answers.push('✓'); } else { answers.push('✗'); }
+  
+  let q5 = confirm(t('risk_q5'));
+  if (q5) { score++; answers.push('✓'); } else { answers.push('✗'); }
+  
+  let q6 = confirm(t('risk_q6'));
+  if (!q6) { score++; answers.push('✓'); } else { answers.push('✗'); }
+  
+  let result = `📊 ${t('risk_result')}\n\n`;
+  result += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  result += `${t('risk_score')}: ${score}/6\n\n`;
+  
+  if (score >= 4) {
+    result += `⚠️ ${t('risk_high')}\n${t('risk_high_advice')}`;
+  } else if (score >= 2) {
+    result += `⚠️ ${t('risk_medium')}\n${t('risk_medium_advice')}`;
+  } else {
+    result += `✓ ${t('risk_low')}\n${t('risk_low_advice')}`;
+  }
+  
+  alert(result);
+}
+
+// ============================================
+// حاسبة BMI (ديناميكية)
+// ============================================
+function calculateBMI() {
+  const t = window.langManager.getText;
+  let weight = prompt(t('bmi_weight'));
+  let height = prompt(t('bmi_height'));
+  
+  if (weight && height) {
+    weight = parseFloat(weight);
+    height = parseFloat(height);
+    let bmi = weight / (height * height);
+    let status = '';
+    
+    if (bmi < 18.5) status = t('bmi_underweight');
+    else if (bmi < 25) status = t('bmi_normal');
+    else if (bmi < 30) status = t('bmi_overweight');
+    else status = t('bmi_obese');
+    
+    alert(`${t('bmi_result')}: ${bmi.toFixed(1)}\n${t('bmi_status')}: ${status}`);
+  }
+}
+
+// ============================================
+// ربط الأحداث
+// ============================================
+document.getElementById('testRisqueBtn')?.addEventListener('click', riskTest);
+document.getElementById('calculerIMCBtn')?.addEventListener('click', calculateBMI);
+
+// ============================================
+// تهيئة الصفحة
+// ============================================
+updateDynamicAlerts();
+
+// استعادة التذكير المحفوظ
+const savedRappel = localStorage.getItem('rappelECG');
+if (savedRappel) {
+  const t = window.langManager.getText;
+  document.getElementById('rappel-message').innerHTML = `📅 ${t('next_reminder')}: ${savedRappel}`;
+}
