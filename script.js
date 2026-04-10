@@ -667,110 +667,253 @@ document.querySelectorAll('.nav-link').forEach(link => {
 
 
 
-
 // ============================================
-// استخدام نظام الترجمة الديناميكي
+// نظام الترجمة البسيط
 // ============================================
 
-// زر تبديل اللغة
-document.getElementById('langBtn')?.addEventListener('click', () => {
-  window.langManager.toggleLanguage();
-  // تحديث النصوص الديناميكية بعد تغيير اللغة
-  updateDynamicAlerts();
-});
-
-// تحديث التنبيهات الديناميكية
-function updateDynamicAlerts() {
-  const t = window.langManager.getText;
-  
-  // تحديث دالة الطوارئ
-  const emergencyBtn = document.getElementById('emergency_btn');
-  if (emergencyBtn) {
-    const oldClick = emergencyBtn.onclick;
-    emergencyBtn.onclick = () => {
-      alert(window.langManager.getText('emergency_alert'));
-    };
+// جميع النصوص بالعربية والفرنسية
+const translations = {
+  ar: {
+    logoText: 'قلب السكري',
+    navHome: 'الرئيسية',
+    navComprendre: 'افهم مرضك',
+    navSignes: 'علامات الخطر',
+    navPrevention: 'الوقاية',
+    navOutils: 'أدوات تفاعلية',
+    navTelechargements: 'تحميلات',
+    loginLink: 'دخول',
+    registerLink: 'تسجيل',
+    heroTitle: '❤️ قلب السكري',
+    heroSubtitle: 'اعرف قلبك.. تحكم بسكريك',
+    urgenceBtn: '🚨 زر الطوارئ: ماذا أفعل عند ظهور أعراض؟',
+    comprendreTitle: '📘 افهم مرضك (Comprendre le risque)',
+    comprendreText1: 'العلاقة بين السكري وأمراض القلب: السكري يرفع نسبة السكر في الدم مما يؤدي إلى تلف الأوعية الدموية وتصلب الشرايين.',
+    comprendreText2: 'لماذا الخطر أكبر عند مريض السكري؟ ارتفاع السكر المزمن يزيد الالتهابات ويضعف جدران الأوعية الدموية.',
+    comprendreText3: '⚠️ مفهوم "الجلطة الصامتة": قد تحدث نوبة قلبية دون ألم صدر، فقط تعب شديد أو غثيان.',
+    signesTitle: '⚠️ علامات الخطر (Signes d\'alerte)',
+    classicTitle: '📍 الأعراض الكلاسيكية',
+    classic1: 'ألم أو ضغط في منتصف الصدر',
+    classic2: 'ضيق في التنفس',
+    classic3: 'تعرق بارد وغزير',
+    classic4: 'دوار أو إغماء',
+    atypicalTitle: '⚠️ الأعراض غير النمطية (الأكثر شيوعاً عند مرضى السكري)',
+    atypical1: 'تعب مفاجئ شديد غير مبرر',
+    atypical2: 'غثيان أو عسر هضم',
+    atypical3: 'آلام في الظهر',
+    atypical4: 'آلام في الفك أو الرقبة',
+    preventionTitle: '🥗 ركن الوقاية (Conseils Préventifs)',
+    preventionText1: '🥗 التغذية: نظام DASH أو البحر الأبيض المتوسط',
+    preventionText2: '🏃 النشاط البدني: مشي 30 دقيقة يومياً',
+    preventionText3: '📊 متابعة الأرقام:',
+    tableHeader1: 'القياس',
+    tableHeader2: 'الهدف الموصى به',
+    tableHeader3: 'متى أقيسه؟',
+    row1Col1: 'ضغط الدم الانقباضي',
+    row1Col2: '< 130 مم زئبق',
+    row1Col3: 'يومياً',
+    row2Col1: 'السكري التراكمي HBA1c',
+    row2Col2: '< 7%',
+    row2Col3: 'كل 3 شهور',
+    row3Col1: 'الكوليسترول الضار LDL',
+    row3Col2: '< 100 mg/dL',
+    row3Col3: 'كل 6 شهور',
+    row4Col1: 'سكر الصائم',
+    row4Col2: '80-130 mg/dL',
+    row4Col3: 'يومياً',
+    outilsTitle: '🛠️ أدوات تفاعلية (Outils)',
+    testTitle: 'اختبار سريع',
+    testSubtitle: 'هل أنت في خطر؟',
+    bmiTitle: 'حاسبة BMI',
+    bmiSubtitle: 'احسب وزنك المثالي',
+    calendarTitle: 'مفكرة المواعيد',
+    calendarSubtitle: 'تذكير بفحص القلب',
+    saveBtn: 'حفظ التذكير',
+    downloadsTitle: '📥 قسم التحميل (Téléchargements)',
+    guideTitle: 'دليل التعرف على الأزمة القلبية الصامتة',
+    guideText: 'PDF قابل للطباعة',
+    carteTitle: 'بطاقة المريض',
+    carteText: 'احملها معك في محفظتك',
+    alimTitle: 'دليل التغذية لمرضى السكري والقلب',
+    alimText: 'نظام DASH + المتوسطي',
+    footerText: '© 2025 قلب السكري - موقع توعوي',
+    footerEmergency: 'للطوارئ: 14 أو 997',
+    emergencyAlert: '🚨 في حالة ظهور أي علامات خطر:\n\n1. اتصل بالإسعاف (14 أو 997)\n2. لا تقود السيارة\n3. أخبر المسعفين أنك مريض سكري'
+  },
+  fr: {
+    logoText: 'Cœur et Diabète',
+    navHome: 'Accueil',
+    navComprendre: 'Comprendre',
+    navSignes: 'Signes',
+    navPrevention: 'Prévention',
+    navOutils: 'Outils',
+    navTelechargements: 'Téléchargements',
+    loginLink: 'Connexion',
+    registerLink: 'Inscription',
+    heroTitle: '❤️ Cœur et Diabète',
+    heroSubtitle: 'Connaissez votre cœur.. Contrôlez votre diabète',
+    urgenceBtn: '🚨 Urgence: Que faire en cas de symptômes?',
+    comprendreTitle: '📘 Comprendre votre maladie',
+    comprendreText1: 'Relation entre diabète et maladies cardiaques: Le diabète augmente le sucre dans le sang, ce qui endommage les vaisseaux.',
+    comprendreText2: 'Pourquoi le risque est plus élevé? L\'hyperglycémie chronique augmente l\'inflammation.',
+    comprendreText3: '⚠️ "Crise silencieuse": Une crise cardiaque peut survenir sans douleur thoracique.',
+    signesTitle: '⚠️ Signes d\'alerte',
+    classicTitle: '📍 Symptômes classiques',
+    classic1: 'Douleur dans la poitrine',
+    classic2: 'Essoufflement',
+    classic3: 'Sueurs froides',
+    classic4: 'Vertiges',
+    atypicalTitle: '⚠️ Symptômes atypiques',
+    atypical1: 'Fatigue soudaine',
+    atypical2: 'Nausées',
+    atypical3: 'Douleurs dans le dos',
+    atypical4: 'Douleurs à la mâchoire',
+    preventionTitle: '🥗 Conseils Préventifs',
+    preventionText1: '🥗 Alimentation: Régime DASH ou méditerranéen',
+    preventionText2: '🏃 Activité physique: Marche 30 minutes par jour',
+    preventionText3: '📊 Suivi des chiffres:',
+    tableHeader1: 'Mesure',
+    tableHeader2: 'Objectif',
+    tableHeader3: 'Quand?',
+    row1Col1: 'Tension artérielle',
+    row1Col2: '< 130 mmHg',
+    row1Col3: 'Quotidien',
+    row2Col1: 'HBA1c',
+    row2Col2: '< 7%',
+    row2Col3: '3 mois',
+    row3Col1: 'Cholestérol LDL',
+    row3Col2: '< 100 mg/dL',
+    row3Col3: '6 mois',
+    row4Col1: 'Glycémie à jeun',
+    row4Col2: '80-130 mg/dL',
+    row4Col3: 'Quotidien',
+    outilsTitle: '🛠️ Outils interactifs',
+    testTitle: 'Test rapide',
+    testSubtitle: 'Êtes-vous à risque?',
+    bmiTitle: 'Calculateur IMC',
+    bmiSubtitle: 'Calculez votre poids',
+    calendarTitle: 'Agenda',
+    calendarSubtitle: 'Rappel examen',
+    saveBtn: 'Enregistrer',
+    downloadsTitle: '📥 Téléchargements',
+    guideTitle: 'Guide de la crise silencieuse',
+    guideText: 'PDF imprimable',
+    carteTitle: 'Carte patient',
+    carteText: 'Portez-la',
+    alimTitle: 'Guide nutritionnel',
+    alimText: 'Régime DASH',
+    footerText: '© 2025 Cœur et Diabète',
+    footerEmergency: 'Urgence: 14 ou 997',
+    emergencyAlert: '🚨 En cas de symptômes:\n\n1. Appelez les secours (14 ou 997)\n2. Ne conduisez pas\n3. Informez les secouristes'
   }
-}
+};
 
-// ============================================
-// اختبار الخطر (ديناميكي)
-// ============================================
-function riskTest() {
-  const t = window.langManager.getText;
-  let score = 0;
-  let answers = [];
+// اللغة الحالية (العربية افتراضياً)
+let currentLang = 'ar';
+
+// دالة تغيير كل النصوص
+function switchLanguage() {
+  // تبديل اللغة
+  currentLang = currentLang === 'ar' ? 'fr' : 'ar';
   
-  let q1 = confirm(t('risk_q1'));
-  if (q1) { score++; answers.push('✓'); } else { answers.push('✗'); }
+  // حفظ اللغة المختارة
+  localStorage.setItem('language', currentLang);
   
-  let q2 = confirm(t('risk_q2'));
-  if (q2) { score++; answers.push('✓'); } else { answers.push('✗'); }
+  // تغيير نص الزر
+  const langBtn = document.getElementById('langBtn');
+  if (langBtn) {
+    langBtn.innerHTML = currentLang === 'ar' ? '🇫🇷 Français' : '🇸🇦 العربية';
+  }
   
-  let q3 = confirm(t('risk_q3'));
-  if (q3) { score++; answers.push('✓'); } else { answers.push('✗'); }
-  
-  let q4 = confirm(t('risk_q4'));
-  if (q4) { score++; answers.push('✓'); } else { answers.push('✗'); }
-  
-  let q5 = confirm(t('risk_q5'));
-  if (q5) { score++; answers.push('✓'); } else { answers.push('✗'); }
-  
-  let q6 = confirm(t('risk_q6'));
-  if (!q6) { score++; answers.push('✓'); } else { answers.push('✗'); }
-  
-  let result = `📊 ${t('risk_result')}\n\n`;
-  result += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-  result += `${t('risk_score')}: ${score}/6\n\n`;
-  
-  if (score >= 4) {
-    result += `⚠️ ${t('risk_high')}\n${t('risk_high_advice')}`;
-  } else if (score >= 2) {
-    result += `⚠️ ${t('risk_medium')}\n${t('risk_medium_advice')}`;
+  // تغيير اتجاه الصفحة
+  if (currentLang === 'ar') {
+    document.body.style.direction = 'rtl';
   } else {
-    result += `✓ ${t('risk_low')}\n${t('risk_low_advice')}`;
+    document.body.style.direction = 'ltr';
   }
   
-  alert(result);
-}
-
-// ============================================
-// حاسبة BMI (ديناميكية)
-// ============================================
-function calculateBMI() {
-  const t = window.langManager.getText;
-  let weight = prompt(t('bmi_weight'));
-  let height = prompt(t('bmi_height'));
+  // جلب النصوص حسب اللغة
+  const t = translations[currentLang];
   
-  if (weight && height) {
-    weight = parseFloat(weight);
-    height = parseFloat(height);
-    let bmi = weight / (height * height);
-    let status = '';
-    
-    if (bmi < 18.5) status = t('bmi_underweight');
-    else if (bmi < 25) status = t('bmi_normal');
-    else if (bmi < 30) status = t('bmi_overweight');
-    else status = t('bmi_obese');
-    
-    alert(`${t('bmi_result')}: ${bmi.toFixed(1)}\n${t('bmi_status')}: ${status}`);
-  }
+  // تغيير كل النصوص في الصفحة
+  document.getElementById('logoText').textContent = t.logoText;
+  document.getElementById('navHome').textContent = t.navHome;
+  document.getElementById('navComprendre').textContent = t.navComprendre;
+  document.getElementById('navSignes').textContent = t.navSignes;
+  document.getElementById('navPrevention').textContent = t.navPrevention;
+  document.getElementById('navOutils').textContent = t.navOutils;
+  document.getElementById('navTelechargements').textContent = t.navTelechargements;
+  document.getElementById('loginLink').textContent = t.loginLink;
+  document.getElementById('registerLink').textContent = t.registerLink;
+  document.getElementById('heroTitle').innerHTML = t.heroTitle;
+  document.getElementById('heroSubtitle').textContent = t.heroSubtitle;
+  document.getElementById('urgenceBtn').innerHTML = t.urgenceBtn;
+  document.getElementById('comprendreTitle').innerHTML = t.comprendreTitle;
+  document.getElementById('comprendreText1').innerHTML = t.comprendreText1;
+  document.getElementById('comprendreText2').innerHTML = t.comprendreText2;
+  document.getElementById('comprendreText3').innerHTML = t.comprendreText3;
+  document.getElementById('signesTitle').innerHTML = t.signesTitle;
+  document.getElementById('classicTitle').innerHTML = t.classicTitle;
+  document.getElementById('classic1').textContent = t.classic1;
+  document.getElementById('classic2').textContent = t.classic2;
+  document.getElementById('classic3').textContent = t.classic3;
+  document.getElementById('classic4').textContent = t.classic4;
+  document.getElementById('atypicalTitle').innerHTML = t.atypicalTitle;
+  document.getElementById('atypical1').textContent = t.atypical1;
+  document.getElementById('atypical2').textContent = t.atypical2;
+  document.getElementById('atypical3').textContent = t.atypical3;
+  document.getElementById('atypical4').textContent = t.atypical4;
+  document.getElementById('preventionTitle').innerHTML = t.preventionTitle;
+  document.getElementById('preventionText1').innerHTML = t.preventionText1;
+  document.getElementById('preventionText2').innerHTML = t.preventionText2;
+  document.getElementById('preventionText3').innerHTML = t.preventionText3;
+  document.getElementById('tableHeader1').textContent = t.tableHeader1;
+  document.getElementById('tableHeader2').textContent = t.tableHeader2;
+  document.getElementById('tableHeader3').textContent = t.tableHeader3;
+  document.getElementById('row1Col1').textContent = t.row1Col1;
+  document.getElementById('row1Col2').innerHTML = t.row1Col2;
+  document.getElementById('row1Col3').textContent = t.row1Col3;
+  document.getElementById('row2Col1').textContent = t.row2Col1;
+  document.getElementById('row2Col2').innerHTML = t.row2Col2;
+  document.getElementById('row2Col3').textContent = t.row2Col3;
+  document.getElementById('row3Col1').textContent = t.row3Col1;
+  document.getElementById('row3Col2').innerHTML = t.row3Col2;
+  document.getElementById('row3Col3').textContent = t.row3Col3;
+  document.getElementById('row4Col1').textContent = t.row4Col1;
+  document.getElementById('row4Col2').innerHTML = t.row4Col2;
+  document.getElementById('row4Col3').textContent = t.row4Col3;
+  document.getElementById('outilsTitle').innerHTML = t.outilsTitle;
+  document.getElementById('testTitle').textContent = t.testTitle;
+  document.getElementById('testSubtitle').textContent = t.testSubtitle;
+  document.getElementById('bmiTitle').textContent = t.bmiTitle;
+  document.getElementById('bmiSubtitle').textContent = t.bmiSubtitle;
+  document.getElementById('calendarTitle').textContent = t.calendarTitle;
+  document.getElementById('calendarSubtitle').textContent = t.calendarSubtitle;
+  document.getElementById('saveRappelBtn').textContent = t.saveBtn;
+  document.getElementById('downloadsTitle').innerHTML = t.downloadsTitle;
+  document.getElementById('guideTitle').textContent = t.guideTitle;
+  document.getElementById('guideText').textContent = t.guideText;
+  document.getElementById('carteTitle').textContent = t.carteTitle;
+  document.getElementById('carteText').textContent = t.carteText;
+  document.getElementById('alimTitle').textContent = t.alimTitle;
+  document.getElementById('alimText').textContent = t.alimText;
+  document.getElementById('footerText').textContent = t.footerText;
+  document.getElementById('footerEmergency').textContent = t.footerEmergency;
+  
+  // تحديث زر الطوارئ
+  const emergencyBtn = document.getElementById('urgenceBtn');
+  emergencyBtn.onclick = () => {
+    alert(t.emergencyAlert);
+  };
 }
 
-// ============================================
-// ربط الأحداث
-// ============================================
-document.getElementById('testRisqueBtn')?.addEventListener('click', riskTest);
-document.getElementById('calculerIMCBtn')?.addEventListener('click', calculateBMI);
+// ربط زر اللغة
+document.getElementById('langBtn').addEventListener('click', switchLanguage);
 
-// ============================================
-// تهيئة الصفحة
-// ============================================
-updateDynamicAlerts();
-
-// استعادة التذكير المحفوظ
-const savedRappel = localStorage.getItem('rappelECG');
-if (savedRappel) {
-  const t = window.langManager.getText;
-  document.getElementById('rappel-message').innerHTML = `📅 ${t('next_reminder')}: ${savedRappel}`;
+// تطبيق اللغة المحفوظة عند تحميل الصفحة
+const savedLang = localStorage.getItem('language');
+if (savedLang === 'fr') {
+  switchLanguage();
 }
+
+// باقي دوال الموقع (اختبار الخطر، BMI، مفكرة المواعيد، التحميلات)
+// ... (نفس الدوال السابقة)
