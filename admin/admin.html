@@ -9,6 +9,7 @@
 </head>
 <body>
   <div class="admin-container">
+    <!-- Header -->
     <div class="admin-header">
       <div class="logo">
         <span class="logo-heart">❤️</span>
@@ -17,16 +18,23 @@
       <div class="user-info">
         <i class="fas fa-crown"></i>
         <span id="adminName"></span>
-        <button class="logout-btn" id="logoutBtn"><a href="../index.html" style="color: inherit; text-decoration: none;">تسجيل خروج</a></button>
+        <button class="logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> تسجيل خروج
+        </button>
       </div>
     </div>
-    
-    <!-- Statistics -->
+
+    <!-- Statistics Cards -->
     <div class="stats-grid">
       <div class="stat-card">
         <i class="fas fa-users"></i>
         <div class="stat-number" id="totalUsers">0</div>
         <div class="stat-label">إجمالي المستخدمين</div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-user-plus"></i>
+        <div class="stat-number" id="newUsersThisMonth">0</div>
+        <div class="stat-label">مستخدمين جدد هذا الشهر</div>
       </div>
       <div class="stat-card">
         <i class="fas fa-calendar-check"></i>
@@ -39,43 +47,63 @@
         <div class="stat-label">تحميلات الكتيبات</div>
       </div>
     </div>
- <!-- Admin Actions Section -->
-<div class="admin-actions">
-  <button class="admin-action-btn" id="manageAppointmentsBtn">
-    <i class="fas fa-calendar-alt"></i> 
-    <span>إدارة المواعيد</span>
-  </button>
-  
-  <button class="admin-action-btn" id="exportDataBtn">
-    <i class="fas fa-file-export"></i> 
-    <span>تصدير البيانات</span>
-  </button>
-  
-  <button class="admin-action-btn" id="clearAllDataBtn">
-    <i class="fas fa-trash-alt"></i> 
-    <span>مسح جميع البيانات</span>
-  </button>
-  
-  <button class="admin-action-btn" id="backupDataBtn">
-    <i class="fas fa-database"></i> 
-    <span>نسخ احتياطي</span>
-  </button>
-</div>
+
+    <!-- Admin Actions Buttons -->
+    <div class="admin-actions">
+      <button class="admin-action-btn" id="manageAppointmentsBtn">
+        <i class="fas fa-calendar-alt"></i>
+        <span>📅 إدارة المواعيد</span>
+      </button>
+      
+      <button class="admin-action-btn" id="exportDataBtn">
+        <i class="fas fa-file-export"></i>
+        <span>📤 تصدير البيانات</span>
+      </button>
+      
+      <button class="admin-action-btn" id="clearAllDataBtn">
+        <i class="fas fa-trash-alt"></i>
+        <span>🗑️ مسح جميع البيانات</span>
+      </button>
+      
+      <button class="admin-action-btn" id="backupDataBtn">
+        <i class="fas fa-database"></i>
+        <span>💾 نسخ احتياطي</span>
+      </button>
+    </div>
+
     <!-- Users Table -->
     <div class="users-table-container">
       <h3><i class="fas fa-users"></i> قائمة المستخدمين المسجلين</h3>
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 بحث عن مستخدم...">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="🔍 بحث عن مستخدم بالبريد الإلكتروني أو الاسم...">
       </div>
       <table class="users-table">
         <thead>
-          <tr><th>#</th><th>المستخدم</th><th>البريد الإلكتروني</th><th>تاريخ التسجيل</th><th>مرات الدخول</th><th>إجراءات</th></tr>
+          <tr>
+            <th>#</th>
+            <th>المستخدم</th>
+            <th>البريد الإلكتروني</th>
+            <th>تاريخ التسجيل</th>
+            <th>مرات الدخول</th>
+            <th>إجراءات</th>
+          </tr>
         </thead>
-        <tbody id="usersTableBody"></tbody>
-       </table>
+        <tbody id="usersTableBody">
+          <tr><td colspan="6" style="text-align: center;">جاري التحميل...</td><tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Activity Log -->
+    <div class="activity-log">
+      <h3><i class="fas fa-history"></i> سجل النشاطات</h3>
+      <div id="activityList">
+        <p style="text-align: center; color: #94a3b8;">لا توجد نشاطات مسجلة</p>
+      </div>
     </div>
   </div>
-  
+
   <script src="admin.js"></script>
 </body>
 </html>
