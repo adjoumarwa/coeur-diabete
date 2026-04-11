@@ -6,32 +6,9 @@
   <title>قلب السكري</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-   <style>
-    /* إخفاء شريط Google Translate العلوي */
-    .goog-te-banner-frame {
-      display: none !important;
-    }
-    body {
-      top: 0 !important;
-    }
-    /* تنسيق زر الترجمة */
-    .goog-te-gadget-simple {
-      background-color: white !important;
-      border: 2px solid #1a472a !important;
-      padding: 5px 15px !important;
-      border-radius: 25px !important;
-      font-size: 14px !important;
-    }
-    .goog-te-gadget-simple .goog-te-menu-value {
-      color: #1a472a !important;
-      font-weight: bold !important;
-    }
-    .goog-te-gadget-simple img {
-      display: none !important;
-    }
-  </style>
 </head>
 <body>
+  <div id="google_translate_element"></div>
   <header class="header">
     <div class="container">
       <nav class="navbar">
@@ -47,14 +24,12 @@
           <a href="#outils" class="nav-link" id="navOutils">أدوات تفاعلية</a>
           <a href="#telechargements" class="nav-link" id="navTelechargements">تحميلات</a>
         </div>
-       <div id="google_translate_element" style="position: fixed; top: 20px; left: 20px; z-index: 1000;"></div>
-      <!--
         <div class="nav-actions">
-          <button class="lang-btn" id="langBtn">🇫🇷 Français</button>
+       <!--   <button class="lang-btn" id="langBtn">🇫🇷 Français</button> -->
           <button class="login-btn"><a href="signUp/login.html" id="loginLink" style="color: inherit; text-decoration: none;">دخول</a></button>
           <button class="register-btn"><a href="signUp/signup.html" id="registerLink" style="color: inherit; text-decoration: none;">تسجيل</a></button>
         </div>
-        -->
+       
         <button class="menu-toggle" id="menuToggle">
           <span class="bar"></span>
           <span class="bar"></span>
