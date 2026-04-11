@@ -394,182 +394,47 @@ body {
     font-size: 0.8rem;
   }
 }
-/* ============================================
-   زر Google Translate - تنسيق احترافي
-   ============================================ */
-
-/* حاوية زر الترجمة */
-#google_translate_element {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 9999;
-  background: linear-gradient(135deg, #ffffff, #f8fafc);
-  padding: 8px 16px;
-  border-radius: 40px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(220, 38, 38, 0.2);
-}
-
-/* تأثير hover على الحاوية */
-#google_translate_element:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.2);
-}
-
-/* تنسيق عنصر الترجمة نفسه */
-.goog-te-gadget {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-  font-size: 0 !important;
-  background: transparent !important;
-}
-
-/* تنسيق الزر الرئيسي */
-.goog-te-gadget-simple {
-  background-color: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  display: inline-block !important;
-  font-size: 14px !important;
-  cursor: pointer !important;
-}
-
-/* تنسيق النص داخل الزر */
-.goog-te-gadget-simple .goog-te-menu-value {
-  color: #1e293b !important;
-  font-weight: 600 !important;
-  font-size: 14px !important;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-  background: transparent !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-}
-
-/* إضافة أيقونة الأرض قبل النص */
-.goog-te-gadget-simple .goog-te-menu-value:before {
-  content: "🌐 ";
-  font-size: 16px;
-}
-
-/* إضافة سهم بعد النص */
-.goog-te-gadget-simple .goog-te-menu-value span:first-child {
-  position: relative;
-}
-
-.goog-te-gadget-simple .goog-te-menu-value span:first-child:after {
-  content: " ▼";
-  font-size: 10px;
-  color: #dc2626;
-  margin-right: 5px;
-}
-
-/* إخفاء الأيقونات الإضافية */
-.goog-te-gadget-simple img {
-  display: none !important;
-}
-
-/* إخفاء النص الإضافي */
-.goog-te-gadget-simple span:not(.goog-te-menu-value) {
-  display: none !important;
-}
-
-/* إخفاء شريط الإشعارات العلوي */
-.goog-te-banner-frame {
-  display: none !important;
-}
-
-/* إزالة المسافة التي يضيفها Google Translate */
-body {
-  top: 0 !important;
-  position: relative !important;
-}
-
-/* تنسيق القائمة المنسدلة للغات */
-.goog-te-menu-frame {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
-  border-radius: 12px !important;
-  border: none !important;
-  overflow: hidden !important;
-}
-
-.goog-te-menu2 {
-  border: none !important;
-  background: white !important;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-}
-
-.goog-te-menu2-item {
-  padding: 10px 15px !important;
-  transition: background 0.2s ease !important;
-}
-
-.goog-te-menu2-item:hover {
-  background: #f1f5f9 !important;
-}
-
-.goog-te-menu2-item-selected {
-  background: #dc2626 !important;
-}
-
-.goog-te-menu2-item-selected .goog-te-menu2-item-text {
-  color: white !important;
-}
-
-.goog-te-menu2-item-text {
-  font-size: 14px !important;
-  color: #1e293b !important;
-  font-weight: 500 !important;
-}
-
-/* للشاشات الصغيرة */
-@media (max-width: 768px) {
-  #google_translate_element {
-    top: 10px;
-    left: 10px;
-    padding: 6px 12px;
-  }
-  
-  .goog-te-gadget-simple .goog-te-menu-value {
-    font-size: 12px !important;
-  }
-}
-
-/* وضعية الشاشة الأفقية على الجوال */
-@media (max-width: 768px) and (orientation: landscape) {
-  #google_translate_element {
-    top: 5px;
-    left: 5px;
-    padding: 4px 10px;
-  }
-}
-
-/* تنسيق إضافي للزر في وضع RTL */
-[dir="rtl"] #google_translate_element {
-  left: auto;
-  right: 20px;
-}
-
-[dir="rtl"] .goog-te-gadget-simple .goog-te-menu-value:before {
-  margin-left: 5px;
-  margin-right: 0;
-}
-
-@media (max-width: 768px) {
-  [dir="rtl"] #google_translate_element {
-    right: 10px;
-    left: auto;
-  }
-}
-
-/* منع ترجمة الأيقونات والأزرار المهمة */
-.logo-heart,
-.btn-urgence i,
-.tool-card i,
-.download-card i,
-.fas,
-.far,
-.fab {
-  white-space: nowrap;
-}
+/*translate button*/
+  /* زر الترجمة البسيط */
+    .lang-select {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 9999;
+      background: white;
+      padding: 8px 16px;
+      border-radius: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 1px solid #ddd;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: bold;
+      color: #1a472a;
+    }
+    
+    .lang-select:hover {
+      background: #f0f0f0;
+    }
+    
+    /* إخفاء شريط Google Translate */
+    .goog-te-banner-frame {
+      display: none !important;
+    }
+    
+    body {
+      top: 0 !important;
+    }
+    
+    /* إخفاء النصوص الإضافية من Google */
+    .goog-te-gadget {
+      display: none !important;
+    }
+    
+    .goog-logo-link {
+      display: none !important;
+    }
+    
+    .goog-te-gadget span {
+      display: none !important;
+    }
