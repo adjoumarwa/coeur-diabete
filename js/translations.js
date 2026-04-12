@@ -9,7 +9,7 @@ function addTranslateStyles() {
     const link = document.createElement('link');
     link.id = 'translate-styles-link';
     link.rel = 'stylesheet';
-    link.href = 'translations.css';
+    link.href = '../js/translations.css';
     document.head.appendChild(link);
   }
 }
