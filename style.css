@@ -395,28 +395,4 @@ body {
   }
 }
 
-/* إخفاء شريط Google Translate  */
-.goog-te-banner-frame,
-.goog-te-banner,
-.skiptranslate,
-.skiptranslate iframe,
-#goog-gt-tt,
-.goog-te-balloon-frame {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  overflow: hidden !important;
-  position: absolute !important;
-  top: -9999px !important;
-  left: -9999px !important;
-}
 
-body {
-  top: 0px !important;
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  position: relative !important;
-}
