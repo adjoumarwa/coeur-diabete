@@ -2,6 +2,59 @@
    أنماط زر الترجمة - translate.css
    ============================================ */
 
+/* إخفاء شريط Google Translate العلوي - الطريقة القوية */
+.goog-te-banner-frame,
+.goog-te-banner,
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame-top,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+div#goog-gt-tt,
+div#goog-gt-tt div,
+div#goog-gt-tt table,
+.goog-te-banner {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* إزالة المسافة التي يضيفها Google Translate */
+body {
+  top: 0px !important;
+  position: relative !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* إخفاء شريط التحميل */
+.goog-te-spinner,
+.goog-te-spinner-pos,
+.goog-te-spinner-icon,
+.goog-te-checkmark,
+.goog-te-cp {
+  display: none !important;
+}
+
+/* إخفاء الإشعارات المنبثقة */
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
+  display: none !important;
+}
+
+/* إخفاء شريط الإشعارات السفلي */
+.goog-te-balloon-frame,
+.goog-te-balloon-frame-bottom {
+  display: none !important;
+}
+
 /* حاوية زر الترجمة */
 #google_translate_element {
   position: fixed;
@@ -43,17 +96,6 @@
   display: none !important;
 }
 
-/* إخفاء شريط Google Translate العلوي */
-.goog-te-banner-frame {
-  display: none !important;
-}
-
-/* إزالة المسافة التي يضيفها Google Translate */
-body {
-  top: 0 !important;
-  position: relative !important;
-}
-
 /* إخفاء النصوص الإضافية */
 .goog-te-gadget {
   font-size: 0 !important;
@@ -72,6 +114,8 @@ body {
   border-radius: 12px !important;
   overflow: hidden !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+  top: 60px !important;
+  left: 20px !important;
 }
 
 .goog-te-menu2 {
