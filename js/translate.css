@@ -1,71 +1,65 @@
 /* ============================================
-   إخفاء شريط Google Translate بشكل نهائي
+   إخفاء شريط Google Translate فقط - مع بقاء الزر
    ============================================ */
 
-/* إخفاء الشريط العلوي بكل قوة */
+/* إخفاء الشريط العلوي فقط - لا تلمس الزر */
 .goog-te-banner-frame,
 .goog-te-banner,
-.skiptranslate,
-.skiptranslate iframe,
-#goog-gt-tt,
-.goog-te-balloon-frame,
-.goog-te-balloon-frame-bottom,
-.goog-te-balloon-frame-top,
-.goog-te-spinner,
-.goog-te-spinner-pos,
-.goog-te-spinner-icon,
-.goog-te-checkmark,
-.goog-te-cp {
+.skiptranslate:not(#google_translate_element) {
   display: none !important;
   visibility: hidden !important;
-  opacity: 0 !important;
   height: 0 !important;
   min-height: 0 !important;
   max-height: 0 !important;
-  width: 0 !important;
   overflow: hidden !important;
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
-  pointer-events: none !important;
 }
 
-/* إزالة المسافة التي يضيفها Google Translate */
+/* إزالة المسافة التي يتركها الشريط */
 body {
   top: 0px !important;
-  position: relative !important;
   margin-top: 0 !important;
   padding-top: 0 !important;
+  position: relative !important;
 }
 
 html {
   margin-top: 0 !important;
 }
 
-/* إخفاء أي عناصر إضافية */
-.goog-te-gadget {
-  font-size: 0 !important;
-}
-
-.goog-logo-link {
+/* إخفاء الإشعارات المنبثقة */
+#goog-gt-tt,
+.goog-te-balloon-frame {
   display: none !important;
+  visibility: hidden !important;
 }
 
 /* حاوية زر الترجمة - تبقى ظاهرة */
 #google_translate_element {
   position: static !important;
   display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* تنسيق زر الترجمة */
+.goog-te-gadget {
+  font-family: inherit !important;
+  display: inline-block !important;
+}
+
 .goog-te-gadget-simple {
   background: transparent !important;
   border: 2px solid #fca5a5 !important;
   border-radius: 25px !important;
-  padding: 0.5rem 1.5rem !important;
+  padding: 0.5rem 1.2rem !important;
   cursor: pointer !important;
   transition: all 0.3s ease !important;
   display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .goog-te-gadget-simple:hover {
@@ -88,8 +82,8 @@ html {
   display: none !important;
 }
 
-/* إخفاء النص الإضافي */
-.goog-te-gadget span:not(.goog-te-menu-value) {
+/* إخفاء الشعار الإضافي مع بقاء النص الأساسي */
+.goog-logo-link {
   display: none !important;
 }
 
@@ -100,6 +94,7 @@ html {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
   top: 60px !important;
   left: 20px !important;
+  z-index: 10000 !important;
 }
 
 .goog-te-menu2-item {
@@ -121,7 +116,7 @@ html {
 /* للشاشات الصغيرة */
 @media (max-width: 768px) {
   .goog-te-gadget-simple {
-    padding: 0.4rem 1rem !important;
+    padding: 0.4rem 0.8rem !important;
   }
   .goog-te-gadget-simple .goog-te-menu-value {
     font-size: 12px !important;
