@@ -10,7 +10,7 @@ function addTranslateStyles() {
     link.rel = 'stylesheet';
     
     const path = window.location.pathname;
-    if (path.includes('/signup/') || path.includes('/dashboard/') || path.includes('/admin/')) {
+    if (path.includes('/signUp/') || path.includes('/dashboard/') || path.includes('/admin/')) {
       link.href = '../js/translate.css';
     } else {
       link.href = 'js/translate.css';
@@ -20,22 +20,20 @@ function addTranslateStyles() {
   }
 }
 
-// دالة قوية لإزالة شريط Google Translate
-function removeGoogleTranslateBar() {
-  // إزالة الشريط العلوي
-  const banners = document.querySelectorAll('.goog-te-banner-frame, .goog-te-banner, .skiptranslate, .skiptranslate iframe');
-  banners.forEach(banner => {
-    if (banner) {
-      banner.remove();
-      banner.style.display = 'none';
-      banner.style.visibility = 'hidden';
-    }
-  });
+// دالة إخفاء الشريط العلوي فقط - مع ترك الزر
+function hideTranslateBarOnly() {
+  // إخفاء الشريط العلوي فقط
+  const banner = document.querySelector('.goog-te-banner-frame');
+  if (banner) {
+    banner.style.display = 'none';
+    banner.style.visibility = 'hidden';
+    banner.style.height = '0';
+  }
   
-  // إزالة أي عناصر إضافية
-  const extraElements = document.querySelectorAll('#goog-gt-tt, .goog-te-balloon-frame, .goog-te-spinner');
-  extraElements.forEach(el => {
-    if (el) el.remove();
+  // إخفاء الإشعارات المنبثقة
+  const notifications = document.querySelectorAll('#goog-gt-tt, .goog-te-balloon-frame');
+  notifications.forEach(el => {
+    if (el) el.style.display = 'none';
   });
   
   // إصلاح موضع الجسم
@@ -44,32 +42,13 @@ function removeGoogleTranslateBar() {
   document.body.style.marginTop = '0';
   document.documentElement.style.marginTop = '0';
   
-  // إزالة أي iframes مخفية
-  const iframes = document.querySelectorAll('iframe');
-  iframes.forEach(iframe => {
-    if (iframe.style.height === '0px' || iframe.style.display === 'none') {
-      iframe.remove();
-    }
-  });
-}
-
-// دالة إضافة CSS إضافي لإخفاء العناصر
-function addHideStyles() {
-  const style = document.createElement('style');
-  style.textContent = `
-    .goog-te-banner-frame, .goog-te-banner, .skiptranslate, .skiptranslate iframe,
-    #goog-gt-tt, .goog-te-balloon-frame, .goog-te-spinner {
-      display: none !important;
-      visibility: hidden !important;
-      height: 0 !important;
-      width: 0 !important;
-      position: absolute !important;
-      top: -9999px !important;
-      left: -9999px !important;
-    }
-    body { top: 0 !important; margin-top: 0 !important; }
-  `;
-  document.head.appendChild(style);
+  // التأكد من أن زر الترجمة ظاهر
+  const translateBtn = document.querySelector('.goog-te-gadget-simple');
+  if (translateBtn) {
+    translateBtn.style.visibility = 'visible';
+    translateBtn.style.opacity = '1';
+    translateBtn.style.display = 'inline-block';
+  }
 }
 
 // دالة تهيئة Google Translate
@@ -94,11 +73,9 @@ function initGoogleTranslate() {
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
     
-    // إزالة الشريط بعد التحميل مباشرة
     setTimeout(() => {
-      removeGoogleTranslateBar();
-      addHideStyles();
-    }, 10);
+      hideTranslateBarOnly();
+    }, 100);
   };
   
   if (typeof google === 'undefined' || !google.translate) {
@@ -121,16 +98,14 @@ function customizeButton() {
   }, 1500);
 }
 
-// مراقبة وإخفاء الشريط باستمرار
+// مراقبة وإخفاء الشريط مع التأكد من بقاء الزر
 function watchAndHide() {
-  // إخفاء كل ثانية
   setInterval(() => {
-    removeGoogleTranslateBar();
-  }, 500);
+    hideTranslateBarOnly();
+  }, 1000);
   
-  // مراقبة إضافة عناصر جديدة
   const observer = new MutationObserver(() => {
-    removeGoogleTranslateBar();
+    hideTranslateBarOnly();
   });
   observer.observe(document.body, { childList: true, subtree: true });
 }
