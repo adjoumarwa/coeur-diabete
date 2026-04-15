@@ -22,19 +22,14 @@ function addTranslateStyles() {
 
 // دالة إخفاء الشريط العلوي فقط
 function hideTranslateBar() {
-  // إخفاء الشريط العلوي
   const banner = document.querySelector('.goog-te-banner-frame');
   if (banner) {
     banner.style.display = 'none';
     banner.style.visibility = 'hidden';
     banner.style.height = '0';
   }
-  
-  // إصلاح موضع الجسم
   document.body.style.top = '0px';
-  document.body.style.position = 'relative';
   document.body.style.marginTop = '0';
-  document.documentElement.style.marginTop = '0';
 }
 
 // دالة تهيئة Google Translate
@@ -42,7 +37,16 @@ function initGoogleTranslate() {
   if (!document.getElementById('google_translate_element')) {
     const translateDiv = document.createElement('div');
     translateDiv.id = 'google_translate_element';
-    document.body.appendChild(translateDiv);
+    translateDiv.className = 'translate-btn-container';
+    
+    // إضافة الزر في المكان الصحيح (بجانب أزرار الدخول والتسجيل)
+    const navActions = document.querySelector('.nav-actions');
+    if (navActions) {
+      const firstChild = navActions.firstChild;
+      navActions.insertBefore(translateDiv, firstChild);
+    } else {
+      document.body.appendChild(translateDiv);
+    }
   }
   
   window.googleTranslateElementInit = function() {
@@ -52,7 +56,6 @@ function initGoogleTranslate() {
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
     
-    // إخفاء الشريط بعد التحميل
     setTimeout(hideTranslateBar, 100);
   };
   
@@ -76,14 +79,12 @@ function customizeButton() {
   }, 1000);
 }
 
-// مراقبة وإخفاء الشريط باستمرار
+// مراقبة وإخفاء الشريط
 function watchAndHide() {
   setInterval(hideTranslateBar, 1000);
-  
   const observer = new MutationObserver(function() {
     hideTranslateBar();
   });
-  
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
@@ -95,7 +96,6 @@ function initTranslation() {
   watchAndHide();
 }
 
-// بدء الترجمة
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initTranslation);
 } else {
