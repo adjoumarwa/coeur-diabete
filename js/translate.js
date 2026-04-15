@@ -22,6 +22,53 @@ function addTranslateStyles() {
   }
 }
 
+// دالة إزالة شريط Google Translate (طريقة قوية)
+function removeGoogleTranslateBar() {
+  // إزالة الشريط العلوي
+  const removeBanner = setInterval(function() {
+    const banner = document.querySelector('.goog-te-banner-frame');
+    if (banner) {
+      banner.remove();
+      banner.style.display = 'none';
+      banner.style.visibility = 'hidden';
+    }
+    
+    // إزالة أي عناصر إضافية
+    const elements = document.querySelectorAll('.goog-te-banner, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame');
+    elements.forEach(el => {
+      if (el) {
+        el.remove();
+        el.style.display = 'none';
+      }
+    });
+    
+    // إصلاح موضع الجسم
+    document.body.style.top = '0px';
+    document.body.style.position = 'relative';
+    document.body.style.marginTop = '0';
+    document.documentElement.style.marginTop = '0';
+    
+  }, 100);
+  
+  // التوقف بعد 3 ثواني
+  setTimeout(() => clearInterval(removeBanner), 3000);
+}
+
+// دالة إخفاء شريط التحميل
+function removeLoadingBar() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .goog-te-spinner,
+    .goog-te-spinner-pos,
+    .goog-te-spinner-icon,
+    .skiptranslate iframe,
+    .skiptranslate div {
+      display: none !important;
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 // دالة تهيئة Google Translate
 function initGoogleTranslate() {
   // إضافة حاوية الترجمة إذا لم تكن موجودة
@@ -38,6 +85,12 @@ function initGoogleTranslate() {
       includedLanguages: 'ar,fr,en',
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
+    
+    // إزالة الشريط بعد التهيئة مباشرة
+    setTimeout(() => {
+      removeGoogleTranslateBar();
+      removeLoadingBar();
+    }, 100);
   };
   
   // تحميل مكتبة Google Translate إذا لم تكن محملة
@@ -51,17 +104,6 @@ function initGoogleTranslate() {
   }
 }
 
-// دالة إخفاء شريط Google Translate (تأكيد إضافي)
-function hideGoogleTranslateBar() {
-  setTimeout(function() {
-    const banner = document.querySelector('.goog-te-banner-frame');
-    if (banner) {
-      banner.style.display = 'none';
-    }
-    document.body.style.top = '0px';
-  }, 500);
-}
-
 // دالة تغيير النص الافتراضي للزر
 function customizeTranslateButton() {
   setTimeout(function() {
@@ -69,6 +111,33 @@ function customizeTranslateButton() {
     if (btnText && btnText.innerText === 'Arabic') {
       btnText.innerText = '🌐 Français';
     }
+    
+    // إخفاء أي نصوص إضافية
+    const extraSpans = document.querySelectorAll('.goog-te-gadget-simple span:not(.goog-te-menu-value)');
+    extraSpans.forEach(span => {
+      if (span && span.innerText !== 'Arabic' && span.innerText !== '🌐 Français') {
+        span.style.display = 'none';
+      }
+    });
+  }, 1500);
+}
+
+// مراقبة التغييرات لإخفاء الشريط باستمرار
+function watchForChanges() {
+  // مراقبة إضافة عناصر جديدة
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes.length) {
+        removeGoogleTranslateBar();
+      }
+    });
+  });
+  
+  observer.observe(document.body, { childList: true, subtree: true });
+  
+  // إعادة الإخفاء كل ثانية
+  setInterval(() => {
+    removeGoogleTranslateBar();
   }, 1000);
 }
 
@@ -76,8 +145,8 @@ function customizeTranslateButton() {
 function initTranslation() {
   addTranslateStyles();
   initGoogleTranslate();
-  hideGoogleTranslateBar();
   customizeTranslateButton();
+  watchForChanges();
 }
 
 // بدء الترجمة عند تحميل الصفحة
@@ -87,7 +156,9 @@ if (document.readyState === 'loading') {
   initTranslation();
 }
 
-// إعادة إخفاء الشريط عند تغيير اللغة
+// إعادة الإخفاء عند تغيير اللغة
 document.addEventListener('click', function() {
-  hideGoogleTranslateBar();
+  setTimeout(() => {
+    removeGoogleTranslateBar();
+  }, 500);
 });
