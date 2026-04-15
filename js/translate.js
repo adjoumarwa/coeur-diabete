@@ -20,16 +20,56 @@ function addTranslateStyles() {
   }
 }
 
-// دالة إخفاء الشريط العلوي فقط
-function hideTranslateBar() {
-  const banner = document.querySelector('.goog-te-banner-frame');
-  if (banner) {
-    banner.style.display = 'none';
-    banner.style.visibility = 'hidden';
-    banner.style.height = '0';
-  }
+// دالة قوية لإزالة شريط Google Translate
+function removeGoogleTranslateBar() {
+  // إزالة الشريط العلوي
+  const banners = document.querySelectorAll('.goog-te-banner-frame, .goog-te-banner, .skiptranslate, .skiptranslate iframe');
+  banners.forEach(banner => {
+    if (banner) {
+      banner.remove();
+      banner.style.display = 'none';
+      banner.style.visibility = 'hidden';
+    }
+  });
+  
+  // إزالة أي عناصر إضافية
+  const extraElements = document.querySelectorAll('#goog-gt-tt, .goog-te-balloon-frame, .goog-te-spinner');
+  extraElements.forEach(el => {
+    if (el) el.remove();
+  });
+  
+  // إصلاح موضع الجسم
   document.body.style.top = '0px';
+  document.body.style.position = 'relative';
   document.body.style.marginTop = '0';
+  document.documentElement.style.marginTop = '0';
+  
+  // إزالة أي iframes مخفية
+  const iframes = document.querySelectorAll('iframe');
+  iframes.forEach(iframe => {
+    if (iframe.style.height === '0px' || iframe.style.display === 'none') {
+      iframe.remove();
+    }
+  });
+}
+
+// دالة إضافة CSS إضافي لإخفاء العناصر
+function addHideStyles() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .goog-te-banner-frame, .goog-te-banner, .skiptranslate, .skiptranslate iframe,
+    #goog-gt-tt, .goog-te-balloon-frame, .goog-te-spinner {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+    }
+    body { top: 0 !important; margin-top: 0 !important; }
+  `;
+  document.head.appendChild(style);
 }
 
 // دالة تهيئة Google Translate
@@ -39,11 +79,9 @@ function initGoogleTranslate() {
     translateDiv.id = 'google_translate_element';
     translateDiv.className = 'translate-btn-container';
     
-    // إضافة الزر في المكان الصحيح (بجانب أزرار الدخول والتسجيل)
     const navActions = document.querySelector('.nav-actions');
     if (navActions) {
-      const firstChild = navActions.firstChild;
-      navActions.insertBefore(translateDiv, firstChild);
+      navActions.insertBefore(translateDiv, navActions.firstChild);
     } else {
       document.body.appendChild(translateDiv);
     }
@@ -56,7 +94,11 @@ function initGoogleTranslate() {
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
     
-    setTimeout(hideTranslateBar, 100);
+    // إزالة الشريط بعد التحميل مباشرة
+    setTimeout(() => {
+      removeGoogleTranslateBar();
+      addHideStyles();
+    }, 10);
   };
   
   if (typeof google === 'undefined' || !google.translate) {
@@ -76,14 +118,19 @@ function customizeButton() {
     if (btn && btn.innerText === 'Arabic') {
       btn.innerText = '🌐 Français';
     }
-  }, 1000);
+  }, 1500);
 }
 
-// مراقبة وإخفاء الشريط
+// مراقبة وإخفاء الشريط باستمرار
 function watchAndHide() {
-  setInterval(hideTranslateBar, 1000);
-  const observer = new MutationObserver(function() {
-    hideTranslateBar();
+  // إخفاء كل ثانية
+  setInterval(() => {
+    removeGoogleTranslateBar();
+  }, 500);
+  
+  // مراقبة إضافة عناصر جديدة
+  const observer = new MutationObserver(() => {
+    removeGoogleTranslateBar();
   });
   observer.observe(document.body, { childList: true, subtree: true });
 }
