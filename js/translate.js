@@ -9,7 +9,15 @@ function addTranslateStyles() {
     const link = document.createElement('link');
     link.id = 'translate-styles-link';
     link.rel = 'stylesheet';
-    link.href = 'js/translate.css';
+    
+    // تحديد المسار الصحيح حسب موقع الصفحة (مع اسم ملفك الصحيح)
+    const path = window.location.pathname;
+    if (path.includes('/signUp/') || path.includes('/dashboard/') || path.includes('/admin/')) {
+      link.href = '../js/translate.css';   // ← هنا اسم ملفك
+    } else {
+      link.href = 'js/translate.css';      // ← هنا اسم ملفك
+    }
+    
     document.head.appendChild(link);
   }
 }
