@@ -1,297 +1,103 @@
-/* ============================================
-   أنماط زر الترجمة - translate.css
-   ============================================ */
-/* ============================================
-   أنماط زر الترجمة - translate.css
-   ============================================ */
+// ============================================
+// ملف الترجمة الموحد - translate.js
+// ============================================
 
-/* إخفاء الشريط العلوي فقط */
-.goog-te-banner-frame {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  overflow: hidden !important;
-  top: -9999px !important;
-  position: absolute !important;
+// دالة إضافة أنماط CSS
+function addTranslateStyles() {
+  if (!document.getElementById('translate-styles-link')) {
+    const link = document.createElement('link');
+    link.id = 'translate-styles-link';
+    link.rel = 'stylesheet';
+    
+    const path = window.location.pathname;
+    if (path.includes('/signup/') || path.includes('/dashboard/') || path.includes('/admin/')) {
+      link.href = '../js/translate.css';
+    } else {
+      link.href = 'js/translate.css';
+    }
+    
+    document.head.appendChild(link);
+  }
 }
 
-/* إزالة المسافة التي يتركها الشريط */
-body {
-  top: 0px !important;
-  margin-top: 0 !important;
-  position: relative !important;
+// دالة إخفاء الشريط العلوي فقط
+function hideTranslateBar() {
+  const banner = document.querySelector('.goog-te-banner-frame');
+  if (banner) {
+    banner.style.display = 'none';
+    banner.style.visibility = 'hidden';
+    banner.style.height = '0';
+  }
+  document.body.style.top = '0px';
+  document.body.style.marginTop = '0';
 }
 
-/* حاوية زر الترجمة - تبقى ظاهرة */
-#google_translate_element {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 9999;
-}
-
-/* تنسيق زر الترجمة */
-.goog-te-gadget-simple {
-  background: white !important;
-  border: 2px solid #dc2626 !important;
-  border-radius: 40px !important;
-  padding: 8px 20px !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-}
-
-.goog-te-gadget-simple:hover {
-  background: #dc2626 !important;
-  transform: scale(1.05) !important;
-}
-
-.goog-te-gadget-simple:hover .goog-te-menu-value {
-  color: white !important;
-}
-
-.goog-te-gadget-simple .goog-te-menu-value {
-  color: #dc2626 !important;
-  font-weight: bold !important;
-  font-size: 14px !important;
-}
-
-.goog-te-gadget-simple img {
-  display: none !important;
-}
-
-/* إخفاء الشعار الإضافي */
-.goog-logo-link {
-  display: none !important;
-}
-
-/* إخفاء النص الإضافي */
-.goog-te-gadget span:not(.goog-te-menu-value) {
-  display: none !important;
-}
-
-/* تنسيق القائمة المنسدلة */
-.goog-te-menu-frame {
-  border-radius: 12px !important;
-  overflow: hidden !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
-}
-
-.goog-te-menu2-item {
-  padding: 10px 20px !important;
-}
-
-.goog-te-menu2-item:hover {
-  background: #f1f5f9 !important;
-}
-
-.goog-te-menu2-item-selected {
-  background: #dc2626 !important;
-}
-
-.goog-te-menu2-item-selected .goog-te-menu2-item-text {
-  color: white !important;
-}
-
-/* للشاشات الصغيرة */
-@media (max-width: 768px) {
-  #google_translate_element {
-    top: 10px;
-    left: 10px;
+// دالة تهيئة Google Translate
+function initGoogleTranslate() {
+  if (!document.getElementById('google_translate_element')) {
+    const translateDiv = document.createElement('div');
+    translateDiv.id = 'google_translate_element';
+    translateDiv.className = 'translate-btn-container';
+    
+    // إضافة الزر في المكان الصحيح (بجانب أزرار الدخول والتسجيل)
+    const navActions = document.querySelector('.nav-actions');
+    if (navActions) {
+      const firstChild = navActions.firstChild;
+      navActions.insertBefore(translateDiv, firstChild);
+    } else {
+      document.body.appendChild(translateDiv);
+    }
   }
   
-  .goog-te-gadget-simple {
-    padding: 6px 15px !important;
-  }
+  window.googleTranslateElementInit = function() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'ar',
+      includedLanguages: 'ar,fr,en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+    
+    setTimeout(hideTranslateBar, 100);
+  };
   
-  .goog-te-gadget-simple .goog-te-menu-value {
-    font-size: 12px !important;
+  if (typeof google === 'undefined' || !google.translate) {
+    const script = document.createElement('script');
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.head.appendChild(script);
+  } else {
+    googleTranslateElementInit();
   }
 }
 
-/* للعربية */
-[dir="rtl"] #google_translate_element {
-  left: auto;
-  right: 20px;
+// دالة تغيير النص الافتراضي للزر
+function customizeButton() {
+  setTimeout(function() {
+    const btn = document.querySelector('.goog-te-gadget-simple .goog-te-menu-value span');
+    if (btn && btn.innerText === 'Arabic') {
+      btn.innerText = '🌐 Français';
+    }
+  }, 1000);
 }
 
-@media (max-width: 768px) {
-  [dir="rtl"] #google_translate_element {
-    right: 10px;
-    left: auto;
-  }
-}
-/* إخفاء شريط Google Translate العلوي - الطريقة القوية */
-.goog-te-banner-frame,
-.goog-te-banner,
-.goog-te-banner-frame.skiptranslate,
-.goog-te-banner-frame-top,
-#goog-gt-tt,
-.goog-te-balloon-frame,
-div#goog-gt-tt,
-div#goog-gt-tt div,
-div#goog-gt-tt table,
-.goog-te-banner {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  overflow: hidden !important;
-  position: absolute !important;
-  top: -9999px !important;
-  left: -9999px !important;
+// مراقبة وإخفاء الشريط
+function watchAndHide() {
+  setInterval(hideTranslateBar, 1000);
+  const observer = new MutationObserver(function() {
+    hideTranslateBar();
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
-/* إزالة المسافة التي يضيفها Google Translate */
-body {
-  top: 0px !important;
-  position: relative !important;
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+// تهيئة كل شيء
+function initTranslation() {
+  addTranslateStyles();
+  initGoogleTranslate();
+  customizeButton();
+  watchAndHide();
 }
 
-/* إخفاء شريط التحميل */
-.goog-te-spinner,
-.goog-te-spinner-pos,
-.goog-te-spinner-icon,
-.goog-te-checkmark,
-.goog-te-cp {
-  display: none !important;
-}
-
-/* إخفاء الإشعارات المنبثقة */
-.goog-tooltip,
-.goog-tooltip:hover,
-.goog-text-highlight {
-  display: none !important;
-}
-
-/* إخفاء شريط الإشعارات السفلي */
-.goog-te-balloon-frame,
-.goog-te-balloon-frame-bottom {
-  display: none !important;
-}
-
-/* حاوية زر الترجمة */
-#google_translate_element {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 9999;
-}
-
-/* تنسيق زر الترجمة */
-.goog-te-gadget-simple {
-  background: white !important;
-  border: 2px solid #dc2626 !important;
-  border-radius: 40px !important;
-  padding: 8px 20px !important;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-}
-
-.goog-te-gadget-simple:hover {
-  background: #dc2626 !important;
-  transform: scale(1.05) !important;
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3) !important;
-}
-
-.goog-te-gadget-simple:hover .goog-te-menu-value {
-  color: white !important;
-}
-
-.goog-te-gadget-simple .goog-te-menu-value {
-  color: #dc2626 !important;
-  font-weight: bold !important;
-  font-size: 14px !important;
-  transition: color 0.3s ease !important;
-}
-
-.goog-te-gadget-simple img {
-  display: none !important;
-}
-
-/* إخفاء النصوص الإضافية */
-.goog-te-gadget {
-  font-size: 0 !important;
-}
-
-.goog-logo-link {
-  display: none !important;
-}
-
-.goog-te-gadget span:not(.goog-te-menu-value) {
-  display: none !important;
-}
-
-/* تنسيق القائمة المنسدلة للغات */
-.goog-te-menu-frame {
-  border-radius: 12px !important;
-  overflow: hidden !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
-  top: 60px !important;
-  left: 20px !important;
-}
-
-.goog-te-menu2 {
-  background: white !important;
-  border: none !important;
-}
-
-.goog-te-menu2-item {
-  padding: 10px 20px !important;
-  transition: background 0.2s ease !important;
-}
-
-.goog-te-menu2-item:hover {
-  background: #f1f5f9 !important;
-}
-
-.goog-te-menu2-item-selected {
-  background: #dc2626 !important;
-}
-
-.goog-te-menu2-item-selected .goog-te-menu2-item-text {
-  color: white !important;
-}
-
-.goog-te-menu2-item-text {
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  color: #1e293b !important;
-}
-
-/* للشاشات الصغيرة */
-@media (max-width: 768px) {
-  #google_translate_element {
-    top: 10px;
-    left: 10px;
-  }
-  
-  .goog-te-gadget-simple {
-    padding: 6px 15px !important;
-  }
-  
-  .goog-te-gadget-simple .goog-te-menu-value {
-    font-size: 12px !important;
-  }
-}
-
-/* للعربية (RTL) */
-[dir="rtl"] #google_translate_element {
-  left: auto;
-  right: 20px;
-}
-
-@media (max-width: 768px) {
-  [dir="rtl"] #google_translate_element {
-    right: 10px;
-    left: auto;
-  }
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTranslation);
+} else {
+  initTranslation();
 }
