@@ -1,80 +1,93 @@
 // ============================================
-// ملف الترجمة الموحد - يستخدم في جميع صفحات الموقع
+// ملف الترجمة الموحد - translate.js
+// يستخدم في جميع صفحات الموقع
 // ============================================
 
-// دالة إضافة أنماط CSS من ملف منفصل
+// دالة إضافة أنماط CSS
 function addTranslateStyles() {
-  // التحقق إذا كانت الأنماط مضافة بالفعل
   if (!document.getElementById('translate-styles-link')) {
     const link = document.createElement('link');
     link.id = 'translate-styles-link';
     link.rel = 'stylesheet';
     
-    // تحديد المسار الصحيح حسب موقع الصفحة (مع اسم ملفك الصحيح)
+    // تحديد المسار الصحيح حسب موقع الصفحة
     const path = window.location.pathname;
-    if (path.includes('/signUp/') || path.includes('/dashboard/') || path.includes('/admin/')) {
-      link.href = '../js/translate.css';   // ← هنا اسم ملفك
+    if (path.includes('/signup/') || path.includes('/dashboard/') || path.includes('/admin/')) {
+      link.href = '../js/translate.css';
     } else {
-      link.href = 'js/translate.css';      // ← هنا اسم ملفك
+      link.href = 'js/translate.css';
     }
     
     document.head.appendChild(link);
   }
 }
 
-// دالة تهيئة الترجمة
-function initTranslation() {
-  // إضافة أنماط CSS أولاً
-  addTranslateStyles();
-  
-  // إضافة زر الترجمة إذا لم يكن موجوداً
+// دالة تهيئة Google Translate
+function initGoogleTranslate() {
+  // إضافة حاوية الترجمة إذا لم تكن موجودة
   if (!document.getElementById('google_translate_element')) {
     const translateDiv = document.createElement('div');
     translateDiv.id = 'google_translate_element';
-    translateDiv.className = 'translate-btn';
-    translateDiv.innerHTML = '🌐 Français';
     document.body.appendChild(translateDiv);
   }
-}
-
-// دالة تحميل Google Translate
-function loadGoogleTranslate() {
-  // تحقق إذا كانت المكتبة محملة بالفعل
-  if (typeof google !== 'undefined' && google.translate) {
-    return;
-  }
   
-  // دالة التهيئة بعد تحميل المكتبة
+  // تعريف دالة التهيئة
   window.googleTranslateElementInit = function() {
     new google.translate.TranslateElement({
       pageLanguage: 'ar',
       includedLanguages: 'ar,fr,en',
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, 'google_translate_element');
-    
-    // تغيير النص الافتراضي للزر بعد تحميله
-    setTimeout(function() {
-      const btn = document.querySelector('.goog-te-gadget-simple .goog-te-menu-value span');
-      if (btn && btn.innerText === 'Arabic') {
-        btn.innerText = '🌐 Français';
-      }
-    }, 500);
   };
   
-  // تحميل مكتبة Google Translate
-  const script = document.createElement('script');
-  script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-  script.async = true;
-  document.head.appendChild(script);
+  // تحميل مكتبة Google Translate إذا لم تكن محملة
+  if (typeof google === 'undefined' || !google.translate) {
+    const script = document.createElement('script');
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.head.appendChild(script);
+  } else {
+    googleTranslateElementInit();
+  }
 }
 
-// تهيئة الترجمة عند تحميل الصفحة
+// دالة إخفاء شريط Google Translate (تأكيد إضافي)
+function hideGoogleTranslateBar() {
+  setTimeout(function() {
+    const banner = document.querySelector('.goog-te-banner-frame');
+    if (banner) {
+      banner.style.display = 'none';
+    }
+    document.body.style.top = '0px';
+  }, 500);
+}
+
+// دالة تغيير النص الافتراضي للزر
+function customizeTranslateButton() {
+  setTimeout(function() {
+    const btnText = document.querySelector('.goog-te-gadget-simple .goog-te-menu-value span');
+    if (btnText && btnText.innerText === 'Arabic') {
+      btnText.innerText = '🌐 Français';
+    }
+  }, 1000);
+}
+
+// تهيئة كل شيء
+function initTranslation() {
+  addTranslateStyles();
+  initGoogleTranslate();
+  hideGoogleTranslateBar();
+  customizeTranslateButton();
+}
+
+// بدء الترجمة عند تحميل الصفحة
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
-    initTranslation();
-    loadGoogleTranslate();
-  });
+  document.addEventListener('DOMContentLoaded', initTranslation);
 } else {
   initTranslation();
-  loadGoogleTranslate();
 }
+
+// إعادة إخفاء الشريط عند تغيير اللغة
+document.addEventListener('click', function() {
+  hideGoogleTranslateBar();
+});
