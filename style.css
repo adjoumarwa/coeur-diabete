@@ -363,6 +363,7 @@ body {
   height: auto;
   border-radius: 20px;
   object-fit: cover;
+  display:flex;
 }
 
 /* Risk cards images */
