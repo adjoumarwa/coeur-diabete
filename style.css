@@ -494,7 +494,7 @@ img:not([src]) + .img-placeholder-text {
   border-radius: 20px;
   object-fit: cover;
   object-position: center; /* توسيط الصورة داخل الإطار */
-  display: block;
+  display: inline-flex;
   margin: 0 auto;
 }
 
