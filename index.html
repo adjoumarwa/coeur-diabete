@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>قلب السكري</title>
+  <title>قلب السكري - تقييم خطر أمراض القلب</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,23 +13,20 @@
       <nav class="navbar">
         <div class="logo">
           <span class="logo-heart">❤️</span>
-          <span class="logo-text" id="logoText">قلب السكري</span>
+          <span class="logo-text">قلب السكري</span>
         </div>
         <div class="nav-links">
-          <a href="#home" class="nav-link" id="navHome">الرئيسية</a>
-          <a href="#comprendre" class="nav-link" id="navComprendre">افهم مرضك</a>
-          <a href="#signes" class="nav-link" id="navSignes">علامات الخطر</a>
-          <a href="#prevention" class="nav-link" id="navPrevention">الوقاية</a>
-          <a href="#outils" class="nav-link" id="navOutils">أدوات تفاعلية</a>
-          <a href="#telechargements" class="nav-link" id="navTelechargements">تحميلات</a>
+          <a href="#accueil" class="nav-link">Accueil</a>
+          <a href="#risk" class="nav-link">Évaluation du risque</a>
+          <a href="#symptoms" class="nav-link">Symptômes</a>
+          <a href="#exams" class="nav-link">Examens médicaux</a>
+          <a href="#prevention" class="nav-link">Prévention</a>
+          <a href="#contact" class="nav-link">Contact</a>
         </div>
         <div class="nav-actions">
-     <!--      <div id="google_translate_element" class="translate-btn-container"></div>
-       <!--   <button class="lang-btn" id="langBtn">🇫🇷 Français</button> -->
-          <button class="login-btn"><a href="signUp/login.html" id="loginLink" style="color: inherit; text-decoration: none;">دخول</a></button>
-          <button class="register-btn"><a href="signUp/signup.html" id="registerLink" style="color: inherit; text-decoration: none;">تسجيل</a></button>
+          <button class="login-btn"><a href="signUp/login.html" style="color: inherit; text-decoration: none;">Connexion</a></button>
+          <button class="register-btn"><a href="signUp/signup.html" style="color: inherit; text-decoration: none;">Inscription</a></button>
         </div>
-       
         <button class="menu-toggle" id="menuToggle">
           <span class="bar"></span>
           <span class="bar"></span>
@@ -40,147 +37,315 @@
   </header>
 
   <main>
-    <section class="hero" id="home">
+    <!-- ==================== القسم 1: Accueil ==================== -->
+    <section class="hero" id="accueil">
       <div class="container">
-        <h1 class="hero-title" id="heroTitle">❤️ قلب السكري</h1>
-        <p class="hero-subtitle" id="heroSubtitle">اعرف قلبك.. تحكم بسكريك</p>
-        <button class="btn-urgence" id="urgenceBtn">🚨 زر الطوارئ: ماذا أفعل عند ظهور أعراض؟</button>
+        <div class="hero-content">
+          <h1 class="hero-title">❤️ Cœur + soins + ECG</h1>
+          <p class="hero-subtitle">قلب السكري - العناية بصحة قلبك</p>
+          <div class="hero-buttons">
+            <button class="btn-primary" id="startEvaluationBtn">Commencer l'évaluation</button>
+            <button class="btn-emergency-header" id="urgenceHeaderBtn">🚨 Urgence</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <!-- صورة القسم 1: صورة القلب والرعاية -->
+          <img src="" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="hero-img" id="heroImg">
+          <div class="img-placeholder-text">🖼️ صورة القلب والرعاية الصحية</div>
+        </div>
       </div>
     </section>
 
-    <div class="container">
-      <!-- افهم مرضك -->
-      <div class="card">
-        <h2 id="comprendreTitle">📘 افهم مرضك (Comprendre le risque)</h2>
-        <p id="comprendreText1"><strong>العلاقة بين السكري وأمراض القلب:</strong> السكري يرفع نسبة السكر في الدم مما يؤدي إلى تلف الأوعية الدموية وتصلب الشرايين.</p>
-        <p style="margin-top: 1rem;" id="comprendreText2"><strong>لماذا الخطر أكبر عند مريض السكري؟</strong> ارتفاع السكر المزمن يزيد الالتهابات ويضعف جدران الأوعية الدموية، ويسرع من تصلب الشرايين.</p>
-        <p style="margin-top: 1rem;" id="comprendreText3"><strong>⚠️ مفهوم "الجلطة الصامتة":</strong> عند مريض السكري، قد تحدث نوبة قلبية دون ألم صدر، فقط تعب شديد أو غثيان أو عسر هضم.</p>
-      </div>
+    <!-- ==================== القسم 2: Évaluation du risque ==================== -->
+    <section class="risk-section" id="risk">
+      <div class="container">
+        <div class="section-header">
+          <h2>📊 Évaluation du risque</h2>
+          <p>Questionnaire / Évaluation du risque cardiaque</p>
+        </div>
+        
+        <div class="risk-cards">
+          <div class="risk-card">
+            <!-- صورة Questionnaire -->
+            <img src="" alt="Image: Questionnaire - ضع مسار الصورة هنا" class="card-img">
+            <h3>Questionnaire</h3>
+            <p>Évaluation du risque</p>
+            <button class="btn-risk" id="questionnaireRiskBtn">Commencer</button>
+          </div>
+          
+          <div class="risk-card">
+            <!-- صورة Appel -->
+            <img src="" alt="Image: Appel téléphonique - ضع مسار الصورة هنا" class="card-img">
+            <h3>Appel</h3>
+            <p>Système de prise en charge</p>
+            <button class="btn-risk" onclick="window.location.href='tel:14'">Appeler</button>
+          </div>
+          
+          <div class="risk-card">
+            <!-- صورة Surveillance -->
+            <img src="" alt="Image: Système de surveillance - ضع مسار الصورة هنا" class="card-img">
+            <h3>Système de surveillance</h3>
+            <p>Surveillance continue</p>
+            <button class="btn-risk" id="surveillanceBtn">Démarrer</button>
+          </div>
+        </div>
 
-      <!-- علامات الخطر -->
-      <div class="card">
-        <h2 id="signesTitle">⚠️ علامات الخطر (Signes d'alerte)</h2>
+        <!-- Activité physique avec image -->
+        <div class="activity-box">
+          <div class="activity-image">
+            <!-- صورة النشاط البدني -->
+            <img src="" alt="Image: Activité physique - ضع مسار الصورة هنا" class="activity-img">
+          </div>
+          <div class="activity-content">
+            <h3><i class="fas fa-walking"></i> Activité physique</h3>
+            <p>Activité physique recommandée: 30 minutes de marche par jour</p>
+            <button class="btn-outline" id="activityInfoBtn">En savoir plus</button>
+          </div>
+        </div>
+
+        <!-- Résultat du questionnaire -->
+        <div class="result-box" id="resultBox" style="display: none;">
+          <div class="result-header">
+            <h3>📈 Résultat (risk score)</h3>
+            <button class="close-result" id="closeResultBtn">&times;</button>
+          </div>
+          <div class="result-content">
+            <div class="gauge-container">
+              <canvas id="riskGauge" width="200" height="200"></canvas>
+              <div class="gauge-text" id="gaugeText">0</div>
+            </div>
+            <div class="score-info">
+              <div class="total-score">
+                Score total: <span id="totalScore">0</span> / 20
+              </div>
+              <div class="risk-level" id="riskLevelResult"></div>
+            </div>
+            <div class="risk-scale">
+              <div class="scale low">0 - 5: Risque faible</div>
+              <div class="scale medium">6 - 10: Risque modéré</div>
+              <div class="scale high">≥ 11: Risque élevé</div>
+            </div>
+            <button class="btn-primary" id="retestBtn">Recommencer</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== القسم 3: Symptômes typiques et atypiques ==================== -->
+    <section class="symptoms-section" id="symptoms">
+      <div class="container">
+        <div class="section-header">
+          <h2>⚠️ Signes d'alerte</h2>
+          <p>Symptômes typiques et atypiques</p>
+        </div>
         <div class="symptoms-grid">
-          <div class="symptom-box symptom-classique">
-            <h3 id="classicTitle">📍 الأعراض الكلاسيكية</h3>
+          <!-- Symptômes typiques avec image -->
+          <div class="symptom-card typical">
+            <img src="" alt="Image: Douleur thoracique - ضع مسار الصورة هنا" class="symptom-img">
+            <h3><i class="fas fa-heartbeat"></i> Symptômes typiques</h3>
             <ul>
-              <li><i class="fas fa-heartbeat"></i> <span id="classic1">ألم أو ضغط في منتصف الصدر</span></li>
-              <li><i class="fas fa-lungs"></i> <span id="classic2">ضيق في التنفس</span></li>
-              <li><i class="fas fa-tint"></i> <span id="classic3">تعرق بارد وغزير</span></li>
-              <li><i class="fas fa-dizzy"></i> <span id="classic4">دوار أو إغماء</span></li>
+              <li><i class="fas fa-angle-left"></i> Douleur thoracique / douleur qui se propage</li>
+              <li><i class="fas fa-angle-left"></i> ألم في الصدر يمتد إلى الذراع</li>
+              <li><i class="fas fa-angle-left"></i> ضيق في التنفس</li>
+              <li><i class="fas fa-angle-left"></i> تعرق بارد</li>
             </ul>
           </div>
-          <div class="symptom-box symptom-atypique">
-            <h3 id="atypicalTitle">⚠️ الأعراض غير النمطية (الأكثر شيوعاً عند مرضى السكري)</h3>
+          <!-- Symptômes atypiques avec image -->
+          <div class="symptom-card atypical">
+            <img src="" alt="Image: Fatigue inhabituelle - ضع مسار الصورة هنا" class="symptom-img">
+            <h3><i class="fas fa-bed"></i> Symptômes atypiques</h3>
             <ul>
-              <li><i class="fas fa-bed"></i> <span id="atypical1">تعب مفاجئ شديد غير مبرر</span></li>
-              <li><i class="fas fa-stomach"></i> <span id="atypical2">غثيان أو عسر هضم أو حرقة معدة</span></li>
-              <li><i class="fas fa-backward"></i> <span id="atypical3">آلام في الظهر بين الكتفين</span></li>
-              <li><i class="fas fa-tooth"></i> <span id="atypical4">آلام في الفك أو الرقبة</span></li>
+              <li><i class="fas fa-angle-left"></i> Fatigue inhabituelle</li>
+              <li><i class="fas fa-angle-left"></i> Essoufflement léger</li>
+              <li><i class="fas fa-angle-left"></i> Malaise général</li>
+              <li><i class="fas fa-angle-left"></i> Nausées / Troubles digestifs</li>
             </ul>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- ركن الوقاية -->
-      <div class="card">
-        <h2 id="preventionTitle">🥗 ركن الوقاية (Conseils Préventifs)</h2>
-        <p id="preventionText1"><strong>🥗 التغذية:</strong> نظام DASH أو البحر الأبيض المتوسط - إكثار من الخضروات والفواكه والحبوب الكاملة، زيت الزيتون، الأسماك الدهنية، وتقليل الملح والسكريات.</p>
-        <p style="margin-top: 1rem;" id="preventionText2"><strong>🏃 النشاط البدني:</strong> مشي 30 دقيقة يومياً، تمارين مقاومة خفيفة مرتين في الأسبوع.</p>
-        <p style="margin-top: 1rem;" id="preventionText3"><strong>📊 متابعة الأرقام:</strong></p>
-        <table class="monitoring-table">
-          <thead>
-            <tr><th id="tableHeader1">القياس</th><th id="tableHeader2">الهدف الموصى به</th><th id="tableHeader3">متى أقيسه؟</th></tr>
-          </thead>
-          <tbody>
-            <tr><td id="row1Col1">ضغط الدم الانقباضي</td><td id="row1Col2">&lt; 130 مم زئبق</td><td id="row1Col3">يومياً</td></tr>
-            <tr><td id="row2Col1">السكري التراكمي HBA1c</td><td id="row2Col2">&lt; 7%</td><td id="row2Col3">كل 3 شهور</td></tr>
-            <tr><td id="row3Col1">الكوليسترول الضار LDL</td><td id="row3Col2">&lt; 100 mg/dL</td><td id="row3Col3">كل 6 شهور</td></tr>
-            <tr><td id="row4Col1">سكر الصائم</td><td id="row4Col2">80-130 mg/dL</td><td id="row4Col3">يومياً</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- أدوات تفاعلية -->
-      <div class="card">
-        <h2 id="outilsTitle">🛠️ أدوات تفاعلية (Outils)</h2>
-        <div class="tools-grid">
-          <div class="tool-card" id="testRisqueBtn">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h3 id="testTitle">اختبار سريع</h3>
-            <p id="testSubtitle">هل أنت في خطر؟</p>
-          </div>
-          <div class="tool-card" id="calculerIMCBtn">
-            <i class="fas fa-calculator"></i>
-            <h3 id="bmiTitle">حاسبة BMI</h3>
-            <p id="bmiSubtitle">احسب وزنك المثالي</p>
-          </div>
-          <div class="tool-card" id="ajouterRappelBtn">
-            <i class="fas fa-calendar-alt"></i>
-            <h3 id="calendarTitle">مفكرة المواعيد</h3>
-            <p id="calendarSubtitle">تذكير بفحص القلب</p>
-          </div>
-        </div>
-        <div id="rappel-container" style="margin-top: 1rem; display: none;">
-          <input type="date" id="rappel-date" class="date-input">
-          <button id="saveRappelBtn" class="save-btn">حفظ التذكير</button>
-          <p id="rappel-message" style="margin-top: 10px; color: #1a472a;"></p>
+    <!-- ==================== القسم 4: Urgence ==================== -->
+    <section class="emergency-section">
+      <div class="container">
+        <div class="emergency-card">
+          <!-- صورة الطوارئ -->
+          <img src="" alt="Image: Ambulance / Urgence - ضع مسار الصورة هنا" class="emergency-img">
+          <h2>Appelez immédiatement les urgences</h2>
+          <div class="emergency-number">14</div>
+          <p>Chaque minute compte et peut sauver une vie</p>
+          <p class="emergency-warning">Restez calme et n'attendez pas</p>
+          <button class="btn-emergency" onclick="window.location.href='tel:14'">
+            <i class="fas fa-phone"></i> Appeler les urgences
+          </button>
         </div>
       </div>
+    </section>
 
-      <!-- قسم التحميل -->
-      <div class="card">
-        <h2 id="downloadsTitle">📥 قسم التحميل (Téléchargements)</h2>
-        <div class="downloads-grid">
-          <div class="download-card" data-download="guide">
-            <i class="fas fa-file-pdf" style="font-size: 2rem;"></i>
-            <h3 id="guideTitle">دليل التعرف على الأزمة القلبية الصامتة</h3>
-            <p id="guideText">PDF قابل للطباعة</p>
+    <!-- ==================== القسم 5: Examens médicaux ==================== -->
+    <section class="exams-section" id="exams">
+      <div class="container">
+        <div class="section-header">
+          <h2>🩺 Examens médicaux</h2>
+          <p>الفحوصات الطبية اللازمة</p>
+        </div>
+        <div class="exams-grid">
+          <div class="exam-card">
+            <img src="" alt="Image: ECG - ضع مسار الصورة هنا" class="exam-img">
+            <h3>ECG</h3>
+            <p>Électrocardiogramme</p>
           </div>
-          <div class="download-card" data-download="carte">
-            <i class="fas fa-id-card" style="font-size: 2rem;"></i>
-            <h3 id="carteTitle">بطاقة المريض</h3>
-            <p id="carteText">احملها معك في محفظتك</p>
+          <div class="exam-card">
+            <img src="" alt="Image: Glycémie - ضع مسار الصورة هنا" class="exam-img">
+            <h3>Glycémie</h3>
+            <p>Niveau de sucre</p>
           </div>
-          <div class="download-card" data-download="alimentation">
-            <i class="fas fa-utensils" style="font-size: 2rem;"></i>
-            <h3 id="alimTitle">دليل التغذية لمرضى السكري والقلب</h3>
-            <p id="alimText">نظام DASH + المتوسطي</p>
+          <div class="exam-card">
+            <img src="" alt="Image: Bilan lipidique - ضع مسار الصورة هنا" class="exam-img">
+            <h3>Bilan lipidique</h3>
+            <p>Cholestérol, triglycérides</p>
+          </div>
+          <div class="exam-card">
+            <img src="" alt="Image: Troponin - ضع مسار الصورة هنا" class="exam-img">
+            <h3>Troponin</h3>
+            <p>Marqueur cardiaque</p>
+          </div>
+          <div class="exam-card">
+            <img src="" alt="Image: Tension artérielle - ضع مسار الصورة هنا" class="exam-img">
+            <h3>Tension artérielle</h3>
+            <p>Pression artérielle</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- ==================== القسم 6: Prévention ==================== -->
+    <section class="prevention-section" id="prevention">
+      <div class="container">
+        <div class="section-header">
+          <h2>🥗 Prévention</h2>
+          <p>نصائح وقائية لحياة صحية</p>
+        </div>
+        <div class="prevention-grid">
+          <div class="prevention-card">
+            <img src="" alt="Image: Sport - ضع مسار الصورة هنا" class="prevention-img">
+            <h3>Sport</h3>
+            <p>30 min/jour</p>
+          </div>
+          <div class="prevention-card">
+            <img src="" alt="Image: Alimentation - ضع مسار الصورة هنا" class="prevention-img">
+            <h3>Alimentation</h3>
+            <p>Régime DASH</p>
+          </div>
+          <div class="prevention-card">
+            <img src="" alt="Image: Arrêt du tabac - ضع مسار الصورة هنا" class="prevention-img">
+            <h3>Arrêt du tabac</h3>
+            <p>الإقلاع عن التدخين</p>
+          </div>
+          <div class="prevention-card">
+            <img src="" alt="Image: Gestion du stress - ضع مسار الصورة هنا" class="prevention-img">
+            <h3>Gestion du stress</h3>
+            <p>Stress management</p>
+          </div>
+          <div class="prevention-card">
+            <img src="" alt="Image: Sommeil - ضع مسار الصورة هنا" class="prevention-img">
+            <h3>Sommeil suffisant</h3>
+            <p>7-8 heures</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== القسم 7: Vidéo éducative ==================== -->
+    <section class="video-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>🎥 Vidéo éducative</h2>
+          <p>Médecin expliquant</p>
+        </div>
+        <div class="video-container">
+          <div class="video-placeholder" id="videoPlaceholder">
+            <!-- صورة الفيديو (thumbnail) -->
+            <img src="" alt="Image: Vidéo - Médecin spécialiste - ضع مسار الصورة هنا" class="video-img">
+            <p>Vidéo explicative - Médecin spécialiste</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== القسم 8: Contact / À propos ==================== -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2>📞 Contact / À propos</h2>
+          <p>Équipe médicale / Nous contacter</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <!-- صورة الفريق الطبي -->
+            <img src="" alt="Image: Équipe médicale - ضع مسار الصورة هنا" class="team-img">
+            <div class="team-info">
+              <h3>Équipe médicale</h3>
+              <p>Cardiologues, diabétologues, nutritionnistes</p>
+            </div>
+            <div class="contact-details">
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <strong>Téléphone</strong>
+                  <p>14 (Urgences)</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <strong>Email</strong>
+                  <p>info@coeur-diabete.dz</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <strong>Adresse</strong>
+                  <p>Algiers, Algeria</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form">
+            <h3>Formulaire de contact</h3>
+            <form id="contactForm">
+              <input type="text" id="contactName" placeholder="Nom complet" required>
+              <input type="email" id="contactEmail" placeholder="Email" required>
+              <textarea id="contactMessage" placeholder="Votre message..." rows="5" required></textarea>
+              <button type="submit" class="btn-primary">Envoyer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p class="footer-text" id="footerText">© 2026 قلب السكري - موقع توعوي لمرضى السكري وأمراض القلب</p>
-      <p class="footer-emergency" id="footerEmergency">في حالة الطوارئ، اتصل بالإسعاف فوراً: 14 أو 997</p>
+      <p class="footer-text">© 2026 قلب السكري - موقع توعوي لمرضى السكري وأمراض القلب</p>
+      <p class="footer-emergency">🚨 Urgence: Appelez le 14 ou 997</p>
     </div>
   </footer>
 
-  <!-- إضافة مكتبة الترجمة -->
- <!-- زر الترجمة البسيط -->
-<!-- أضف نفس الكود قبل </body> -->
-<div id="google_translate_element" style="position: fixed; top: 20px; left: 20px; z-index: 9999;"></div>
-<script>
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'ar',
-      includedLanguages: 'ar,fr,en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  }
-</script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<style>
-  .goog-te-banner-frame { display: none !important; }
-  body { top: 0 !important; }
-  .goog-te-gadget-simple { background: white !important; border: 2px solid #dc2626 !important; border-radius: 40px !important; padding: 5px 15px !important; }
-  .goog-te-gadget-simple .goog-te-menu-value { color: #dc2626 !important; font-weight: bold !important; }
-  .goog-te-gadget-simple img { display: none !important; }
-</style>
-  <script src="script.js"></script>
+  <!-- Google Translate -->
+  <div id="google_translate_element" class="translate-btn"></div>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'ar,fr,en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+  <script src="script.js"></script>
 </body>
 </html>
