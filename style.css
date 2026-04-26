@@ -503,7 +503,7 @@ img:not([src]) + .img-placeholder-text {
   display: inline-flex;
   margin: 0 auto;
 }
-.hero-img , .result-images{
+.hero-img {
   width: 100%;
   max-width: 400px;
   height: 400px;
