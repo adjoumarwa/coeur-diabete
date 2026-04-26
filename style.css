@@ -541,7 +541,7 @@ img:not([src]) + .img-placeholder-text {
 
 .risk-img {
   width: 300px;
-  height: 250px;
+  height: 300px;
   border-radius: 20px;
   object-fit: cover;
   
@@ -554,7 +554,7 @@ img:not([src]) + .img-placeholder-text {
   cursor: pointer;
 }
 
-.risk-img:hover {
+.risk-img:hover , .hero-img:hover{
   transform: translateY(-10px);
   background:red;
 }
