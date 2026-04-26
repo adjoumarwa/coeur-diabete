@@ -503,7 +503,7 @@ img:not([src]) + .img-placeholder-text {
   display: inline-flex;
   margin: 0 auto;
 }
-.hero-img {
+.hero-img , .result-images{
   width: 100%;
   max-width: 400px;
   height: 400px;
@@ -512,6 +512,9 @@ img:not([src]) + .img-placeholder-text {
   object-position: center; /* توسيط الصورة داخل الإطار */
   display: inline-flex;
   margin: 0 auto;
+  transition: transform 0.3s;
+  cursor: pointer;
+
 }
 
 /* للشاشات الصغيرة */
