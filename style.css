@@ -748,3 +748,224 @@ img:not([src]) + .img-placeholder-text {
     height: 200px;
   }
 }
+
+/* ============================================
+   HERO IMAGES SECTION - SAME LINE
+   ============================================ */
+
+/* حاوية صور القسم الرئيسي */
+.hero-image {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+/* الصور في نفس السطر */
+.hero-img {
+  width: 320px;
+  height: 320px;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+
+/* تأثير hover */
+.hero-img:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(220, 38, 38, 0.3);
+  border-color: #dc2626;
+}
+
+/* ============================================
+   RISK IMAGES SECTION - SAME LINE
+   ============================================ */
+
+/* حاوية صور تقييم الخطر */
+.risk-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+/* صور تقييم الخطر */
+.risk-img {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 3px solid #dc2626;
+  padding: 5px;
+  background: white;
+}
+
+/* تأثير hover لصور تقييم الخطر */
+.risk-img:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(220, 38, 38, 0.3);
+  border-color: #b91c1c;
+  background: #fee2e2;
+}
+
+/* ============================================
+   RESULT IMAGES SECTION - SAME LINE (FIXED)
+   ============================================ */
+
+/* حاوية صور النتائج */
+.result-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+/* صور النتائج */
+.result-img {
+  width: 320px;
+  height: 320px;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+
+/* تأثير hover لصور النتائج */
+.result-img:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+  border-color: #2563eb;
+}
+
+/* ============================================
+   ACTIVITY IMAGE
+   ============================================ */
+
+/* صورة النشاط البدني */
+.activity-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.activity-img:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   SECTION TITLES - CENTERED
+   ============================================ */
+
+/* توسيط جميع العناوين الرئيسية */
+.hero-content,
+.section-header,
+.result-content {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   RESPONSIVE FOR ALL IMAGES
+   ============================================ */
+
+/* للشاشات المتوسطة */
+@media (max-width: 900px) {
+  .hero-img,
+  .risk-img,
+  .result-img {
+    width: 260px;
+    height: 260px;
+  }
+  
+  .hero-image,
+  .risk-images,
+  .result-images {
+    gap: 1.5rem;
+  }
+}
+
+/* للشاشات الصغيرة - تصبح الصور عمودية */
+@media (max-width: 700px) {
+  .hero-image,
+  .risk-images,
+  .result-images {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-img,
+  .risk-img,
+  .result-img {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .hero-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+  .hero-img,
+  .risk-img,
+  .result-img {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+/* ============================================
+   ACTIVITY BOX RESPONSIVE
+   ============================================ */
+
+.activity-box {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: linear-gradient(135deg, #fef2f2, #eff6ff);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .activity-box {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .activity-img {
+    width: 100px;
+    height: 100px;
+  }
+}
