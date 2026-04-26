@@ -493,7 +493,16 @@ img:not([src]) + .img-placeholder-text {
   }
 }
 
-
+.risk-img{
+   width: 100%;
+  max-width: 400px;
+  height: 400px;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: center; /* توسيط الصورة داخل الإطار */
+  display: inline-flex;
+  margin: 0 auto;
+}
 .hero-img {
   width: 100%;
   max-width: 400px;
@@ -507,7 +516,7 @@ img:not([src]) + .img-placeholder-text {
 
 /* للشاشات الصغيرة */
 @media (max-width: 768px) {
-  .hero-img {
+  .hero-img , .risk-img{
     height: 250px;
     max-width: 100%;
   }
@@ -515,7 +524,7 @@ img:not([src]) + .img-placeholder-text {
 
 /* للشاشات الكبيرة */
 @media (min-width: 1200px) {
-  .hero-img {
+  .hero-img , .risk-img {
     height: 450px;
     max-width: 500px;
   }
