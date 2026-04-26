@@ -529,3 +529,37 @@ img:not([src]) + .img-placeholder-text {
     max-width: 500px;
   }
 }
+
+/*risk images*/
+.risk-images {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.risk-img {
+  width: 280px;
+  height: 250px;
+  border-radius: 20px;
+  object-fit: cover;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.risk-img:hover {
+  transform: translateY(-10px);
+}
+
+@media (max-width: 768px) {
+  .risk-images {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .risk-img {
+    width: 90%;
+    height: auto;
+  }
+}
