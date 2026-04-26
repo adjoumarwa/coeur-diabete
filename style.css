@@ -588,7 +588,7 @@ img:not([src]) + .img-placeholder-text {
 
 /* الصور في نفس السطر */
 .hero-img {
-  width: 370px;
+  width: 300px;
   height: 300px;
   border-radius: 20px;
   object-fit: cover;
