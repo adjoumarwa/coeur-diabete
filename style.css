@@ -648,7 +648,7 @@ img:not([src]) + .img-placeholder-text {
 
 /* صور النتائج */
 .result-img {
-  width: 380px;
+  width: 430px;
   height: 350px;
   border-radius: 20px;
   object-fit: cover;
