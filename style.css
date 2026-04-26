@@ -533,23 +533,30 @@ img:not([src]) + .img-placeholder-text {
 /*risk images*/
 .risk-images {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 2rem;
 }
 
 .risk-img {
-  width: 280px;
+  width: 300px;
   height: 250px;
   border-radius: 20px;
   object-fit: cover;
+  
+   border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 1px solid #dc2626;
+  padding: 5px;
+  
   transition: transform 0.3s;
   cursor: pointer;
 }
 
 .risk-img:hover {
   transform: translateY(-10px);
+  background:red;
 }
 
 @media (max-width: 768px) {
