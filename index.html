@@ -43,88 +43,80 @@
           <h1 class="hero-title">❤️ Cœur + soins + ECG</h1>
         </div>
         <div class="hero-image">
-          <!-- صورة القسم 1: صورة القلب والرعاية -->
-          <img src="image/img1.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="hero-img" id="heroImg">
-          <img src="image/img11.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="hero-img" id="heroImg">
-          <img src="image/img12.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="hero-img" id="heroImg">
+          <img src="image/img1.jfif" alt="Image: Cœur et soins" class="hero-img">
+          <img src="image/img11.jfif" alt="Image: Soins cardiaques" class="hero-img">
+          <img src="image/img12.jfif" alt="Image: ECG" class="hero-img">
         </div>
       </div>
     </section>
 
-<!--risk-->
-<section class="risk-section" id="risk">
+    <!-- ==================== القسم 2: Évaluation du risque ==================== -->
+    <section class="risk-section" id="risk">
       <div class="container">
         <div class="hero-content">
-          <h1 class="hero-title">❤️ Cœur + soins + ECG</h1>
+          <h1 class="hero-title">❤️ Évaluation du risque</h1>
         </div>
         <div class="risk-images">
-          <img src="image/img2.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="risk-img" id="riskImg">
-          <img src="image/img22.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="risk-img" id="riskIimg">
-          <img src="image/img23.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="risk-img" id="riskIimg">
+          <img src="image/img2.jfif" alt="Risk Image 1" class="risk-img">
+          <img src="image/img22.jfif" alt="Risk Image 2" class="risk-img">
+          <img src="image/img23.jfif" alt="Risk Image 3" class="risk-img">
         </div>
       </div>
     </section>
     
-    <!-- ==================== القسم 2: Évaluation du risque ==================== -->
-    
-    <!-- ==================== القسم 2: Resultat du risque ==================== -->
-    <section class="result" id="accueil">
+    <!-- ==================== القسم 3: Résultat ==================== -->
+    <section class="result-section" id="result">
       <div class="container">
         <div class="result-content">
-          <h1 class="hero-title">result</h1>
+          <h1 class="hero-title">📊 Résultat</h1>
         </div>
         <div class="result-images">
-          <!-- صورة القسم 1: صورة القلب والرعاية -->
-          <img src="image/img1.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="result-img" id="resultImg">
-          <img src="image/img11.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="result-img" id="resultImg">
-          <img src="image/img12.jfif" alt="Image: Cœur et soins - ضع مسار الصورة هنا" class="result-img" id="resultImg">
+          <img src="image/img1.jfif" alt="Result Image 1" class="result-img">
+          <img src="image/img11.jfif" alt="Result Image 2" class="result-img">
+          <img src="image/img12.jfif" alt="Result Image 3" class="result-img">
         </div>
       </div>
     </section>
 
-    
-        <!-- Activité physique avec image -->
-        <div class="activity-box">
-          <div class="activity-image">
-            <!-- صورة النشاط البدني -->
-            <img src="image/img5.jfif" alt="Image: Activité physique - ضع مسار الصورة هنا" class="activity-img">
-          </div>
-          <div class="activity-content">
-            <h3><i class="fas fa-walking"></i> Activité physique</h3>
-            <p>Activité physique recommandée: 30 minutes de marche par jour</p>
-            <button class="btn-outline" id="activityInfoBtn">En savoir plus</button>
-          </div>
-        </div>
-
-        <!-- Résultat du questionnaire -->
-        <div class="result-box" id="resultBox" style="display: none;">
-          <div class="result-header">
-            <h3>📈 Résultat (risk score)</h3>
-            <button class="close-result" id="closeResultBtn">&times;</button>
-          </div>
-          <div class="result-content">
-            <div class="gauge-container">
-              <canvas id="riskGauge" width="200" height="200"></canvas>
-              <div class="gauge-text" id="gaugeText">0</div>
-            </div>
-            <div class="score-info">
-              <div class="total-score">
-                Score total: <span id="totalScore">0</span> / 20
-              </div>
-              <div class="risk-level" id="riskLevelResult"></div>
-            </div>
-            <div class="risk-scale">
-              <div class="scale low">0 - 5: Risque faible</div>
-              <div class="scale medium">6 - 10: Risque modéré</div>
-              <div class="scale high">≥ 11: Risque élevé</div>
-            </div>
-            <button class="btn-primary" id="retestBtn">Recommencer</button>
-          </div>
-        </div>
+    <!-- ==================== Activité physique ==================== -->
+    <div class="activity-box">
+      <div class="activity-image">
+        <img src="image/img5.jfif" alt="Activité physique" class="activity-img">
       </div>
-    </section>
+      <div class="activity-content">
+        <h3><i class="fas fa-walking"></i> Activité physique</h3>
+        <p>Activité physique recommandée: 30 minutes de marche par jour</p>
+        <button class="btn-outline" id="activityInfoBtn">En savoir plus</button>
+      </div>
+    </div>
 
-    <!-- ==================== القسم 3: Symptômes typiques et atypiques ==================== -->
+    <!-- ==================== Résultat du questionnaire ==================== -->
+    <div class="result-box" id="resultBox" style="display: none;">
+      <div class="result-header">
+        <h3>📈 Résultat (risk score)</h3>
+        <button class="close-result" id="closeResultBtn">&times;</button>
+      </div>
+      <div class="result-content">
+        <div class="gauge-container">
+          <canvas id="riskGauge" width="200" height="200"></canvas>
+          <div class="gauge-text" id="gaugeText">0</div>
+        </div>
+        <div class="score-info">
+          <div class="total-score">
+            Score total: <span id="totalScore">0</span> / 20
+          </div>
+          <div class="risk-level" id="riskLevelResult"></div>
+        </div>
+        <div class="risk-scale">
+          <div class="scale low">0 - 5: Risque faible</div>
+          <div class="scale medium">6 - 10: Risque modéré</div>
+          <div class="scale high">≥ 11: Risque élevé</div>
+        </div>
+        <button class="btn-primary" id="retestBtn">Recommencer</button>
+      </div>
+    </div>
+
+    <!-- ==================== القسم 4: Symptômes ==================== -->
     <section class="symptoms-section" id="symptoms">
       <div class="container">
         <div class="section-header">
@@ -132,9 +124,8 @@
           <p>Symptômes typiques et atypiques</p>
         </div>
         <div class="symptoms-grid">
-          <!-- Symptômes typiques avec image -->
           <div class="symptom-card typical">
-            <img src="image/img6.jfif" alt="Image: Douleur thoracique - ضع مسار الصورة هنا" class="symptom-img">
+            <img src="image/img6.jfif" alt="Douleur thoracique" class="symptom-img">
             <h3><i class="fas fa-heartbeat"></i> Symptômes typiques</h3>
             <ul>
               <li><i class="fas fa-angle-left"></i> Douleur thoracique / douleur qui se propage</li>
@@ -143,9 +134,8 @@
               <li><i class="fas fa-angle-left"></i> تعرق بارد</li>
             </ul>
           </div>
-          <!-- Symptômes atypiques avec image -->
           <div class="symptom-card atypical">
-            <img src="image/img7.jfif" alt="Image: Fatigue inhabituelle - ضع مسار الصورة هنا" class="symptom-img">
+            <img src="image/img7.jfif" alt="Fatigue inhabituelle" class="symptom-img">
             <h3><i class="fas fa-bed"></i> Symptômes atypiques</h3>
             <ul>
               <li><i class="fas fa-angle-left"></i> Fatigue inhabituelle</li>
@@ -158,12 +148,11 @@
       </div>
     </section>
 
-    <!-- ==================== القسم 4: Urgence ==================== -->
+    <!-- ==================== القسم 5: Urgence ==================== -->
     <section class="emergency-section">
       <div class="container">
         <div class="emergency-card">
-          <!-- صورة الطوارئ -->
-          <img src="image/img8.jfif" alt="Image: Ambulance / Urgence - ضع مسار الصورة هنا" class="emergency-img">
+          <img src="image/img8.jfif" alt="Ambulance" class="emergency-img">
           <h2>Appelez immédiatement les urgences</h2>
           <div class="emergency-number">14</div>
           <p>Chaque minute compte et peut sauver une vie</p>
@@ -175,7 +164,7 @@
       </div>
     </section>
 
-    <!-- ==================== القسم 5: Examens médicaux ==================== -->
+    <!-- ==================== القسم 6: Examens médicaux ==================== -->
     <section class="exams-section" id="exams">
       <div class="container">
         <div class="section-header">
@@ -184,27 +173,27 @@
         </div>
         <div class="exams-grid">
           <div class="exam-card">
-            <img src="image/img9.jfif" alt="Image: ECG - ضع مسار الصورة هنا" class="exam-img">
+            <img src="image/img9.jfif" alt="ECG" class="exam-img">
             <h3>ECG</h3>
             <p>Électrocardiogramme</p>
           </div>
           <div class="exam-card">
-            <img src="image/img10.jfif" alt="Image: Glycémie - ضع مسار الصورة هنا" class="exam-img">
+            <img src="image/img10.jfif" alt="Glycémie" class="exam-img">
             <h3>Glycémie</h3>
             <p>Niveau de sucre</p>
           </div>
           <div class="exam-card">
-            <img src="" alt="Image: Bilan lipidique - ضع مسار الصورة هنا" class="exam-img">
+            <img src="" alt="Bilan lipidique" class="exam-img">
             <h3>Bilan lipidique</h3>
             <p>Cholestérol, triglycérides</p>
           </div>
           <div class="exam-card">
-            <img src="" alt="Image: Troponin - ضع مسار الصورة هنا" class="exam-img">
+            <img src="" alt="Troponin" class="exam-img">
             <h3>Troponin</h3>
             <p>Marqueur cardiaque</p>
           </div>
           <div class="exam-card">
-            <img src="" alt="Image: Tension artérielle - ضع مسار الصورة هنا" class="exam-img">
+            <img src="" alt="Tension artérielle" class="exam-img">
             <h3>Tension artérielle</h3>
             <p>Pression artérielle</p>
           </div>
@@ -212,7 +201,7 @@
       </div>
     </section>
 
-    <!-- ==================== القسم 6: Prévention ==================== -->
+    <!-- ==================== القسم 7: Prévention ==================== -->
     <section class="prevention-section" id="prevention">
       <div class="container">
         <div class="section-header">
@@ -221,27 +210,27 @@
         </div>
         <div class="prevention-grid">
           <div class="prevention-card">
-            <img src="" alt="Image: Sport - ضع مسار الصورة هنا" class="prevention-img">
+            <img src="" alt="Sport" class="prevention-img">
             <h3>Sport</h3>
             <p>30 min/jour</p>
           </div>
           <div class="prevention-card">
-            <img src="" alt="Image: Alimentation - ضع مسار الصورة هنا" class="prevention-img">
+            <img src="" alt="Alimentation" class="prevention-img">
             <h3>Alimentation</h3>
             <p>Régime DASH</p>
           </div>
           <div class="prevention-card">
-            <img src="" alt="Image: Arrêt du tabac - ضع مسار الصورة هنا" class="prevention-img">
+            <img src="" alt="Arrêt du tabac" class="prevention-img">
             <h3>Arrêt du tabac</h3>
             <p>الإقلاع عن التدخين</p>
           </div>
           <div class="prevention-card">
-            <img src="" alt="Image: Gestion du stress - ضع مسار الصورة هنا" class="prevention-img">
+            <img src="" alt="Gestion du stress" class="prevention-img">
             <h3>Gestion du stress</h3>
             <p>Stress management</p>
           </div>
           <div class="prevention-card">
-            <img src="" alt="Image: Sommeil - ضع مسار الصورة هنا" class="prevention-img">
+            <img src="" alt="Sommeil" class="prevention-img">
             <h3>Sommeil suffisant</h3>
             <p>7-8 heures</p>
           </div>
@@ -249,7 +238,7 @@
       </div>
     </section>
 
-    <!-- ==================== القسم 7: Vidéo éducative ==================== -->
+    <!-- ==================== القسم 8: Vidéo éducative ==================== -->
     <section class="video-section">
       <div class="container">
         <div class="section-header">
@@ -258,15 +247,14 @@
         </div>
         <div class="video-container">
           <div class="video-placeholder" id="videoPlaceholder">
-            <!-- صورة الفيديو (thumbnail) -->
-            <img src="" alt="Image: Vidéo - Médecin spécialiste - ضع مسار الصورة هنا" class="video-img">
+            <img src="" alt="Vidéo éducative" class="video-img">
             <p>Vidéo explicative - Médecin spécialiste</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== القسم 8: Contact / À propos ==================== -->
+    <!-- ==================== القسم 9: Contact ==================== -->
     <section class="contact-section" id="contact">
       <div class="container">
         <div class="section-header">
@@ -275,8 +263,7 @@
         </div>
         <div class="contact-grid">
           <div class="contact-info">
-            <!-- صورة الفريق الطبي -->
-            <img src="" alt="Image: Équipe médicale - ضع مسار الصورة هنا" class="team-img">
+            <img src="" alt="Équipe médicale" class="team-img">
             <div class="team-info">
               <h3>Équipe médicale</h3>
               <p>Cardiologues, diabétologues, nutritionnistes</p>
