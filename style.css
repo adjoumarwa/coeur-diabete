@@ -588,7 +588,7 @@ img:not([src]) + .img-placeholder-text {
 
 /* الصور في نفس السطر */
 .hero-img {
-  width: 300px;
+  width: 370px;
   height: 300px;
   border-radius: 20px;
   object-fit: cover;
@@ -617,7 +617,7 @@ img:not([src]) + .img-placeholder-text {
 
 /* صور تقييم الخطر */
 .risk-img {
-  width: 280px;
+  width: 340px;
   height: 280px;
   border-radius: 50%;
   object-fit: cover;
