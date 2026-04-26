@@ -370,14 +370,14 @@ body {
 
 /* Risk cards images */
 .card-img {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1rem;
-  border: 3px solid #dc2626;
+  border: 1px solid #dc2626;
   padding: 10px;
-  background: white;
+  background: none;
 }
 
 /* Activity image */
