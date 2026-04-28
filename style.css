@@ -129,7 +129,15 @@ body {
   border-radius: 3px;
 }
 
-.hero , .sympotome-section{
+.hero {
+  background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+ .sympotome-section{
   background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
   color: white;
   padding: 4rem 0;
