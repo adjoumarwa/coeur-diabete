@@ -129,7 +129,7 @@ body {
   border-radius: 3px;
 }
 
-.hero {
+.hero , .sympotome-section{
   background: linear-gradient(135deg, #dc2626 0%, #2563eb 100%);
   color: white;
   padding: 4rem 0;
@@ -677,6 +677,8 @@ img:not([src]) + .img-placeholder-text {
   text-align: center;
   margin-bottom: 1rem;
 }
+
+
 @media (max-width: 900px) {
   .hero-img,
   .risk-img,
@@ -722,3 +724,4 @@ img:not([src]) + .img-placeholder-text {
     height: 200px;
   }
 }
+
