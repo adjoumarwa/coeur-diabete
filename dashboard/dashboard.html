@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ABbeats - Votre cœur, notre soin</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
+
   <!-- Google Translate Element -->
   <div id="google_translate_element" class="translate-btn"></div>
 
@@ -39,6 +41,7 @@
       <a href="#evaluation" class="nav-link">Évaluation</a>
       <a href="#resultat" class="nav-link">Résultat</a>
       <a href="#symptomes" class="nav-link">Symptômes</a>
+      <a href="#examens" class="nav-link">Examens</a>
       <a href="#prevention" class="nav-link">Prévention</a>
       <a href="#urgence" class="nav-link">Urgence</a>
       <a href="#contact" class="nav-link">Contact</a>
@@ -51,18 +54,18 @@
 
     <div class="dashboard-content">
       
-      <!-- ========== SECTION ACCUEIL ========== -->
+      <!-- ==================== SECTION ACCUEIL ==================== -->
       <section id="accueil" class="dashboard-section">
         <div class="hero-card">
           <div class="hero-text">
             <h2>Commencez à prendre soin de votre cœur dès maintenant</h2>
             <div class="warning-box">
               <i class="fas fa-exclamation-triangle"></i>
-              <p>Une douleur thoracique ("sensation de pression ou de brûlure dans la poitrine") n'est pas toujours bénigne. Elle peut être un signe d'infarctus du myocarde.</p>
+              <p>Une douleur thoracique ("sensation de pression ou de brûlure dans la poitrine") n'est pas toujours bénigne. Elle peut être un signe d'infarctus du myocarde ("obstruction brutale d'une artère coronaire qui empêche le sang d'atteindre le cœur").</p>
             </div>
             <div class="warning-box yellow">
               <i class="fas fa-lungs"></i>
-              <p>Une dyspnée ("difficulté à respirer") associée à une transpiration ou une fatigue soudaine peut indiquer une ischémie myocardique.</p>
+              <p>Une dyspnée ("difficulté à respirer") associée à une transpiration ou une fatigue soudaine peut indiquer une ischémie myocardique ("diminution de l'apport en oxygène au muscle cardiaque").</p>
             </div>
             <div class="alert-box">
               <i class="fas fa-clock"></i>
@@ -77,7 +80,7 @@
         </div>
       </section>
 
-      <!-- ========== SECTION ÉVALUATION ========== -->
+      <!-- ==================== SECTION ÉVALUATION ==================== -->
       <section id="evaluation" class="dashboard-section">
         <div class="section-header">
           <h2><i class="fas fa-chart-line"></i> Comment évaluer votre risque cardiaque ?</h2>
@@ -191,7 +194,7 @@
         </div>
       </section>
 
-      <!-- ========== SECTION RÉSULTAT ========== -->
+      <!-- ==================== SECTION RÉSULTAT ==================== -->
       <section id="resultat" class="dashboard-section">
         <div class="section-header">
           <h2><i class="fas fa-chart-simple"></i> Que signifie votre résultat ?</h2>
@@ -209,9 +212,9 @@
             </div>
           </div>
           <div class="risk-scale">
-            <div class="scale low">0-5 : Risque faible</div>
-            <div class="scale medium">6-10 : Risque modéré</div>
-            <div class="scale high">≥11 : Risque élevé</div>
+            <div class="scale low">0-5 : Risque faible ✔ État rassurant – Hygiène de vie à maintenir</div>
+            <div class="scale medium">6-10 : Risque modéré ⚠ Présence de facteurs de risque – Un bilan médical est recommandé</div>
+            <div class="scale high">≥11 : Risque élevé 🚨 Forte probabilité de maladie cardiaque aiguë – Prise en charge rapide aux urgences</div>
           </div>
           <div class="result-buttons">
             <button class="btn-secondary" id="restartBtn">🔘 Recommencer</button>
@@ -224,104 +227,105 @@
         </div>
       </section>
 
-      <!-- ========== SECTION SYMPTÔMES ========== -->
+      <!-- ==================== SECTION SYMPTÔMES ==================== -->
       <section id="symptomes" class="dashboard-section">
         <div class="section-header">
           <h2><i class="fas fa-head-side-medical"></i> Quels sont les symptômes que vous pouvez ressentir ?</h2>
-          <p>Les maladies cardiaques peuvent apparaître avec des signes différents selon les personnes. Il existe des symptômes clairs (typiques) et des symptômes moins évidents (atypiques), surtout chez les patients diabétiques.</p>
+          <p>Les maladies cardiaques comme l'infarctus du myocarde (IDM : obstruction d'une artère du cœur) peuvent apparaître avec des signes différents selon les personnes. Il existe des symptômes clairs (typiques) et des symptômes moins évidents (atypiques), surtout chez les patients diabétiques.</p>
         </div>
 
         <div class="symptoms-grid">
           <div class="symptom-card typical">
-            <h3><i class="fas fa-heartbeat"></i> Symptômes typiques</h3>
+            <h3><i class="fas fa-heartbeat"></i> Symptômes typiques (clairs et faciles à reconnaître)</h3>
             <div class="symptom-image-placeholder">
               <i class="fas fa-heartbeat"></i>
               <span>Image: Douleur thoracique</span>
             </div>
             <ul>
-              <li><i class="fas fa-angle-right"></i> Douleur dans la poitrine ("sensation de pression, de serrement ou de brûlure")</li>
+              <li><i class="fas fa-angle-right"></i> Douleur dans la poitrine ("sensation de pression, de serrement ou de brûlure au centre de la poitrine")</li>
               <li><i class="fas fa-angle-right"></i> Douleur qui se propage vers le bras gauche, le dos ou la mâchoire</li>
-              <li><i class="fas fa-angle-right"></i> Difficulté à respirer (dyspnée)</li>
-              <li><i class="fas fa-angle-right"></i> Sueurs froides</li>
+              <li><i class="fas fa-angle-right"></i> Difficulté à respirer (dyspnée : "impression de manquer d'air")</li>
+              <li><i class="fas fa-angle-right"></i> Sueurs froides ("transpiration soudaine sans effort")</li>
               <li><i class="fas fa-angle-right"></i> Fatigue intense inhabituelle</li>
               <li><i class="fas fa-angle-right"></i> Nausées ou sensation de malaise</li>
             </ul>
             <div class="explanation">
               <i class="fas fa-lightbulb"></i>
-              <p>Ces signes apparaissent lorsque le cœur ne reçoit pas assez d'oxygène (ischémie myocardique).</p>
+              <p>Ces signes apparaissent lorsque le cœur ne reçoit pas assez d'oxygène (ischémie myocardique : "manque de sang et d'oxygène dans le muscle du cœur").</p>
             </div>
           </div>
 
           <div class="symptom-card atypical">
-            <h3><i class="fas fa-bed"></i> Symptômes atypiques</h3>
+            <h3><i class="fas fa-bed"></i> Symptômes atypiques (moins visibles, surtout chez le diabétique)</h3>
             <div class="symptom-image-placeholder">
               <i class="fas fa-fatigue"></i>
               <span>Image: Fatigue inhabituelle</span>
             </div>
             <ul>
-              <li><i class="fas fa-angle-right"></i> Fatigue soudaine sans raison claire</li>
+              <li><i class="fas fa-angle-right"></i> Fatigue soudaine sans raison claire ("être épuisé sans effort")</li>
               <li><i class="fas fa-angle-right"></i> Essoufflement léger qui apparaît progressivement</li>
               <li><i class="fas fa-angle-right"></i> Malaise général sans douleur précise</li>
-              <li><i class="fas fa-angle-right"></i> Troubles digestifs ("sensation de brûlure dans l'estomac")</li>
+              <li><i class="fas fa-angle-right"></i> Troubles digestifs ("sensation de brûlure ou d'indigestion dans l'estomac")</li>
               <li><i class="fas fa-angle-right"></i> Nausées isolées</li>
-              <li><i class="fas fa-angle-right"></i> Sensation d'anxiété ou d'inconfort vague</li>
+              <li><i class="fas fa-angle-right"></i> Sensation d'anxiété ou d'inconfort vague ("gêne sans localisation précise")</li>
             </ul>
             <div class="explanation">
               <i class="fas fa-lightbulb"></i>
-              <p>Chez les diabétiques, les nerfs peuvent être abîmés par le sucre élevé (neuropathie diabétique). Le cœur peut souffrir sans provoquer une forte douleur.</p>
+              <p>Chez les diabétiques, les nerfs peuvent être abîmés par le sucre élevé (neuropathie diabétique : "atteinte des nerfs qui diminue la sensibilité à la douleur"). Donc le cœur peut souffrir sans provoquer une forte douleur.</p>
             </div>
           </div>
         </div>
 
         <div class="silent-form">
           <h3><i class="fas fa-eye-slash"></i> Forme silencieuse (sans symptômes visibles)</h3>
-          <p>Dans certains cas : aucune douleur dans la poitrine, aucun signe clair. Découverte seulement lors d'un examen médical (ECG).</p>
+          <p>Dans certains cas : aucune douleur dans la poitrine, aucun signe clair. Découverte seulement lors d'un examen médical (ECG : "test qui enregistre l'activité électrique du cœur").</p>
           <div class="conclusion">
             <i class="fas fa-exclamation-triangle"></i>
-            <p><strong>Conclusion :</strong> Un infarctus ne se manifeste pas toujours par une douleur forte. Chez le diabétique, les signes peuvent être faibles ou même absents. Toute fatigue inhabituelle ou essoufflement doit être pris au sérieux.</p>
+            <p><strong>Conclusion :</strong> Un infarctus ne se manifeste pas toujours par une douleur forte. Chez le diabétique, les signes peuvent être faibles ou même absents. Toute fatigue inhabituelle ou essoufflement doit être pris au sérieux. Ignorer ces symptômes peut entraîner des complications graves comme un arrêt cardiaque.</p>
           </div>
           <button class="btn-secondary" id="seeExamsBtn">🔘 Voir les examens</button>
         </div>
       </section>
 
-      <!-- ========== SECTION EXAMENS ========== -->
+      <!-- ==================== SECTION EXAMENS MÉDICAUX ==================== -->
       <section id="examens" class="dashboard-section">
         <div class="section-header">
           <h2><i class="fas fa-stethoscope"></i> Quels examens pouvez-vous faire pour vérifier votre cœur ?</h2>
         </div>
         <div class="exams-grid">
-          <div class="exam-card"><i class="fas fa-stethoscope"></i><h3>Tension artérielle</h3><p>Pression du sang dans les artères</p></div>
-          <div class="exam-card"><i class="fas fa-tint"></i><h3>Glycémie</h3><p>Taux de sucre dans le sang</p></div>
-          <div class="exam-card"><i class="fas fa-chart-line"></i><h3>Bilan lipidique</h3><p>Cholestérol total et fractions</p></div>
-          <div class="exam-card"><i class="fas fa-heartbeat"></i><h3>ECG</h3><p>Enregistrement de l'activité électrique</p></div>
-          <div class="exam-card"><i class="fas fa-microscope"></i><h3>Troponine</h3><p>Marqueur sanguin de la nécrose myocardique</p></div>
+          <div class="exam-card"><i class="fas fa-stethoscope"></i><h3>Tension artérielle</h3><p>"Pression du sang dans les artères"</p></div>
+          <div class="exam-card"><i class="fas fa-tint"></i><h3>Glycémie</h3><p>"Taux de sucre dans le sang"</p></div>
+          <div class="exam-card"><i class="fas fa-chart-line"></i><h3>Bilan lipidique</h3><p>"Cholestérol total et fractions"</p></div>
+          <div class="exam-card"><i class="fas fa-heartbeat"></i><h3>ECG</h3><p>"Enregistrement de l'activité électrique du cœur"</p></div>
+          <div class="exam-card"><i class="fas fa-microscope"></i><h3>Troponine</h3><p>"Marqueur sanguin de la nécrose myocardique"</p></div>
         </div>
         <p class="info-note"><i class="fas fa-info-circle"></i> Ces examens permettent un diagnostic précoce et fiable. Chaque test apporte une information essentielle sur le cœur.</p>
         <button class="btn-secondary" id="preventionFromExamsBtn">🔘 Prévention</button>
       </section>
 
-      <!-- ========== SECTION PRÉVENTION ========== -->
+      <!-- ==================== SECTION PRÉVENTION ==================== -->
       <section id="prevention" class="dashboard-section">
         <div class="section-header">
           <h2><i class="fas fa-apple-alt"></i> Comment protéger votre cœur au quotidien ?</h2>
-          <p>Les maladies cardiovasculaires peuvent être évitées dans la majorité des cas. Hygiène de vie = cœur en bonne santé</p>
+          <p>Les maladies cardiovasculaires peuvent être évitées dans la majorité des cas. <strong>Hygiène de vie = cœur en bonne santé</strong></p>
         </div>
         <div class="prevention-grid">
           <div class="prevention-card"><i class="fas fa-walking"></i><h3>Activité physique</h3><p>Au moins 30 minutes par jour</p></div>
           <div class="prevention-card"><i class="fas fa-apple-alt"></i><h3>Alimentation saine</h3><p>Réduction des graisses et du sel</p></div>
           <div class="prevention-card"><i class="fas fa-smoking-ban"></i><h3>Arrêt du tabac</h3></div>
           <div class="prevention-card"><i class="fas fa-spa"></i><h3>Gestion du stress</h3><p>Réduction de la tension psychologique</p></div>
+          <div class="prevention-card"><i class="fas fa-moon"></i><h3>Sommeil suffisant</h3><p>7-8 heures par nuit</p></div>
         </div>
         <button class="btn-secondary" id="symptomsFromPreventionBtn">🔘 Symptômes</button>
       </section>
 
-      <!-- ========== SECTION URGENCE ========== -->
+      <!-- ==================== SECTION URGENCE ==================== -->
       <section id="urgence" class="dashboard-section">
         <div class="emergency-card">
           <h2><i class="fas fa-ambulance"></i> 🚨 Situation médicale urgente</h2>
-          <div class="video-placeholder">
+          <div class="video-placeholder" id="videoPlaceholder">
             <i class="fas fa-play-circle"></i>
-            <span>🎥 Vidéo éducative</span>
+            <span>🎥 Vidéo éducative - Explication par un médecin</span>
           </div>
           <div class="emergency-instructions">
             <h3>En cas de douleur thoracique intense :</h3>
@@ -343,14 +347,14 @@
           </div>
           <div class="golden-hour">
             <i class="fas fa-hourglass-half"></i>
-            <p>L'infarctus du myocarde nécessite une prise en charge rapide pendant la <strong>"golden hour"</strong> (première heure critique)</p>
+            <p>L'infarctus du myocarde ("obstruction d'une artère coronaire") nécessite une prise en charge rapide pendant la <strong>"golden hour"</strong> ("première heure critique après le début des symptômes")</p>
             <p class="warning">🚨 Chaque minute de retard = perte de cellules cardiaques</p>
           </div>
           <button class="btn-emergency btn-large" onclick="window.location.href='tel:14'">🔘 Appeler les urgences</button>
         </div>
       </section>
 
-      <!-- ========== SECTION CONTACT ========== -->
+      <!-- ==================== SECTION CONTACT ==================== -->
       <section id="contact" class="dashboard-section">
         <div class="section-header">
           <h2><i class="fas fa-envelope"></i> Comment nous contacter et en savoir plus ?</h2>
@@ -383,6 +387,81 @@
           </div>
         </div>
       </section>
+
+      <!-- ==================== ANCIENNES FONCTIONNALITÉS (DASHBOARD ORIGINAL) ==================== -->
+      
+      <!-- Medical Readings Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-chart-line"></i> متابعة القراءات الطبية</h3>
+        <div class="reading-item">
+          <span>السكري التراكمي HBA1c:</span>
+          <span id="hba1c">--</span>%
+        </div>
+        <div class="reading-item">
+          <span>ضغط الدم:</span>
+          <span id="bp">--</span> mmHg
+        </div>
+        <div class="reading-item">
+          <span>الكوليسترول LDL:</span>
+          <span id="cholesterol">--</span> mg/dL
+        </div>
+        <div class="reading-item">
+          <span>سكر الصائم:</span>
+          <span id="fastingSugar">--</span> mg/dL
+        </div>
+        <button class="card-btn" id="updateReadingsBtn">تحديث القراءات</button>
+      </div>
+      
+      <!-- BMI Calculator Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-calculator"></i> حاسبة BMI</h3>
+        <p>احسب وزنك المثالي ومعرفة مؤشر كتلة الجسم</p>
+        <button class="card-btn" id="bmiBtn">احسب BMI</button>
+      </div>
+      
+      <!-- Appointments Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-calendar-alt"></i> مفكرة المواعيد</h3>
+        <ul class="appointments-list" id="appointmentsList">
+          <li style="text-align: center; color: #999;">لا توجد مواعيد مسجلة</li>
+        </ul>
+        <button class="card-btn" id="addAppointmentBtn">+ إضافة موعد جديد</button>
+      </div>
+      
+      <!-- Daily Tips Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-lightbulb"></i> نصائح يومية</h3>
+        <div class="tip-text" id="dailyTip"></div>
+        <button class="card-btn" id="newTipBtn">نصيحة جديدة</button>
+      </div>
+      
+      <!-- Downloads Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-download"></i> تحميلات مفيدة</h3>
+        <div class="download-buttons">
+          <button class="download-btn" data-download="guide">📄 دليل الأزمة القلبية الصامتة</button>
+          <button class="download-btn" data-download="carte">🪪 بطاقة المريض</button>
+          <button class="download-btn" data-download="alimentation">🥗 دليل التغذية</button>
+        </div>
+      </div>
+      
+      <!-- Stats Card -->
+      <div class="dashboard-card">
+        <h3><i class="fas fa-chart-simple"></i> إحصائياتك</h3>
+        <div class="reading-item">
+          <span>عدد مرات تسجيل الدخول:</span>
+          <span id="loginCount">0</span>
+        </div>
+        <div class="reading-item">
+          <span>آخر تسجيل دخول:</span>
+          <span id="lastLogin"></span>
+        </div>
+        <div class="reading-item">
+          <span>عضو منذ:</span>
+          <span id="memberSince"></span>
+        </div>
+      </div>
+
     </div>
   </div>
 
