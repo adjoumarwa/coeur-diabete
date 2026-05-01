@@ -1345,3 +1345,534 @@ document.querySelectorAll('.download-btn').forEach(btn => {
 
 // Rendre les fonctions globales
 window.deleteAppointment = deleteAppointment;
+
+// ============================================
+// ABbeats - Dashboard Principal
+// Toutes les fonctionnalités
+// ============================================
+
+// ============================================
+// VARIABLES GLOBALES
+// ============================================
+let timerInterval;
+let timerSeconds = 0;
+let currentUser = null;
+
+// ============================================
+// RÉCUPÉRATION DE L'UTILISATEUR
+// ============================================
+try {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+        currentUser = JSON.parse(storedUser);
+        const userNameSpan = document.getElementById('userName');
+        if (userNameSpan) userNameSpan.textContent = currentUser.name || currentUser.email || 'Invité';
+    } else {
+        currentUser = { email: 'guest@example.com', name: 'Invité' };
+        const userNameSpan = document.getElementById('userName');
+        if (userNameSpan) userNameSpan.textContent = 'Invité';
+    }
+} catch(e) {
+    currentUser = { email: 'guest@example.com', name: 'Invité' };
+}
+
+// ============================================
+// TIMER
+// ============================================
+function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
+}
+startTimer();
+
+// ============================================
+// ALERTE INTELLIGENTE
+// ============================================
+function checkSmartAlert() {
+    const douleur = document.getElementById('douleurSelect')?.value;
+    const dyspnee = document.getElementById('dyspneeSelect')?.value;
+    const alertDiv = document.getElementById('smartAlert');
+    if (alertDiv && ((douleur === '2' || douleur === '3') && dyspnee === '2')) {
+        alertDiv.style.display = 'block';
+    } else if (alertDiv) {
+        alertDiv.style.display = 'none';
+    }
+}
+
+// ============================================
+// CALCUL DU RISQUE CARDIACQUE
+// ============================================
+function calculateRisk() {
+    const age = parseInt(document.getElementById('ageSelect')?.value || 0);
+    const sexe = parseInt(document.getElementById('sexeSelect')?.value || 0);
+    
+    let pathologies = 0;
+    if (document.getElementById('hypertension')?.checked) pathologies += 2;
+    if (document.getElementById('diabete')?.checked) pathologies += 2;
+    if (document.getElementById('hypercholesterolemie')?.checked) pathologies += 2;
+    
+    const tabagisme = parseInt(document.getElementById('tabagismeSelect')?.value || 0);
+    const activite = parseInt(document.getElementById('activiteSelect')?.value || 0);
+    const alimentation = parseInt(document.getElementById('alimentationSelect')?.value || 0);
+    
+    let facteurs = 0;
+    if (document.getElementById('obesite')?.checked) facteurs += 1;
+    if (document.getElementById('antecedents')?.checked) facteurs += 2;
+    
+    const douleur = parseInt(document.getElementById('douleurSelect')?.value || 0);
+    const dyspnee = parseInt(document.getElementById('dyspneeSelect')?.value || 0);
+    const fatigue = parseInt(document.getElementById('fatigueSelect')?.value || 0);
+    
+    const totalScore = age + sexe + pathologies + tabagisme + activite + alimentation + facteurs + douleur + dyspnee + fatigue;
+    
+    // Afficher le résultat
+    const resultCard = document.getElementById('resultCard');
+    const scoreSpan = document.getElementById('scoreValue');
+    const riskLevelSpan = document.getElementById('riskLevel');
+    
+    if (resultCard) resultCard.style.display = 'block';
+    if (scoreSpan) scoreSpan.textContent = totalScore;
+    
+    let level = '';
+    if (totalScore <= 5) level = '✔ Risque faible';
+    else if (totalScore <= 10) level = '⚠ Risque modéré';
+    else level = '🚨 Risque élevé';
+    
+    if (riskLevelSpan) riskLevelSpan.innerHTML = `<span class="${totalScore <= 5 ? 'low' : (totalScore <= 10 ? 'medium' : 'high')}">${level}</span>`;
+    
+    document.getElementById('resultat')?.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================
+// FONCTION 1: LECTURES MÉDICALES (Mettre à jour)
+// ============================================
+function updateReadings() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10001;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 20px; padding: 25px; max-width: 400px; width: 90%;">
+            <h3 style="color: #e74c3c; margin-bottom: 20px;">📊 Mettre à jour les lectures</h3>
+            <div style="margin-bottom: 15px;">
+                <label>HBA1c (%) - Objectif &lt;7%</label>
+                <input type="number" id="hba1cInput" step="0.1" placeholder="Ex: 6.5" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label>Tension artérielle (mmHg)</label>
+                <input type="text" id="bpInput" placeholder="Ex: 120/80" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label>Cholestérol LDL (mg/dL) - Objectif &lt;100</label>
+                <input type="number" id="cholesterolInput" placeholder="Ex: 95" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label>Glycémie à jeun (mg/dL) - Objectif 80-130</label>
+                <input type="number" id="fastingSugarInput" placeholder="Ex: 110" style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button id="saveReadingsBtn" style="flex:1; background: #e74c3c; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer;">Enregistrer</button>
+                <button id="closeReadingsBtn" style="flex:1; background: #95a5a6; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer;">Annuler</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('saveReadingsBtn').onclick = () => {
+        const hba1c = document.getElementById('hba1cInput').value;
+        const bp = document.getElementById('bpInput').value;
+        const cholesterol = document.getElementById('cholesterolInput').value;
+        const fastingSugar = document.getElementById('fastingSugarInput').value;
+        
+        const userData = JSON.parse(localStorage.getItem(`userData_${currentUser.email}`) || '{}');
+        if (hba1c) { userData.hba1c = hba1c; document.getElementById('hba1c').textContent = hba1c; }
+        if (bp) { userData.bp = bp; document.getElementById('bp').textContent = bp; }
+        if (cholesterol) { userData.cholesterol = cholesterol; document.getElementById('cholesterol').textContent = cholesterol; }
+        if (fastingSugar) { userData.fastingSugar = fastingSugar; document.getElementById('fastingSugar').textContent = fastingSugar; }
+        
+        localStorage.setItem(`userData_${currentUser.email}`, JSON.stringify(userData));
+        modal.remove();
+        alert('✅ Lectures mises à jour!');
+    };
+    document.getElementById('closeReadingsBtn').onclick = () => modal.remove();
+}
+
+// ============================================
+// FONCTION 2: CALCULATEUR IMC
+// ============================================
+function calculateBMI() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10001;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 20px; padding: 25px; max-width: 350px; width: 90%; text-align: center;">
+            <h3 style="color: #e74c3c;">⚖️ Calculateur IMC</h3>
+            <div style="margin: 15px 0;">
+                <input type="number" id="weight" placeholder="Poids (kg)" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px;">
+                <input type="number" id="height" step="0.01" placeholder="Taille (m)" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <button id="calcBtn" style="background: #e74c3c; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer;">Calculer</button>
+            <div id="bmiResult" style="margin-top: 15px; display: none;"></div>
+            <button id="closeBmiBtn" style="background: #95a5a6; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; margin-top: 15px; width: 100%;">Fermer</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('calcBtn').onclick = () => {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const resultDiv = document.getElementById('bmiResult');
+        
+        if (!weight || !height || weight <= 0 || height <= 0) {
+            resultDiv.innerHTML = '<p style="color: red;">Veuillez entrer des valeurs valides</p>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+        
+        const bmi = weight / (height * height);
+        let status = '';
+        if (bmi < 18.5) status = 'Insuffisance pondérale';
+        else if (bmi < 25) status = 'Poids normal';
+        else if (bmi < 30) status = 'Surpoids';
+        else status = 'Obésité';
+        
+        resultDiv.innerHTML = `<p style="font-size: 24px; font-weight: bold;">IMC: ${bmi.toFixed(1)}</p><p>${status}</p>`;
+        resultDiv.style.display = 'block';
+    };
+    document.getElementById('closeBmiBtn').onclick = () => modal.remove();
+}
+
+// ============================================
+// FONCTION 3: AGENDA DES RENDEZ-VOUS
+// ============================================
+function loadAppointments() {
+    const appointments = JSON.parse(localStorage.getItem(`appointments_${currentUser.email}`) || '[]');
+    const list = document.getElementById('appointmentsList');
+    if (!list) return;
+    
+    if (appointments.length === 0) {
+        list.innerHTML = '<li style="text-align: center; color: #999;">📅 Aucun rendez-vous enregistré</li>';
+        return;
+    }
+    
+    list.innerHTML = '';
+    appointments.sort((a, b) => new Date(a.date) - new Date(b.date));
+    appointments.forEach((app, index) => {
+        const li = document.createElement('li');
+        li.style.cssText = 'padding: 10px; background: #f8fafc; margin-bottom: 8px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;';
+        li.innerHTML = `
+            <span style="font-weight: bold; color: #1e3c5c;">${app.date}</span>
+            <span>${app.title}</span>
+            <button onclick="deleteAppointment(${index})" style="background:#e74c3c; color:white; border:none; border-radius:5px; padding:3px 8px; cursor:pointer;">✗</button>
+        `;
+        list.appendChild(li);
+    });
+}
+
+function addAppointment() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10001;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 20px; padding: 25px; max-width: 350px; width: 90%;">
+            <h3 style="color: #e74c3c;">📅 Ajouter un rendez-vous</h3>
+            <div style="margin: 15px 0;">
+                <input type="date" id="appDate" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 10px;">
+                <select id="appType" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                    <option>ECG cardiaque</option>
+                    <option>Bilan sanguin</option>
+                    <option>Consultation cardiologue</option>
+                    <option>Contrôle diabète</option>
+                    <option>Consultation nutritionniste</option>
+                </select>
+            </div>
+            <button id="saveAppBtn" style="background: #e74c3c; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%;">Enregistrer</button>
+            <button id="closeAppBtn" style="background: #95a5a6; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; margin-top: 10px; width: 100%;">Annuler</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('saveAppBtn').onclick = () => {
+        const date = document.getElementById('appDate').value;
+        const title = document.getElementById('appType').value;
+        if (!date) { alert('Veuillez choisir une date'); return; }
+        
+        const appointments = JSON.parse(localStorage.getItem(`appointments_${currentUser.email}`) || '[]');
+        appointments.push({ date, title });
+        localStorage.setItem(`appointments_${currentUser.email}`, JSON.stringify(appointments));
+        loadAppointments();
+        modal.remove();
+        alert('✅ Rendez-vous ajouté!');
+    };
+    document.getElementById('closeAppBtn').onclick = () => modal.remove();
+}
+
+function deleteAppointment(index) {
+    if (confirm('Supprimer ce rendez-vous?')) {
+        const appointments = JSON.parse(localStorage.getItem(`appointments_${currentUser.email}`) || '[]');
+        appointments.splice(index, 1);
+        localStorage.setItem(`appointments_${currentUser.email}`, JSON.stringify(appointments));
+        loadAppointments();
+    }
+}
+
+// ============================================
+// FONCTION 4: CONSEILS QUOTIDIENS
+// ============================================
+const tipsList = [
+    "🚶 Commencez votre journée par 30 minutes de marche",
+    "💧 Buvez 8-10 verres d'eau par jour",
+    "🥗 Mangez des légumes verts riches en magnésium",
+    "😴 Dormez 7-8 heures par nuit",
+    "📊 Contrôlez régulièrement votre glycémie",
+    "❤️ Mesurez votre tension chaque semaine",
+    "🥑 L'huile d'olive est bonne pour le cœur",
+    "🚫 Évitez les sodas et les sucres raffinés",
+    "🐟 Mangez du poisson 2 fois par semaine",
+    "🧘‍♂️ Pratiquez la respiration profonde"
+];
+
+function newTip() {
+    const randomTip = tipsList[Math.floor(Math.random() * tipsList.length)];
+    const tipDiv = document.getElementById('dailyTip');
+    if (tipDiv) tipDiv.innerHTML = randomTip;
+}
+
+// ============================================
+// FONCTION 5: TÉLÉCHARGEMENTS
+// ============================================
+function telechargerGuide() {
+    const content = `GUIDE DE LA CRISE CARDIAQUE SILENCIEUSE
+
+Signes d'alerte:
+- Fatigue soudaine intense
+- Nausées ou indigestion
+- Douleurs dans le dos ou la mâchoire
+- Essoufflement
+
+Que faire?
+1. Appelez les secours (14)
+2. Ne conduisez pas
+3. Allongez-vous`;
+    downloadFile(content, 'guide_cardiaque.txt');
+}
+
+function telechargerCarte() {
+    const content = `CARTE PATIENT - ABbeats
+
+Nom: ................................
+Prénom: .............................
+Diabète: ............................
+Médicaments: ........................
+Allergies: ..........................
+
+Urgence: 14 (SAMU)
+
+⚠️ PATIENT DIABÉTIQUE
+⚠️ Risque de crise cardiaque silencieuse`;
+    downloadFile(content, 'carte_patient.txt');
+}
+
+function telechargerAlimentation() {
+    const content = `GUIDE NUTRITIONNEL
+
+Régime DASH:
+- 5-6 portions de légumes/jour
+- 4-5 portions de fruits/jour
+- 6-8 portions de céréales complètes
+
+Régime Méditerranéen:
+- Huile d'olive
+- Poisson 2x/semaine
+- Fruits et légumes frais
+
+Aliments à éviter:
+- Sucreries
+- Boissons gazeuses
+- Graisses saturées`;
+    downloadFile(content, 'guide_alimentation.txt');
+}
+
+function downloadFile(content, filename) {
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    alert('✅ Téléchargement terminé!');
+}
+
+// ============================================
+// FONCTION 6: STATISTIQUES UTILISATEUR
+// ============================================
+function loadUserStats() {
+    const loginCount = localStorage.getItem(`loginCount_${currentUser.email}`) || 0;
+    const lastLogin = localStorage.getItem(`lastLogin_${currentUser.email}`) || '';
+    const memberSince = localStorage.getItem(`memberSince_${currentUser.email}`) || new Date().toLocaleDateString();
+    
+    const loginCountEl = document.getElementById('loginCount');
+    const lastLoginEl = document.getElementById('lastLogin');
+    const memberSinceEl = document.getElementById('memberSince');
+    
+    if (loginCountEl) loginCountEl.textContent = loginCount;
+    if (lastLoginEl) lastLoginEl.textContent = lastLogin ? new Date(lastLogin).toLocaleDateString() : 'Aujourd\'hui';
+    if (memberSinceEl) memberSinceEl.textContent = memberSince;
+}
+
+function loadUserReadings() {
+    const data = JSON.parse(localStorage.getItem(`userData_${currentUser.email}`) || '{}');
+    const hba1cEl = document.getElementById('hba1c');
+    const bpEl = document.getElementById('bp');
+    const cholesterolEl = document.getElementById('cholesterol');
+    const fastingSugarEl = document.getElementById('fastingSugar');
+    
+    if (hba1cEl && data.hba1c) hba1cEl.textContent = data.hba1c;
+    if (bpEl && data.bp) bpEl.textContent = data.bp;
+    if (cholesterolEl && data.cholesterol) cholesterolEl.textContent = data.cholesterol;
+    if (fastingSugarEl && data.fastingSugar) fastingSugarEl.textContent = data.fastingSugar;
+}
+
+function updateLoginStats() {
+    if (currentUser.email === 'guest@example.com') return;
+    let count = parseInt(localStorage.getItem(`loginCount_${currentUser.email}`) || '0');
+    count++;
+    localStorage.setItem(`loginCount_${currentUser.email}`, count);
+    localStorage.setItem(`lastLogin_${currentUser.email}`, new Date().toISOString());
+    
+    if (!localStorage.getItem(`memberSince_${currentUser.email}`)) {
+        localStorage.setItem(`memberSince_${currentUser.email}`, new Date().toLocaleDateString());
+    }
+}
+
+// ============================================
+// URGENCE
+// ============================================
+function emergencyAlert() {
+    alert("🚨 URGENCE MÉDICALE 🚨\n\nEn cas de douleur thoracique intense :\n• Arrêter tout effort\n• S'asseoir ou s'allonger\n• Appeler immédiatement les secours\n\n📞 SAMU / Secours : 14\n📞 Protection civile : 14 / 1548");
+}
+
+// ============================================
+// SCROLL SMOOTH
+// ============================================
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================
+// DÉCONNEXION
+// ============================================
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('currentUser');
+        window.location.href = '../signUp/login.html';
+    });
+}
+
+// ============================================
+// BOUTONS DE NAVIGATION
+// ============================================
+document.getElementById('startEvaluationBtn')?.addEventListener('click', () => scrollToSection('evaluation'));
+document.getElementById('discoverSymptomsBtn')?.addEventListener('click', () => scrollToSection('symptomes'));
+document.getElementById('findHelpBtn')?.addEventListener('click', () => scrollToSection('urgence'));
+document.getElementById('calculateRiskBtn')?.addEventListener('click', calculateRisk);
+document.getElementById('restartBtn')?.addEventListener('click', () => scrollToSection('evaluation'));
+document.getElementById('preventionBtn')?.addEventListener('click', () => scrollToSection('prevention'));
+document.getElementById('seeExamsBtn')?.addEventListener('click', () => scrollToSection('examens'));
+document.getElementById('emergencyBtn')?.addEventListener('click', emergencyAlert);
+document.getElementById('emergencyResultBtn')?.addEventListener('click', emergencyAlert);
+
+// ============================================
+// LIER LES BOUTONS DES ANCIENNES FONCTIONNALITÉS
+// ============================================
+document.getElementById('updateReadingsBtn')?.addEventListener('click', updateReadings);
+document.getElementById('bmiBtn')?.addEventListener('click', calculateBMI);
+document.getElementById('addAppointmentBtn')?.addEventListener('click', addAppointment);
+document.getElementById('newTipBtn')?.addEventListener('click', newTip);
+
+document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const type = btn.getAttribute('data-download');
+        if (type === 'guide') telechargerGuide();
+        else if (type === 'carte') telechargerCarte();
+        else if (type === 'alimentation') telechargerAlimentation();
+    });
+});
+
+// ============================================
+// FORMULAIRE DE CONTACT
+// ============================================
+document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert("✅ Message envoyé avec succès! Notre équipe vous répondra dans les plus brefs délais.");
+    e.target.reset();
+});
+
+// ============================================
+// NAVIGATION LINKS
+// ============================================
+document.querySelectorAll('.dashboard-nav .nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        scrollToSection(targetId);
+    });
+});
+
+// ============================================
+// ALERTE INTELLIGENTE
+// ============================================
+document.getElementById('douleurSelect')?.addEventListener('change', checkSmartAlert);
+document.getElementById('dyspneeSelect')?.addEventListener('change', checkSmartAlert);
+
+// ============================================
+// INITIALISATION
+// ============================================
+updateLoginStats();
+loadUserStats();
+loadUserReadings();
+loadAppointments();
+newTip();
+checkSmartAlert();
+
+// Rendre les fonctions globales
+window.deleteAppointment = deleteAppointment;
