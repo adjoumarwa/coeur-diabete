@@ -1,108 +1,423 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة المستخدم - قلب السكري</title>
+  <title>ABbeats - Votre cœur, notre soin</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
+  <!-- Google Translate Element -->
+  <div id="google_translate_element" class="translate-btn"></div>
+
   <div class="dashboard-container">
+    <!-- Header -->
     <div class="dashboard-header">
       <div class="logo">
         <span class="logo-heart">❤️</span>
-        <h1>قلب السكري</h1>
+        <div class="logo-text">
+          <h1>ABbeats</h1>
+          <p class="tagline">"Your heart, our care"</p>
+        </div>
+      </div>
+      <div class="language-switcher">
+        <button class="lang-option" onclick="changeLanguage('fr')">Français</button>
+        <button class="lang-option" onclick="changeLanguage('ar')">العربية</button>
+        <button class="lang-option" onclick="changeLanguage('darija')">Darija</button>
       </div>
       <div class="user-info">
         <i class="fas fa-user-circle"></i>
         <span id="userName"></span>
-        <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+        <button class="logout-btn" id="logoutBtn">Déconnexion</button>
       </div>
     </div>
-    
+
+    <!-- Navigation Menu -->
+    <nav class="dashboard-nav">
+      <a href="#accueil" class="nav-link">Accueil</a>
+      <a href="#evaluation" class="nav-link">Évaluation</a>
+      <a href="#resultat" class="nav-link">Résultat</a>
+      <a href="#symptomes" class="nav-link">Symptômes</a>
+      <a href="#prevention" class="nav-link">Prévention</a>
+      <a href="#urgence" class="nav-link">Urgence</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <!-- Fixed Emergency Button -->
+    <button class="fixed-emergency-btn" id="emergencyBtn">
+      <i class="fas fa-ambulance"></i> Urgence
+    </button>
+
     <div class="dashboard-content">
-      <!-- Health Stats Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-chart-line"></i> متابعة القراءات الطبية</h3>
-        <div class="reading-item">
-          <span>السكري التراكمي HBA1c:</span>
-          <span id="hba1c">--</span>%
-        </div>
-        <div class="reading-item">
-          <span>ضغط الدم:</span>
-          <span id="bp">--</span> mmHg
-        </div>
-        <div class="reading-item">
-          <span>الكوليسترول LDL:</span>
-          <span id="cholesterol">--</span> mg/dL
-        </div>
-        <div class="reading-item">
-          <span>سكر الصائم:</span>
-          <span id="fastingSugar">--</span> mg/dL
-        </div>
-        <button class="card-btn" id="updateReadingsBtn">تحديث القراءات</button>
-      </div>
       
-      <!-- Risk Test Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-exclamation-triangle"></i> اختبار سريع</h3>
-        <p>هل أنت في خطر؟ أجب عن الأسئلة التالية لتقييم خطر الإصابة بأمراض القلب</p>
-        <button class="card-btn" id="riskTestBtn">ابدأ الاختبار</button>
-      </div>
-      
-      <!-- BMI Calculator Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-calculator"></i> حاسبة BMI</h3>
-        <p>احسب وزنك المثالي ومعرفة مؤشر كتلة الجسم</p>
-        <button class="card-btn" id="bmiBtn">احسب BMI</button>
-      </div>
-      
-      <!-- Appointments Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-calendar-alt"></i> مفكرة المواعيد</h3>
-        <ul class="appointments-list" id="appointmentsList">
-          <li style="text-align: center; color: #999;">لا توجد مواعيد مسجلة</li>
-        </ul>
-        <button class="card-btn" id="addAppointmentBtn">+ إضافة موعد جديد</button>
-      </div>
-      
-      <!-- Daily Tips Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-lightbulb"></i> نصائح يومية</h3>
-        <div class="tip-text" id="dailyTip"></div>
-        <button class="card-btn" id="newTipBtn">نصيحة جديدة</button>
-      </div>
-      
-      <!-- Downloads Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-download"></i> تحميلات مفيدة</h3>
-        <div class="download-buttons">
-          <button class="download-btn" data-download="guide">📄 دليل الأزمة القلبية الصامتة</button>
-          <button class="download-btn" data-download="carte">🪪 بطاقة المريض</button>
-          <button class="download-btn" data-download="alimentation">🥗 دليل التغذية</button>
+      <!-- ========== SECTION ACCUEIL ========== -->
+      <section id="accueil" class="dashboard-section">
+        <div class="hero-card">
+          <div class="hero-text">
+            <h2>Commencez à prendre soin de votre cœur dès maintenant</h2>
+            <div class="warning-box">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>Une douleur thoracique ("sensation de pression ou de brûlure dans la poitrine") n'est pas toujours bénigne. Elle peut être un signe d'infarctus du myocarde.</p>
+            </div>
+            <div class="warning-box yellow">
+              <i class="fas fa-lungs"></i>
+              <p>Une dyspnée ("difficulté à respirer") associée à une transpiration ou une fatigue soudaine peut indiquer une ischémie myocardique.</p>
+            </div>
+            <div class="alert-box">
+              <i class="fas fa-clock"></i>
+              <p><strong>Chaque minute de retard peut entraîner la destruction d'une partie du muscle cardiaque.</strong></p>
+            </div>
+            <div class="hero-buttons">
+              <button class="btn-primary" id="startEvaluationBtn">🔘 Commencer l'évaluation</button>
+              <button class="btn-secondary" id="discoverSymptomsBtn">🔘 Découvrir les symptômes</button>
+              <button class="btn-secondary" id="findHelpBtn">🔘 Trouver de l'aide</button>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <!-- ========== SECTION ÉVALUATION ========== -->
+      <section id="evaluation" class="dashboard-section">
+        <div class="section-header">
+          <h2><i class="fas fa-chart-line"></i> Comment évaluer votre risque cardiaque ?</h2>
+          <div class="timer-info">
+            <i class="fas fa-clock"></i>
+            <span>Depuis le début des symptômes : <span id="timer">00:00</span></span>
+          </div>
+          <p class="warning-text"><i class="fas fa-exclamation-circle"></i> Votre santé est votre responsabilité... ne la négligez pas.</p>
+          <p class="info-text"><i class="fas fa-info-circle"></i> Répondez avec précision pour obtenir une évaluation fiable.</p>
+        </div>
+
+        <div class="evaluation-form">
+          <div class="form-group">
+            <label>Âge</label>
+            <select id="ageSelect" class="form-control">
+              <option value="0">&lt; 40 ans (0)</option>
+              <option value="1">40-50 ans (1)</option>
+              <option value="2">51-60 ans (2)</option>
+              <option value="3">≥ 60 ans (3)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Sexe</label>
+            <select id="sexeSelect" class="form-control">
+              <option value="0">Femme (0)</option>
+              <option value="1">Homme (1)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Pathologies</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="hypertension" value="2"> Hypertension artérielle (Oui +2)</label>
+              <label><input type="checkbox" id="diabete" value="2"> Diabète (Oui +2)</label>
+              <label><input type="checkbox" id="hypercholesterolemie" value="2"> Hypercholestérolémie (Oui +2)</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Mode de vie</label>
+            <div class="radio-group">
+              <label>Tabagisme :</label>
+              <select id="tabagismeSelect" class="form-control">
+                <option value="0">Non (0)</option>
+                <option value="1">Occasionnel (1)</option>
+                <option value="2">Oui (2)</option>
+              </select>
+            </div>
+            <div class="radio-group">
+              <label>Activité physique :</label>
+              <select id="activiteSelect" class="form-control">
+                <option value="0">Régulière (0)</option>
+                <option value="1">Faible (1)</option>
+                <option value="2">Aucune (2)</option>
+              </select>
+            </div>
+            <div class="radio-group">
+              <label>Alimentation :</label>
+              <select id="alimentationSelect" class="form-control">
+                <option value="0">Saine (0)</option>
+                <option value="1">Moyenne (1)</option>
+                <option value="2">Mauvaise (2)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Facteurs supplémentaires</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" id="obesite" value="1"> Obésité (Oui +1)</label>
+              <label><input type="checkbox" id="antecedents" value="2"> Antécédents familiaux (Oui +2)</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Symptômes</label>
+            <div class="radio-group">
+              <label>Douleur thoracique :</label>
+              <select id="douleurSelect" class="form-control">
+                <option value="0">Non (0)</option>
+                <option value="2">Parfois (2)</option>
+                <option value="3">Oui (3)</option>
+              </select>
+            </div>
+            <div class="radio-group">
+              <label>Dyspnée :</label>
+              <select id="dyspneeSelect" class="form-control">
+                <option value="0">Non (0)</option>
+                <option value="2">Oui (2)</option>
+              </select>
+            </div>
+            <div class="radio-group">
+              <label>Fatigue inhabituelle :</label>
+              <select id="fatigueSelect" class="form-control">
+                <option value="0">Non (0)</option>
+                <option value="1">Oui (1)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="alert-box red" id="smartAlert" style="display: none;">
+            <i class="fas fa-ambulance"></i>
+            <p><strong>🚨 Alerte intelligente :</strong> Douleur thoracique + dyspnée → Appelez les urgences immédiatement (suspicion d'infarctus du myocarde)</p>
+          </div>
+
+          <div class="form-actions">
+            <p class="urgent-text"><i class="fas fa-clock"></i> Chaque minute compte et peut sauver une vie</p>
+            <button class="btn-primary btn-large" id="calculateRiskBtn">🔘 Calculer le risque</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION RÉSULTAT ========== -->
+      <section id="resultat" class="dashboard-section">
+        <div class="section-header">
+          <h2><i class="fas fa-chart-simple"></i> Que signifie votre résultat ?</h2>
+        </div>
+        <div id="resultCard" class="result-card" style="display: none;">
+          <div class="score-display">
+            <div class="gauge-wrapper">
+              <canvas id="riskGauge" width="200" height="200"></canvas>
+              <div class="score-value" id="scoreValue">0</div>
+            </div>
+            <div class="score-details">
+              <div class="risk-level" id="riskLevel"></div>
+              <div class="risk-description" id="riskDescription"></div>
+              <div class="risk-advice" id="riskAdvice"></div>
+            </div>
+          </div>
+          <div class="risk-scale">
+            <div class="scale low">0-5 : Risque faible</div>
+            <div class="scale medium">6-10 : Risque modéré</div>
+            <div class="scale high">≥11 : Risque élevé</div>
+          </div>
+          <div class="result-buttons">
+            <button class="btn-secondary" id="restartBtn">🔘 Recommencer</button>
+            <button class="btn-secondary" id="preventionBtn">🔘 Prévention</button>
+            <button class="btn-emergency" id="emergencyResultBtn">🔘 Urgence</button>
+          </div>
+          <div class="history-link">
+            <i class="fas fa-chart-line"></i> <a href="#" id="historyBtn">📈 Historique des résultats</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION SYMPTÔMES ========== -->
+      <section id="symptomes" class="dashboard-section">
+        <div class="section-header">
+          <h2><i class="fas fa-head-side-medical"></i> Quels sont les symptômes que vous pouvez ressentir ?</h2>
+          <p>Les maladies cardiaques peuvent apparaître avec des signes différents selon les personnes. Il existe des symptômes clairs (typiques) et des symptômes moins évidents (atypiques), surtout chez les patients diabétiques.</p>
+        </div>
+
+        <div class="symptoms-grid">
+          <div class="symptom-card typical">
+            <h3><i class="fas fa-heartbeat"></i> Symptômes typiques</h3>
+            <div class="symptom-image-placeholder">
+              <i class="fas fa-heartbeat"></i>
+              <span>Image: Douleur thoracique</span>
+            </div>
+            <ul>
+              <li><i class="fas fa-angle-right"></i> Douleur dans la poitrine ("sensation de pression, de serrement ou de brûlure")</li>
+              <li><i class="fas fa-angle-right"></i> Douleur qui se propage vers le bras gauche, le dos ou la mâchoire</li>
+              <li><i class="fas fa-angle-right"></i> Difficulté à respirer (dyspnée)</li>
+              <li><i class="fas fa-angle-right"></i> Sueurs froides</li>
+              <li><i class="fas fa-angle-right"></i> Fatigue intense inhabituelle</li>
+              <li><i class="fas fa-angle-right"></i> Nausées ou sensation de malaise</li>
+            </ul>
+            <div class="explanation">
+              <i class="fas fa-lightbulb"></i>
+              <p>Ces signes apparaissent lorsque le cœur ne reçoit pas assez d'oxygène (ischémie myocardique).</p>
+            </div>
+          </div>
+
+          <div class="symptom-card atypical">
+            <h3><i class="fas fa-bed"></i> Symptômes atypiques</h3>
+            <div class="symptom-image-placeholder">
+              <i class="fas fa-fatigue"></i>
+              <span>Image: Fatigue inhabituelle</span>
+            </div>
+            <ul>
+              <li><i class="fas fa-angle-right"></i> Fatigue soudaine sans raison claire</li>
+              <li><i class="fas fa-angle-right"></i> Essoufflement léger qui apparaît progressivement</li>
+              <li><i class="fas fa-angle-right"></i> Malaise général sans douleur précise</li>
+              <li><i class="fas fa-angle-right"></i> Troubles digestifs ("sensation de brûlure dans l'estomac")</li>
+              <li><i class="fas fa-angle-right"></i> Nausées isolées</li>
+              <li><i class="fas fa-angle-right"></i> Sensation d'anxiété ou d'inconfort vague</li>
+            </ul>
+            <div class="explanation">
+              <i class="fas fa-lightbulb"></i>
+              <p>Chez les diabétiques, les nerfs peuvent être abîmés par le sucre élevé (neuropathie diabétique). Le cœur peut souffrir sans provoquer une forte douleur.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="silent-form">
+          <h3><i class="fas fa-eye-slash"></i> Forme silencieuse (sans symptômes visibles)</h3>
+          <p>Dans certains cas : aucune douleur dans la poitrine, aucun signe clair. Découverte seulement lors d'un examen médical (ECG).</p>
+          <div class="conclusion">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p><strong>Conclusion :</strong> Un infarctus ne se manifeste pas toujours par une douleur forte. Chez le diabétique, les signes peuvent être faibles ou même absents. Toute fatigue inhabituelle ou essoufflement doit être pris au sérieux.</p>
+          </div>
+          <button class="btn-secondary" id="seeExamsBtn">🔘 Voir les examens</button>
+        </div>
+      </section>
+
+      <!-- ========== SECTION EXAMENS ========== -->
+      <section id="examens" class="dashboard-section">
+        <div class="section-header">
+          <h2><i class="fas fa-stethoscope"></i> Quels examens pouvez-vous faire pour vérifier votre cœur ?</h2>
+        </div>
+        <div class="exams-grid">
+          <div class="exam-card"><i class="fas fa-stethoscope"></i><h3>Tension artérielle</h3><p>Pression du sang dans les artères</p></div>
+          <div class="exam-card"><i class="fas fa-tint"></i><h3>Glycémie</h3><p>Taux de sucre dans le sang</p></div>
+          <div class="exam-card"><i class="fas fa-chart-line"></i><h3>Bilan lipidique</h3><p>Cholestérol total et fractions</p></div>
+          <div class="exam-card"><i class="fas fa-heartbeat"></i><h3>ECG</h3><p>Enregistrement de l'activité électrique</p></div>
+          <div class="exam-card"><i class="fas fa-microscope"></i><h3>Troponine</h3><p>Marqueur sanguin de la nécrose myocardique</p></div>
+        </div>
+        <p class="info-note"><i class="fas fa-info-circle"></i> Ces examens permettent un diagnostic précoce et fiable. Chaque test apporte une information essentielle sur le cœur.</p>
+        <button class="btn-secondary" id="preventionFromExamsBtn">🔘 Prévention</button>
+      </section>
+
+      <!-- ========== SECTION PRÉVENTION ========== -->
+      <section id="prevention" class="dashboard-section">
+        <div class="section-header">
+          <h2><i class="fas fa-apple-alt"></i> Comment protéger votre cœur au quotidien ?</h2>
+          <p>Les maladies cardiovasculaires peuvent être évitées dans la majorité des cas. Hygiène de vie = cœur en bonne santé</p>
+        </div>
+        <div class="prevention-grid">
+          <div class="prevention-card"><i class="fas fa-walking"></i><h3>Activité physique</h3><p>Au moins 30 minutes par jour</p></div>
+          <div class="prevention-card"><i class="fas fa-apple-alt"></i><h3>Alimentation saine</h3><p>Réduction des graisses et du sel</p></div>
+          <div class="prevention-card"><i class="fas fa-smoking-ban"></i><h3>Arrêt du tabac</h3></div>
+          <div class="prevention-card"><i class="fas fa-spa"></i><h3>Gestion du stress</h3><p>Réduction de la tension psychologique</p></div>
+        </div>
+        <button class="btn-secondary" id="symptomsFromPreventionBtn">🔘 Symptômes</button>
+      </section>
+
+      <!-- ========== SECTION URGENCE ========== -->
+      <section id="urgence" class="dashboard-section">
+        <div class="emergency-card">
+          <h2><i class="fas fa-ambulance"></i> 🚨 Situation médicale urgente</h2>
+          <div class="video-placeholder">
+            <i class="fas fa-play-circle"></i>
+            <span>🎥 Vidéo éducative</span>
+          </div>
+          <div class="emergency-instructions">
+            <h3>En cas de douleur thoracique intense :</h3>
+            <ul>
+              <li>Arrêter tout effort</li>
+              <li>S'asseoir ou s'allonger</li>
+              <li>Appeler immédiatement les secours</li>
+            </ul>
+          </div>
+          <div class="emergency-numbers">
+            <div class="number-card">
+              <i class="fas fa-phone-alt"></i>
+              <span>SAMU / secours : <strong>14</strong></span>
+            </div>
+            <div class="number-card">
+              <i class="fas fa-shield-alt"></i>
+              <span>Protection civile : <strong>14 / 1548</strong></span>
+            </div>
+          </div>
+          <div class="golden-hour">
+            <i class="fas fa-hourglass-half"></i>
+            <p>L'infarctus du myocarde nécessite une prise en charge rapide pendant la <strong>"golden hour"</strong> (première heure critique)</p>
+            <p class="warning">🚨 Chaque minute de retard = perte de cellules cardiaques</p>
+          </div>
+          <button class="btn-emergency btn-large" onclick="window.location.href='tel:14'">🔘 Appeler les urgences</button>
+        </div>
+      </section>
+
+      <!-- ========== SECTION CONTACT ========== -->
+      <section id="contact" class="dashboard-section">
+        <div class="section-header">
+          <h2><i class="fas fa-envelope"></i> Comment nous contacter et en savoir plus ?</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="team-info">
+            <div class="team-image-placeholder">
+              <i class="fas fa-user-md"></i>
+              <span>Image: Équipe médicale</span>
+            </div>
+            <h3>Projet : Yahiaoui Abla & Ghemari Bouchra</h3>
+            <div class="disclaimer">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>Ce site est un outil de sensibilisation et ne remplace pas une consultation médicale</p>
+            </div>
+            <p class="heart-message">❤️ Votre cœur est précieux... n'attendez pas qu'il soit trop tard</p>
+          </div>
+          <div class="contact-form">
+            <h3>Formulaire de contact</h3>
+            <form id="contactForm">
+              <input type="text" id="contactName" placeholder="Votre nom" required>
+              <input type="email" id="contactEmail" placeholder="Votre email" required>
+              <textarea id="contactMessage" placeholder="Votre message..." rows="4" required></textarea>
+              <button type="submit" class="btn-primary">Envoyer</button>
+            </form>
+            <div class="contact-info-simple">
+              <p><i class="fas fa-phone"></i> Téléphone : 14 (Urgences)</p>
+              <p><i class="fas fa-envelope"></i> Email : info@abbeats.dz</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- History Modal -->
+  <div id="historyModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>📈 Historique des résultats</h3>
+        <button class="modal-close" id="closeHistoryBtn">&times;</button>
       </div>
-      
-      <!-- Stats Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-chart-simple"></i> إحصائياتك</h3>
-        <div class="reading-item">
-          <span>عدد مرات تسجيل الدخول:</span>
-          <span id="loginCount">0</span>
-        </div>
-        <div class="reading-item">
-          <span>آخر تسجيل دخول:</span>
-          <span id="lastLogin"></span>
-        </div>
-        <div class="reading-item">
-          <span>عضو منذ:</span>
-          <span id="memberSince"></span>
-        </div>
+      <div class="modal-body">
+        <div id="historyList"></div>
       </div>
     </div>
   </div>
-  
+
+  <script>
+    // Google Translate
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'fr,ar,en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+    
+    function changeLanguage(lang) {
+      if (lang === 'fr') {
+        window.location.reload();
+      } else if (lang === 'ar') {
+        window.location.href = '?lang=ar';
+      }
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script src="dashboard.js"></script>
 </body>
 </html>
