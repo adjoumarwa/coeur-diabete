@@ -96,26 +96,26 @@
           <div class="form-group">
             <label>Âge</label>
             <select id="ageSelect" class="form-control">
-              <option value="0">&lt; 40 ans </option>
-              <option value="1">40-50 ans </option>
-              <option value="2">51-60 ans </option>
-              <option value="3">≥ 60 ans </option>
+              <option value="0">&lt; 40 ans</option>
+              <option value="1">40-50 ans</option>
+              <option value="2">51-60 ans</option>
+              <option value="3">≥ 60 ans</option>
             </select>
           </div>
 
           <div class="form-group">
             <label>Sexe</label>
             <select id="sexeSelect" class="form-control">
-              <option value="0">Femme </option>
-              <option value="1">Homme </option>
+              <option value="0">Femme</option>
+              <option value="1">Homme</option>
             </select>
           </div>
 
           <div class="form-group">
             <label>Pathologies</label>
             <div class="checkbox-group">
-              <label><input type="checkbox" id="hypertension" value="2"> Hypertension artérielle </label>
-              <label><input type="checkbox" id="diabete" value="2"> Diabète </label>
+              <label><input type="checkbox" id="hypertension" value="2"> Hypertension artérielle</label>
+              <label><input type="checkbox" id="diabete" value="2"> Diabète</label>
               <label><input type="checkbox" id="hypercholesterolemie" value="2"> Hypercholestérolémie</label>
             </div>
           </div>
@@ -125,25 +125,25 @@
             <div class="radio-group">
               <label>Tabagisme :</label>
               <select id="tabagismeSelect" class="form-control">
-                <option value="0">Non </option>
-                <option value="1">Occasionnel </option>
-                <option value="2">Oui </option>
+                <option value="0">Non</option>
+                <option value="1">Occasionnel</option>
+                <option value="2">Oui</option>
               </select>
             </div>
             <div class="radio-group">
               <label>Activité physique :</label>
               <select id="activiteSelect" class="form-control">
-                <option value="0">Régulière </option>
-                <option value="1">Faible </option>
-                <option value="2">Aucune </option>
+                <option value="0">Régulière</option>
+                <option value="1">Faible</option>
+                <option value="2">Aucune</option>
               </select>
             </div>
             <div class="radio-group">
               <label>Alimentation :</label>
               <select id="alimentationSelect" class="form-control">
-                <option value="0">Saine </option>
-                <option value="1">Moyenne </option>
-                <option value="2">Mauvaise </option>
+                <option value="0">Saine</option>
+                <option value="1">Moyenne</option>
+                <option value="2">Mauvaise</option>
               </select>
             </div>
           </div>
@@ -151,8 +151,8 @@
           <div class="form-group">
             <label>Facteurs supplémentaires</label>
             <div class="checkbox-group">
-              <label><input type="checkbox" id="obesite" value="1"> Obésité </label>
-              <label><input type="checkbox" id="antecedents" value="2"> Antécédents familiaux </label>
+              <label><input type="checkbox" id="obesite" value="1"> Obésité</label>
+              <label><input type="checkbox" id="antecedents" value="2"> Antécédents familiaux</label>
             </div>
           </div>
 
@@ -161,23 +161,23 @@
             <div class="radio-group">
               <label>Douleur thoracique :</label>
               <select id="douleurSelect" class="form-control">
-                <option value="0">Non </option>
-                <option value="2">Parfois </option>
-                <option value="3">Oui </option>
+                <option value="0">Non</option>
+                <option value="2">Parfois</option>
+                <option value="3">Oui</option>
               </select>
             </div>
             <div class="radio-group">
               <label>Dyspnée :</label>
               <select id="dyspneeSelect" class="form-control">
-                <option value="0">Non </option>
-                <option value="2">Oui </option>
+                <option value="0">Non</option>
+                <option value="2">Oui</option>
               </select>
             </div>
             <div class="radio-group">
               <label>Fatigue inhabituelle :</label>
               <select id="fatigueSelect" class="form-control">
-                <option value="0">Non </option>
-                <option value="1">Oui </option>
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
               </select>
             </div>
           </div>
@@ -388,78 +388,81 @@
         </div>
       </section>
 
-      <!-- ==================== ANCIENNES FONCTIONNALITÉS (DASHBOARD ORIGINAL) ==================== -->
-      
-      <!-- Medical Readings Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-chart-line"></i> متابعة القراءات الطبية</h3>
-        <div class="reading-item">
-          <span>السكري التراكمي HBA1c:</span>
-          <span id="hba1c">--</span>%
+      <!-- ==================== ANCIENNES FONCTIONNALITÉS AVEC GRILLE ==================== -->
+      <div class="dashboard-cards-grid">
+        
+        <!-- Medical Readings Card -->
+        <div class="dashboard-card">
+          <h3><i class="fas fa-chart-line"></i> Lectures médicales</h3>
+          <div class="reading-item">
+            <span>HBA1c:</span>
+            <span id="hba1c">--</span>%
+          </div>
+          <div class="reading-item">
+            <span>Tension artérielle:</span>
+            <span id="bp">--</span> mmHg
+          </div>
+          <div class="reading-item">
+            <span>Cholestérol LDL:</span>
+            <span id="cholesterol">--</span> mg/dL
+          </div>
+          <div class="reading-item">
+            <span>Glycémie à jeun:</span>
+            <span id="fastingSugar">--</span> mg/dL
+          </div>
+          <button class="card-btn" id="updateReadingsBtn">Mettre à jour</button>
         </div>
-        <div class="reading-item">
-          <span>ضغط الدم:</span>
-          <span id="bp">--</span> mmHg
+        
+        <!-- BMI Calculator Card -->
+        <div class="dashboard-card">
+          <h3><i class="fas fa-calculator"></i> Calculateur IMC</h3>
+          <p>Calculez votre poids idéal</p>
+          <button class="card-btn" id="bmiBtn">Calculer IMC</button>
         </div>
-        <div class="reading-item">
-          <span>الكوليسترول LDL:</span>
-          <span id="cholesterol">--</span> mg/dL
+        
+        <!-- Appointments Card -->
+        <div class="dashboard-card">
+          <h3><i class="fas fa-calendar-alt"></i> Agenda des rendez-vous</h3>
+          <ul class="appointments-list" id="appointmentsList">
+            <li style="text-align: center; color: #999;">Aucun rendez-vous enregistré</li>
+          </ul>
+          <button class="card-btn" id="addAppointmentBtn">+ Ajouter un rendez-vous</button>
         </div>
-        <div class="reading-item">
-          <span>سكر الصائم:</span>
-          <span id="fastingSugar">--</span> mg/dL
+        
+        <!-- Daily Tips Card -->
+        <div class="dashboard-card">
+          <h3><i class="fas fa-lightbulb"></i> Conseils quotidiens</h3>
+          <div class="tip-text" id="dailyTip"></div>
+          <button class="card-btn" id="newTipBtn">Nouveau conseil</button>
         </div>
-        <button class="card-btn" id="updateReadingsBtn">تحديث القراءات</button>
-      </div>
-      
-      <!-- BMI Calculator Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-calculator"></i> حاسبة BMI</h3>
-        <p>احسب وزنك المثالي ومعرفة مؤشر كتلة الجسم</p>
-        <button class="card-btn" id="bmiBtn">احسب BMI</button>
-      </div>
-      
-      <!-- Appointments Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-calendar-alt"></i> مفكرة المواعيد</h3>
-        <ul class="appointments-list" id="appointmentsList">
-          <li style="text-align: center; color: #999;">لا توجد مواعيد مسجلة</li>
-        </ul>
-        <button class="card-btn" id="addAppointmentBtn">+ إضافة موعد جديد</button>
-      </div>
-      
-      <!-- Daily Tips Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-lightbulb"></i> نصائح يومية</h3>
-        <div class="tip-text" id="dailyTip"></div>
-        <button class="card-btn" id="newTipBtn">نصيحة جديدة</button>
-      </div>
-      
-      <!-- Downloads Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-download"></i> تحميلات مفيدة</h3>
-        <div class="download-buttons">
-          <button class="download-btn" data-download="guide">📄 دليل الأزمة القلبية الصامتة</button>
-          <button class="download-btn" data-download="carte">🪪 بطاقة المريض</button>
-          <button class="download-btn" data-download="alimentation">🥗 دليل التغذية</button>
+        
+        <!-- Downloads Card -->
+        <div class="dashboard-card">
+          <h3><i class="fas fa-download"></i> Téléchargements</h3>
+          <div class="download-buttons">
+            <button class="download-btn" data-download="guide">📄 Guide de la crise silencieuse</button>
+            <button class="download-btn" data-download="carte">🪪 Carte patient</button>
+            <button class="download-btn" data-download="alimentation">🥗 Guide nutritionnel</button>
+          </div>
         </div>
-      </div>
-      
-      <!-- Stats Card -->
-      <div class="dashboard-card">
-        <h3><i class="fas fa-chart-simple"></i> إحصائياتك</h3>
-        <div class="reading-item">
-          <span>عدد مرات تسجيل الدخول:</span>
-          <span id="loginCount">0</span>
+        
+        <!-- Stats Card -->
+        <div class="dashboard-card">
+          <h3><i class="fas fa-chart-simple"></i> Vos statistiques</h3>
+          <div class="reading-item">
+            <span>Nombre de connexions:</span>
+            <span id="loginCount">0</span>
+          </div>
+          <div class="reading-item">
+            <span>Dernière connexion:</span>
+            <span id="lastLogin"></span>
+          </div>
+          <div class="reading-item">
+            <span>Membre depuis:</span>
+            <span id="memberSince"></span>
+          </div>
         </div>
-        <div class="reading-item">
-          <span>آخر تسجيل دخول:</span>
-          <span id="lastLogin"></span>
-        </div>
-        <div class="reading-item">
-          <span>عضو منذ:</span>
-          <span id="memberSince"></span>
-        </div>
+
       </div>
 
     </div>
