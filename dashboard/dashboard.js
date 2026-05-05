@@ -562,3 +562,66 @@ checkSmartAlert();
 
 // Rendre les fonctions globales
 window.deleteAppointment = deleteAppointment;
+
+// ============================================
+// FONCTION DE TÉLÉCHARGEMENT PROFESSIONNELLE
+// ============================================
+
+function downloadFile(fileName) {
+    // Vérifier si le fichier existe
+    const filePath = `downloads/${fileName}`;
+    
+    // Créer un lien temporaire
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.download = fileName;
+    
+    // Déclencher le téléchargement
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Afficher un message de succès
+    showCustomAlert(`✅ Téléchargement terminé : ${fileName}`, 'Téléchargement');
+    
+    // Enregistrer dans les statistiques
+    saveDownloadStat(fileName);
+}
+
+// Enregistrer les statistiques de téléchargement
+function saveDownloadStat(fileName) {
+    let downloads = JSON.parse(localStorage.getItem(`downloads_${currentUser.email}`) || '[]');
+    downloads.push({
+        file: fileName,
+        date: new Date().toISOString()
+    });
+    localStorage.setItem(`downloads_${currentUser.email}`, JSON.stringify(downloads));
+    
+    // Mettre à jour le compteur
+    let totalDownloads = parseInt(localStorage.getItem(`totalDownloads_${currentUser.email}`) || '0');
+    totalDownloads++;
+    localStorage.setItem(`totalDownloads_${currentUser.email}`, totalDownloads);
+    
+    // Mettre à jour l'affichage
+    const totalDownloadsSpan = document.getElementById('totalDownloads');
+    if (totalDownloadsSpan) totalDownloadsSpan.textContent = totalDownloads;
+}
+
+// Récupérer les statistiques de téléchargement
+function loadDownloadStats() {
+    let totalDownloads = parseInt(localStorage.getItem(`totalDownloads_${currentUser.email}`) || '0');
+    const totalDownloadsSpan = document.getElementById('totalDownloads');
+    if (totalDownloadsSpan) totalDownloadsSpan.textContent = totalDownloads;
+}
+// ============================================
+// LIER LES BOUTONS DE TÉLÉCHARGEMENT
+// ============================================
+
+document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const fileName = btn.getAttribute('data-file');
+        if (fileName) {
+            downloadFile(fileName);
+        }
+    });
+});
