@@ -388,7 +388,7 @@
         </div>
       </section>
 
-      <!-- ==================== ANCIENNES FONCTIONNALITÉS AVEC GRILLE ==================== -->
+      <!-- ==================== SECTION: LECTURES MÉDICALES ==================== -->
       <div class="dashboard-cards-grid">
         
         <!-- Medical Readings Card -->
@@ -424,7 +424,7 @@
         <div class="dashboard-card">
           <h3><i class="fas fa-calendar-alt"></i> Agenda des rendez-vous</h3>
           <ul class="appointments-list" id="appointmentsList">
-            <li style="text-align: center; color: #999;">Aucun rendez-vous enregistré</li>
+            <li style="text-align: center; color: #999;">📅 Aucun rendez-vous enregistré</li>
           </ul>
           <button class="card-btn" id="addAppointmentBtn">+ Ajouter un rendez-vous</button>
         </div>
@@ -496,6 +496,8 @@
         window.location.reload();
       } else if (lang === 'ar') {
         window.location.href = '?lang=ar';
+      } else if (lang === 'darija') {
+        alert('Langue Darija - Version simplifiée');
       }
     }
   </script>
