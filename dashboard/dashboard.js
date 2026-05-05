@@ -1,507 +1,564 @@
-<!DOCTYPE html>
-<html lang="fr" dir="ltr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ABbeats - Votre cœur, notre soin</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
+// ============================================
+// ABbeats - Dashboard Principal
+// Toutes les fonctionnalités
+// ============================================
 
-  <!-- Google Translate Element -->
-  <div id="google_translate_element" class="translate-btn"></div>
+// ============================================
+// VARIABLES GLOBALES
+// ============================================
+let timerInterval;
+let timerSeconds = 0;
+let currentUser = null;
 
-  <div class="dashboard-container">
-    <!-- Header -->
-    <div class="dashboard-header">
-      <div class="logo">
-        <span class="logo-heart">❤️</span>
-        <div class="logo-text">
-          <h1>ABbeats</h1>
-          <p class="tagline">"Your heart, our care"</p>
-        </div>
-      </div>
-      <div class="language-switcher">
-        <button class="lang-option" onclick="changeLanguage('fr')">Français</button>
-        <button class="lang-option" onclick="changeLanguage('ar')">العربية</button>
-        <button class="lang-option" onclick="changeLanguage('darija')">Darija</button>
-      </div>
-      <div class="user-info">
-        <i class="fas fa-user-circle"></i>
-        <span id="userName"></span>
-        <button class="logout-btn" id="logoutBtn">Déconnexion</button>
-      </div>
-    </div>
+// ============================================
+// RÉCUPÉRATION DE L'UTILISATEUR
+// ============================================
+try {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+        currentUser = JSON.parse(storedUser);
+        const userNameSpan = document.getElementById('userName');
+        if (userNameSpan) userNameSpan.textContent = currentUser.name || currentUser.email || 'Invité';
+    } else {
+        currentUser = { email: 'guest@example.com', name: 'Invité' };
+        const userNameSpan = document.getElementById('userName');
+        if (userNameSpan) userNameSpan.textContent = 'Invité';
+    }
+} catch(e) {
+    currentUser = { email: 'guest@example.com', name: 'Invité' };
+}
 
-    <!-- Navigation Menu -->
-    <nav class="dashboard-nav">
-      <a href="#accueil" class="nav-link">Accueil</a>
-      <a href="#evaluation" class="nav-link">Évaluation</a>
-      <a href="#resultat" class="nav-link">Résultat</a>
-      <a href="#symptomes" class="nav-link">Symptômes</a>
-      <a href="#examens" class="nav-link">Examens</a>
-      <a href="#prevention" class="nav-link">Prévention</a>
-      <a href="#urgence" class="nav-link">Urgence</a>
-      <a href="#contact" class="nav-link">Contact</a>
-    </nav>
+// ============================================
+// FONCTIONS D'ALERTE PERSONNALISÉES
+// ============================================
+function showCustomAlert(message, title = 'Information') {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(5px);
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 450px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        border-top: 5px solid #e74c3c;
+    `;
+    
+    modal.innerHTML = `
+        <h3 style="color: #1e3c5c; margin-bottom: 1rem;">${title}</h3>
+        <div style="margin: 1rem 0; text-align: left; line-height: 1.6; white-space: pre-line;">${message}</div>
+        <button id="alertCloseBtn" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; padding: 10px 30px; border-radius: 10px; cursor: pointer; margin-top: 1rem;">OK</button>
+    `;
+    
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    
+    document.getElementById('alertCloseBtn').onclick = () => overlay.remove();
+}
 
-    <!-- Fixed Emergency Button -->
-    <button class="fixed-emergency-btn" id="emergencyBtn">
-      <i class="fas fa-ambulance"></i> Urgence
-    </button>
+// ============================================
+// TIMER
+// ============================================
+function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+    }, 1000);
+}
+startTimer();
 
-    <div class="dashboard-content">
-      
-      <!-- ==================== SECTION ACCUEIL ==================== -->
-      <section id="accueil" class="dashboard-section">
-        <div class="hero-card">
-          <div class="hero-text">
-            <h2>Commencez à prendre soin de votre cœur dès maintenant</h2>
-            <div class="warning-box">
-              <i class="fas fa-exclamation-triangle"></i>
-              <p>Une douleur thoracique ("sensation de pression ou de brûlure dans la poitrine") n'est pas toujours bénigne. Elle peut être un signe d'infarctus du myocarde ("obstruction brutale d'une artère coronaire qui empêche le sang d'atteindre le cœur").</p>
-            </div>
-            <div class="warning-box yellow">
-              <i class="fas fa-lungs"></i>
-              <p>Une dyspnée ("difficulté à respirer") associée à une transpiration ou une fatigue soudaine peut indiquer une ischémie myocardique ("diminution de l'apport en oxygène au muscle cardiaque").</p>
-            </div>
-            <div class="alert-box">
-              <i class="fas fa-clock"></i>
-              <p><strong>Chaque minute de retard peut entraîner la destruction d'une partie du muscle cardiaque.</strong></p>
-            </div>
-            <div class="hero-buttons">
-              <button class="btn-primary" id="startEvaluationBtn">🔘 Commencer l'évaluation</button>
-              <button class="btn-secondary" id="discoverSymptomsBtn">🔘 Découvrir les symptômes</button>
-              <button class="btn-secondary" id="findHelpBtn">🔘 Trouver de l'aide</button>
-            </div>
-          </div>
-        </div>
-      </section>
+// ============================================
+// ALERTE INTELLIGENTE
+// ============================================
+function checkSmartAlert() {
+    const douleur = document.getElementById('douleurSelect')?.value;
+    const dyspnee = document.getElementById('dyspneeSelect')?.value;
+    const alertDiv = document.getElementById('smartAlert');
+    if (alertDiv && ((douleur === '2' || douleur === '3') && dyspnee === '2')) {
+        alertDiv.style.display = 'block';
+    } else if (alertDiv) {
+        alertDiv.style.display = 'none';
+    }
+}
 
-      <!-- ==================== SECTION ÉVALUATION ==================== -->
-      <section id="evaluation" class="dashboard-section">
-        <div class="section-header">
-          <h2><i class="fas fa-chart-line"></i> Comment évaluer votre risque cardiaque ?</h2>
-          <div class="timer-info">
-            <i class="fas fa-clock"></i>
-            <span>Depuis le début des symptômes : <span id="timer">00:00</span></span>
-          </div>
-          <p class="warning-text"><i class="fas fa-exclamation-circle"></i> Votre santé est votre responsabilité... ne la négligez pas.</p>
-          <p class="info-text"><i class="fas fa-info-circle"></i> Répondez avec précision pour obtenir une évaluation fiable.</p>
-        </div>
+// ============================================
+// CALCUL DU RISQUE CARDIACQUE
+// ============================================
+function calculateRisk() {
+    const age = parseInt(document.getElementById('ageSelect')?.value || 0);
+    const sexe = parseInt(document.getElementById('sexeSelect')?.value || 0);
+    
+    let pathologies = 0;
+    if (document.getElementById('hypertension')?.checked) pathologies += 2;
+    if (document.getElementById('diabete')?.checked) pathologies += 2;
+    if (document.getElementById('hypercholesterolemie')?.checked) pathologies += 2;
+    
+    const tabagisme = parseInt(document.getElementById('tabagismeSelect')?.value || 0);
+    const activite = parseInt(document.getElementById('activiteSelect')?.value || 0);
+    const alimentation = parseInt(document.getElementById('alimentationSelect')?.value || 0);
+    
+    let facteurs = 0;
+    if (document.getElementById('obesite')?.checked) facteurs += 1;
+    if (document.getElementById('antecedents')?.checked) facteurs += 2;
+    
+    const douleur = parseInt(document.getElementById('douleurSelect')?.value || 0);
+    const dyspnee = parseInt(document.getElementById('dyspneeSelect')?.value || 0);
+    const fatigue = parseInt(document.getElementById('fatigueSelect')?.value || 0);
+    
+    const totalScore = age + sexe + pathologies + tabagisme + activite + alimentation + facteurs + douleur + dyspnee + fatigue;
+    
+    showResult(totalScore);
+    saveToHistory(totalScore);
+}
 
-        <div class="evaluation-form">
-          <div class="form-group">
-            <label>Âge</label>
-            <select id="ageSelect" class="form-control">
-              <option value="0">&lt; 40 ans</option>
-              <option value="1">40-50 ans</option>
-              <option value="2">51-60 ans</option>
-              <option value="3">≥ 60 ans</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Sexe</label>
-            <select id="sexeSelect" class="form-control">
-              <option value="0">Femme</option>
-              <option value="1">Homme</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Pathologies</label>
-            <div class="checkbox-group">
-              <label><input type="checkbox" id="hypertension" value="2"> Hypertension artérielle</label>
-              <label><input type="checkbox" id="diabete" value="2"> Diabète</label>
-              <label><input type="checkbox" id="hypercholesterolemie" value="2"> Hypercholestérolémie</label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Mode de vie</label>
-            <div class="radio-group">
-              <label>Tabagisme :</label>
-              <select id="tabagismeSelect" class="form-control">
-                <option value="0">Non</option>
-                <option value="1">Occasionnel</option>
-                <option value="2">Oui</option>
-              </select>
-            </div>
-            <div class="radio-group">
-              <label>Activité physique :</label>
-              <select id="activiteSelect" class="form-control">
-                <option value="0">Régulière</option>
-                <option value="1">Faible</option>
-                <option value="2">Aucune</option>
-              </select>
-            </div>
-            <div class="radio-group">
-              <label>Alimentation :</label>
-              <select id="alimentationSelect" class="form-control">
-                <option value="0">Saine</option>
-                <option value="1">Moyenne</option>
-                <option value="2">Mauvaise</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Facteurs supplémentaires</label>
-            <div class="checkbox-group">
-              <label><input type="checkbox" id="obesite" value="1"> Obésité</label>
-              <label><input type="checkbox" id="antecedents" value="2"> Antécédents familiaux</label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Symptômes</label>
-            <div class="radio-group">
-              <label>Douleur thoracique :</label>
-              <select id="douleurSelect" class="form-control">
-                <option value="0">Non</option>
-                <option value="2">Parfois</option>
-                <option value="3">Oui</option>
-              </select>
-            </div>
-            <div class="radio-group">
-              <label>Dyspnée :</label>
-              <select id="dyspneeSelect" class="form-control">
-                <option value="0">Non</option>
-                <option value="2">Oui</option>
-              </select>
-            </div>
-            <div class="radio-group">
-              <label>Fatigue inhabituelle :</label>
-              <select id="fatigueSelect" class="form-control">
-                <option value="0">Non</option>
-                <option value="1">Oui</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="alert-box red" id="smartAlert" style="display: none;">
-            <i class="fas fa-ambulance"></i>
-            <p><strong>🚨 Alerte intelligente :</strong> Douleur thoracique + dyspnée → Appelez les urgences immédiatement (suspicion d'infarctus du myocarde)</p>
-          </div>
-
-          <div class="form-actions">
-            <p class="urgent-text"><i class="fas fa-clock"></i> Chaque minute compte et peut sauver une vie</p>
-            <button class="btn-primary btn-large" id="calculateRiskBtn">🔘 Calculer le risque</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SECTION RÉSULTAT ==================== -->
-      <section id="resultat" class="dashboard-section">
-        <div class="section-header">
-          <h2><i class="fas fa-chart-simple"></i> Que signifie votre résultat ?</h2>
-        </div>
-        <div id="resultCard" class="result-card" style="display: none;">
-          <div class="score-display">
-            <div class="gauge-wrapper">
-              <canvas id="riskGauge" width="200" height="200"></canvas>
-              <div class="score-value" id="scoreValue">0</div>
-            </div>
-            <div class="score-details">
-              <div class="risk-level" id="riskLevel"></div>
-              <div class="risk-description" id="riskDescription"></div>
-              <div class="risk-advice" id="riskAdvice"></div>
-            </div>
-          </div>
-          <div class="risk-scale">
-            <div class="scale low">0-5 : Risque faible ✔ État rassurant – Hygiène de vie à maintenir</div>
-            <div class="scale medium">6-10 : Risque modéré ⚠ Présence de facteurs de risque – Un bilan médical est recommandé</div>
-            <div class="scale high">≥11 : Risque élevé 🚨 Forte probabilité de maladie cardiaque aiguë – Prise en charge rapide aux urgences</div>
-          </div>
-          <div class="result-buttons">
-            <button class="btn-secondary" id="restartBtn">🔘 Recommencer</button>
-            <button class="btn-secondary" id="preventionBtn">🔘 Prévention</button>
-            <button class="btn-emergency" id="emergencyResultBtn">🔘 Urgence</button>
-          </div>
-          <div class="history-link">
-            <i class="fas fa-chart-line"></i> <a href="#" id="historyBtn">📈 Historique des résultats</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SECTION SYMPTÔMES ==================== -->
-      <section id="symptomes" class="dashboard-section">
-        <div class="section-header">
-          <h2><i class="fas fa-head-side-medical"></i> Quels sont les symptômes que vous pouvez ressentir ?</h2>
-          <p>Les maladies cardiaques comme l'infarctus du myocarde (IDM : obstruction d'une artère du cœur) peuvent apparaître avec des signes différents selon les personnes. Il existe des symptômes clairs (typiques) et des symptômes moins évidents (atypiques), surtout chez les patients diabétiques.</p>
-        </div>
-
-        <div class="symptoms-grid">
-          <div class="symptom-card typical">
-            <h3><i class="fas fa-heartbeat"></i> Symptômes typiques (clairs et faciles à reconnaître)</h3>
-            <div class="symptom-image-placeholder">
-              <i class="fas fa-heartbeat"></i>
-              <span>Image: Douleur thoracique</span>
-            </div>
-            <ul>
-              <li><i class="fas fa-angle-right"></i> Douleur dans la poitrine ("sensation de pression, de serrement ou de brûlure au centre de la poitrine")</li>
-              <li><i class="fas fa-angle-right"></i> Douleur qui se propage vers le bras gauche, le dos ou la mâchoire</li>
-              <li><i class="fas fa-angle-right"></i> Difficulté à respirer (dyspnée : "impression de manquer d'air")</li>
-              <li><i class="fas fa-angle-right"></i> Sueurs froides ("transpiration soudaine sans effort")</li>
-              <li><i class="fas fa-angle-right"></i> Fatigue intense inhabituelle</li>
-              <li><i class="fas fa-angle-right"></i> Nausées ou sensation de malaise</li>
-            </ul>
-            <div class="explanation">
-              <i class="fas fa-lightbulb"></i>
-              <p>Ces signes apparaissent lorsque le cœur ne reçoit pas assez d'oxygène (ischémie myocardique : "manque de sang et d'oxygène dans le muscle du cœur").</p>
-            </div>
-          </div>
-
-          <div class="symptom-card atypical">
-            <h3><i class="fas fa-bed"></i> Symptômes atypiques (moins visibles, surtout chez le diabétique)</h3>
-            <div class="symptom-image-placeholder">
-              <i class="fas fa-fatigue"></i>
-              <span>Image: Fatigue inhabituelle</span>
-            </div>
-            <ul>
-              <li><i class="fas fa-angle-right"></i> Fatigue soudaine sans raison claire ("être épuisé sans effort")</li>
-              <li><i class="fas fa-angle-right"></i> Essoufflement léger qui apparaît progressivement</li>
-              <li><i class="fas fa-angle-right"></i> Malaise général sans douleur précise</li>
-              <li><i class="fas fa-angle-right"></i> Troubles digestifs ("sensation de brûlure ou d'indigestion dans l'estomac")</li>
-              <li><i class="fas fa-angle-right"></i> Nausées isolées</li>
-              <li><i class="fas fa-angle-right"></i> Sensation d'anxiété ou d'inconfort vague ("gêne sans localisation précise")</li>
-            </ul>
-            <div class="explanation">
-              <i class="fas fa-lightbulb"></i>
-              <p>Chez les diabétiques, les nerfs peuvent être abîmés par le sucre élevé (neuropathie diabétique : "atteinte des nerfs qui diminue la sensibilité à la douleur"). Donc le cœur peut souffrir sans provoquer une forte douleur.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="silent-form">
-          <h3><i class="fas fa-eye-slash"></i> Forme silencieuse (sans symptômes visibles)</h3>
-          <p>Dans certains cas : aucune douleur dans la poitrine, aucun signe clair. Découverte seulement lors d'un examen médical (ECG : "test qui enregistre l'activité électrique du cœur").</p>
-          <div class="conclusion">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p><strong>Conclusion :</strong> Un infarctus ne se manifeste pas toujours par une douleur forte. Chez le diabétique, les signes peuvent être faibles ou même absents. Toute fatigue inhabituelle ou essoufflement doit être pris au sérieux. Ignorer ces symptômes peut entraîner des complications graves comme un arrêt cardiaque.</p>
-          </div>
-          <button class="btn-secondary" id="seeExamsBtn">🔘 Voir les examens</button>
-        </div>
-      </section>
-
-      <!-- ==================== SECTION EXAMENS MÉDICAUX ==================== -->
-      <section id="examens" class="dashboard-section">
-        <div class="section-header">
-          <h2><i class="fas fa-stethoscope"></i> Quels examens pouvez-vous faire pour vérifier votre cœur ?</h2>
-        </div>
-        <div class="exams-grid">
-          <div class="exam-card"><i class="fas fa-stethoscope"></i><h3>Tension artérielle</h3><p>"Pression du sang dans les artères"</p></div>
-          <div class="exam-card"><i class="fas fa-tint"></i><h3>Glycémie</h3><p>"Taux de sucre dans le sang"</p></div>
-          <div class="exam-card"><i class="fas fa-chart-line"></i><h3>Bilan lipidique</h3><p>"Cholestérol total et fractions"</p></div>
-          <div class="exam-card"><i class="fas fa-heartbeat"></i><h3>ECG</h3><p>"Enregistrement de l'activité électrique du cœur"</p></div>
-          <div class="exam-card"><i class="fas fa-microscope"></i><h3>Troponine</h3><p>"Marqueur sanguin de la nécrose myocardique"</p></div>
-        </div>
-        <p class="info-note"><i class="fas fa-info-circle"></i> Ces examens permettent un diagnostic précoce et fiable. Chaque test apporte une information essentielle sur le cœur.</p>
-        <button class="btn-secondary" id="preventionFromExamsBtn">🔘 Prévention</button>
-      </section>
-
-      <!-- ==================== SECTION PRÉVENTION ==================== -->
-      <section id="prevention" class="dashboard-section">
-        <div class="section-header">
-          <h2><i class="fas fa-apple-alt"></i> Comment protéger votre cœur au quotidien ?</h2>
-          <p>Les maladies cardiovasculaires peuvent être évitées dans la majorité des cas. <strong>Hygiène de vie = cœur en bonne santé</strong></p>
-        </div>
-        <div class="prevention-grid">
-          <div class="prevention-card"><i class="fas fa-walking"></i><h3>Activité physique</h3><p>Au moins 30 minutes par jour</p></div>
-          <div class="prevention-card"><i class="fas fa-apple-alt"></i><h3>Alimentation saine</h3><p>Réduction des graisses et du sel</p></div>
-          <div class="prevention-card"><i class="fas fa-smoking-ban"></i><h3>Arrêt du tabac</h3></div>
-          <div class="prevention-card"><i class="fas fa-spa"></i><h3>Gestion du stress</h3><p>Réduction de la tension psychologique</p></div>
-          <div class="prevention-card"><i class="fas fa-moon"></i><h3>Sommeil suffisant</h3><p>7-8 heures par nuit</p></div>
-        </div>
-        <button class="btn-secondary" id="symptomsFromPreventionBtn">🔘 Symptômes</button>
-      </section>
-
-      <!-- ==================== SECTION URGENCE ==================== -->
-      <section id="urgence" class="dashboard-section">
-        <div class="emergency-card">
-          <h2><i class="fas fa-ambulance"></i> 🚨 Situation médicale urgente</h2>
-          <div class="video-placeholder" id="videoPlaceholder">
-            <i class="fas fa-play-circle"></i>
-            <span>🎥 Vidéo éducative - Explication par un médecin</span>
-          </div>
-          <div class="emergency-instructions">
-            <h3>En cas de douleur thoracique intense :</h3>
-            <ul>
-              <li>Arrêter tout effort</li>
-              <li>S'asseoir ou s'allonger</li>
-              <li>Appeler immédiatement les secours</li>
-            </ul>
-          </div>
-          <div class="emergency-numbers">
-            <div class="number-card">
-              <i class="fas fa-phone-alt"></i>
-              <span>SAMU / secours : <strong>14</strong></span>
-            </div>
-            <div class="number-card">
-              <i class="fas fa-shield-alt"></i>
-              <span>Protection civile : <strong>14 / 1548</strong></span>
-            </div>
-          </div>
-          <div class="golden-hour">
-            <i class="fas fa-hourglass-half"></i>
-            <p>L'infarctus du myocarde ("obstruction d'une artère coronaire") nécessite une prise en charge rapide pendant la <strong>"golden hour"</strong> ("première heure critique après le début des symptômes")</p>
-            <p class="warning">🚨 Chaque minute de retard = perte de cellules cardiaques</p>
-          </div>
-          <button class="btn-emergency btn-large" onclick="window.location.href='tel:14'">🔘 Appeler les urgences</button>
-        </div>
-      </section>
-
-      <!-- ==================== SECTION CONTACT ==================== -->
-      <section id="contact" class="dashboard-section">
-        <div class="section-header">
-          <h2><i class="fas fa-envelope"></i> Comment nous contacter et en savoir plus ?</h2>
-        </div>
-        <div class="contact-grid">
-          <div class="team-info">
-            <div class="team-image-placeholder">
-              <i class="fas fa-user-md"></i>
-              <span>Image: Équipe médicale</span>
-            </div>
-            <h3>Projet : Yahiaoui Abla & Ghemari Bouchra</h3>
-            <div class="disclaimer">
-              <i class="fas fa-exclamation-triangle"></i>
-              <p>Ce site est un outil de sensibilisation et ne remplace pas une consultation médicale</p>
-            </div>
-            <p class="heart-message">❤️ Votre cœur est précieux... n'attendez pas qu'il soit trop tard</p>
-          </div>
-          <div class="contact-form">
-            <h3>Formulaire de contact</h3>
-            <form id="contactForm">
-              <input type="text" id="contactName" placeholder="Votre nom" required>
-              <input type="email" id="contactEmail" placeholder="Votre email" required>
-              <textarea id="contactMessage" placeholder="Votre message..." rows="4" required></textarea>
-              <button type="submit" class="btn-primary">Envoyer</button>
-            </form>
-            <div class="contact-info-simple">
-              <p><i class="fas fa-phone"></i> Téléphone : 14 (Urgences)</p>
-              <p><i class="fas fa-envelope"></i> Email : info@abbeats.dz</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== SECTION: LECTURES MÉDICALES ==================== -->
-      <div class="dashboard-cards-grid">
-        
-        <!-- Medical Readings Card -->
-        <div class="dashboard-card">
-          <h3><i class="fas fa-chart-line"></i> Lectures médicales</h3>
-          <div class="reading-item">
-            <span>HBA1c:</span>
-            <span id="hba1c">--</span>%
-          </div>
-          <div class="reading-item">
-            <span>Tension artérielle:</span>
-            <span id="bp">--</span> mmHg
-          </div>
-          <div class="reading-item">
-            <span>Cholestérol LDL:</span>
-            <span id="cholesterol">--</span> mg/dL
-          </div>
-          <div class="reading-item">
-            <span>Glycémie à jeun:</span>
-            <span id="fastingSugar">--</span> mg/dL
-          </div>
-          <button class="card-btn" id="updateReadingsBtn">Mettre à jour</button>
-        </div>
-        
-        <!-- BMI Calculator Card -->
-        <div class="dashboard-card">
-          <h3><i class="fas fa-calculator"></i> Calculateur IMC</h3>
-          <p>Calculez votre poids idéal</p>
-          <button class="card-btn" id="bmiBtn">Calculer IMC</button>
-        </div>
-        
-        <!-- Appointments Card -->
-        <div class="dashboard-card">
-          <h3><i class="fas fa-calendar-alt"></i> Agenda des rendez-vous</h3>
-          <ul class="appointments-list" id="appointmentsList">
-            <li style="text-align: center; color: #999;">📅 Aucun rendez-vous enregistré</li>
-          </ul>
-          <button class="card-btn" id="addAppointmentBtn">+ Ajouter un rendez-vous</button>
-        </div>
-        
-        <!-- Daily Tips Card -->
-        <div class="dashboard-card">
-          <h3><i class="fas fa-lightbulb"></i> Conseils quotidiens</h3>
-          <div class="tip-text" id="dailyTip"></div>
-          <button class="card-btn" id="newTipBtn">Nouveau conseil</button>
-        </div>
-        
-        <!-- Downloads Card -->
-        <div class="dashboard-card">
-          <h3><i class="fas fa-download"></i> Téléchargements</h3>
-          <div class="download-buttons">
-            <button class="download-btn" data-download="guide">📄 Guide de la crise silencieuse</button>
-            <button class="download-btn" data-download="carte">🪪 Carte patient</button>
-            <button class="download-btn" data-download="alimentation">🥗 Guide nutritionnel</button>
-          </div>
-        </div>
-        
-        <!-- Stats Card -->
-        <div class="dashboard-card">
-          <h3><i class="fas fa-chart-simple"></i> Vos statistiques</h3>
-          <div class="reading-item">
-            <span>Nombre de connexions:</span>
-            <span id="loginCount">0</span>
-          </div>
-          <div class="reading-item">
-            <span>Dernière connexion:</span>
-            <span id="lastLogin"></span>
-          </div>
-          <div class="reading-item">
-            <span>Membre depuis:</span>
-            <span id="memberSince"></span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <!-- History Modal -->
-  <div id="historyModal" class="modal" style="display: none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>📈 Historique des résultats</h3>
-        <button class="modal-close" id="closeHistoryBtn">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div id="historyList"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Google Translate
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'fr',
-        includedLanguages: 'fr,ar,en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
+function showResult(score) {
+    const resultCard = document.getElementById('resultCard');
+    const scoreSpan = document.getElementById('scoreValue');
+    const riskLevelSpan = document.getElementById('riskLevel');
+    
+    if (resultCard) resultCard.style.display = 'block';
+    if (scoreSpan) scoreSpan.textContent = score;
+    
+    document.getElementById('resultat')?.scrollIntoView({ behavior: 'smooth' });
+    
+    let level = '';
+    let levelClass = '';
+    if (score <= 5) {
+        level = '✔ Risque faible';
+        levelClass = 'low';
+    } else if (score <= 10) {
+        level = '⚠ Risque modéré';
+        levelClass = 'medium';
+    } else {
+        level = '🚨 Risque élevé';
+        levelClass = 'high';
     }
     
-    function changeLanguage(lang) {
-      if (lang === 'fr') {
-        window.location.reload();
-      } else if (lang === 'ar') {
-        window.location.href = '?lang=ar';
-      } else if (lang === 'darija') {
-        alert('Langue Darija - Version simplifiée');
-      }
+    if (riskLevelSpan) riskLevelSpan.innerHTML = `<span class="${levelClass}">${level}</span>`;
+    drawGauge(score);
+}
+
+function drawGauge(score) {
+    const canvas = document.getElementById('riskGauge');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = 200;
+    canvas.height = 200;
+    
+    const percentage = Math.min(score / 20, 1);
+    const angle = -Math.PI / 2 + (Math.PI * percentage);
+    
+    ctx.clearRect(0, 0, 200, 200);
+    
+    ctx.beginPath();
+    ctx.arc(100, 100, 80, -Math.PI / 2, Math.PI / 2);
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.lineWidth = 15;
+    ctx.stroke();
+    
+    ctx.beginPath();
+    ctx.arc(100, 100, 80, -Math.PI / 2, angle);
+    
+    if (score <= 5) ctx.strokeStyle = "#16a34a";
+    else if (score <= 10) ctx.strokeStyle = "#f59e0b";
+    else ctx.strokeStyle = "#dc2626";
+    ctx.lineWidth = 15;
+    ctx.stroke();
+}
+
+// ============================================
+// HISTORIQUE
+// ============================================
+function saveToHistory(score) {
+    const history = JSON.parse(localStorage.getItem('abbeats_history') || '[]');
+    history.push({
+        date: new Date().toLocaleDateString('fr-FR'),
+        time: new Date().toLocaleTimeString('fr-FR'),
+        score: score
+    });
+    localStorage.setItem('abbeats_history', JSON.stringify(history));
+}
+
+function showHistory() {
+    const history = JSON.parse(localStorage.getItem('abbeats_history') || '[]');
+    const modal = document.getElementById('historyModal');
+    const historyList = document.getElementById('historyList');
+    
+    if (history.length === 0) {
+        if (historyList) historyList.innerHTML = '<p style="text-align: center;">Aucun résultat enregistré</p>';
+    } else if (historyList) {
+        historyList.innerHTML = '<table class="history-table"><tr><th>Date</th><th>Heure</th><th>Score</th><th>Risque</th></tr>';
+        history.forEach(item => {
+            let risk = item.score <= 5 ? 'Faible' : (item.score <= 10 ? 'Modéré' : 'Élevé');
+            historyList.innerHTML += `<tr><td>${item.date}</td><td>${item.time}</td><td>${item.score}/20</td><td>${risk}</td></tr>`;
+        });
+        historyList.innerHTML += '</table>';
     }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script src="dashboard.js"></script>
-</body>
-</html>
+    if (modal) modal.style.display = 'flex';
+}
+
+// ============================================
+// FONCTION 1: LECTURES MÉDICALES
+// ============================================
+function updateReadings() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10001;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 20px; padding: 25px; max-width: 400px; width: 90%;">
+            <h3 style="color: #e74c3c;">📊 Mettre à jour les lectures</h3>
+            <div style="margin: 15px 0;"><label>HBA1c (%) - Objectif <7%</label><input type="number" id="hba1cInput" step="0.1" placeholder="Ex: 6.5" style="width:100%; padding:10px; margin-top:5px; border-radius:8px; border:1px solid #ddd;"></div>
+            <div style="margin: 15px 0;"><label>Tension artérielle (mmHg)</label><input type="text" id="bpInput" placeholder="Ex: 120/80" style="width:100%; padding:10px; margin-top:5px; border-radius:8px; border:1px solid #ddd;"></div>
+            <div style="margin: 15px 0;"><label>Cholestérol LDL (mg/dL) - Objectif <100</label><input type="number" id="cholesterolInput" placeholder="Ex: 95" style="width:100%; padding:10px; margin-top:5px; border-radius:8px; border:1px solid #ddd;"></div>
+            <div style="margin: 15px 0;"><label>Glycémie à jeun (mg/dL) - Objectif 80-130</label><input type="number" id="fastingSugarInput" placeholder="Ex: 110" style="width:100%; padding:10px; margin-top:5px; border-radius:8px; border:1px solid #ddd;"></div>
+            <div style="display: flex; gap: 10px;"><button id="saveReadingsBtn" style="flex:1; background:#e74c3c; color:white; border:none; padding:12px; border-radius:8px; cursor:pointer;">Enregistrer</button><button id="closeReadingsBtn" style="flex:1; background:#95a5a6; color:white; border:none; padding:12px; border-radius:8px; cursor:pointer;">Annuler</button></div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('saveReadingsBtn').onclick = () => {
+        const hba1c = document.getElementById('hba1cInput').value;
+        const bp = document.getElementById('bpInput').value;
+        const cholesterol = document.getElementById('cholesterolInput').value;
+        const fastingSugar = document.getElementById('fastingSugarInput').value;
+        
+        const userData = JSON.parse(localStorage.getItem(`userData_${currentUser.email}`) || '{}');
+        if (hba1c) { userData.hba1c = hba1c; document.getElementById('hba1c').textContent = hba1c; }
+        if (bp) { userData.bp = bp; document.getElementById('bp').textContent = bp; }
+        if (cholesterol) { userData.cholesterol = cholesterol; document.getElementById('cholesterol').textContent = cholesterol; }
+        if (fastingSugar) { userData.fastingSugar = fastingSugar; document.getElementById('fastingSugar').textContent = fastingSugar; }
+        
+        localStorage.setItem(`userData_${currentUser.email}`, JSON.stringify(userData));
+        modal.remove();
+        showCustomAlert('✅ Lectures mises à jour!', 'Succès');
+    };
+    document.getElementById('closeReadingsBtn').onclick = () => modal.remove();
+}
+
+// ============================================
+// FONCTION 2: CALCULATEUR IMC
+// ============================================
+function calculateBMI() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10001;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 20px; padding: 25px; max-width: 350px; width: 90%; text-align: center;">
+            <h3 style="color: #e74c3c;">⚖️ Calculateur IMC</h3>
+            <div style="margin: 15px 0;"><input type="number" id="weight" placeholder="Poids (kg)" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; margin-bottom:10px;"><input type="number" id="height" step="0.01" placeholder="Taille (m)" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd;"></div>
+            <button id="calcBtn" style="background:#e74c3c; color:white; border:none; padding:12px 25px; border-radius:8px; cursor:pointer;">Calculer</button>
+            <div id="bmiResult" style="margin-top:15px; display:none;"></div>
+            <button id="closeBmiBtn" style="background:#95a5a6; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer; margin-top:15px; width:100%;">Fermer</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('calcBtn').onclick = () => {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const resultDiv = document.getElementById('bmiResult');
+        
+        if (!weight || !height || weight <= 0 || height <= 0) {
+            resultDiv.innerHTML = '<p style="color: red;">Veuillez entrer des valeurs valides</p>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+        
+        const bmi = weight / (height * height);
+        let status = bmi < 18.5 ? 'Insuffisance pondérale' : (bmi < 25 ? 'Poids normal' : (bmi < 30 ? 'Surpoids' : 'Obésité'));
+        resultDiv.innerHTML = `<p style="font-size: 24px; font-weight: bold;">IMC: ${bmi.toFixed(1)}</p><p>${status}</p>`;
+        resultDiv.style.display = 'block';
+    };
+    document.getElementById('closeBmiBtn').onclick = () => modal.remove();
+}
+
+// ============================================
+// FONCTION 3: AGENDA DES RENDEZ-VOUS
+// ============================================
+function loadAppointments() {
+    const appointments = JSON.parse(localStorage.getItem(`appointments_${currentUser.email}`) || '[]');
+    const list = document.getElementById('appointmentsList');
+    if (!list) return;
+    
+    if (appointments.length === 0) {
+        list.innerHTML = '<li style="text-align: center; color: #999;">📅 Aucun rendez-vous enregistré</li>';
+        return;
+    }
+    
+    list.innerHTML = '';
+    appointments.sort((a, b) => new Date(a.date) - new Date(b.date));
+    appointments.forEach((app, index) => {
+        const li = document.createElement('li');
+        li.style.cssText = 'padding: 10px; background: #f8fafc; margin-bottom: 8px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;';
+        li.innerHTML = `<span style="font-weight: bold; color: #1e3c5c;">${app.date}</span><span>${app.title}</span><button onclick="deleteAppointment(${index})" style="background:#e74c3c; color:white; border:none; border-radius:5px; padding:3px 8px; cursor:pointer;">✗</button>`;
+        list.appendChild(li);
+    });
+}
+
+function addAppointment() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 10001;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `;
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 20px; padding: 25px; max-width: 350px; width: 90%;">
+            <h3 style="color: #e74c3c;">📅 Ajouter un rendez-vous</h3>
+            <div style="margin: 15px 0;"><input type="date" id="appDate" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; margin-bottom:10px;"><select id="appType" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd;"><option>ECG cardiaque</option><option>Bilan sanguin</option><option>Consultation cardiologue</option><option>Contrôle diabète</option><option>Consultation nutritionniste</option></select></div>
+            <button id="saveAppBtn" style="background:#e74c3c; color:white; border:none; padding:12px; border-radius:8px; cursor:pointer; width:100%;">Enregistrer</button>
+            <button id="closeAppBtn" style="background:#95a5a6; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer; margin-top:10px; width:100%;">Annuler</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    document.getElementById('saveAppBtn').onclick = () => {
+        const date = document.getElementById('appDate').value;
+        const title = document.getElementById('appType').value;
+        if (!date) { showCustomAlert('Veuillez choisir une date', 'Erreur'); return; }
+        
+        const appointments = JSON.parse(localStorage.getItem(`appointments_${currentUser.email}`) || '[]');
+        appointments.push({ date, title });
+        localStorage.setItem(`appointments_${currentUser.email}`, JSON.stringify(appointments));
+        loadAppointments();
+        modal.remove();
+        showCustomAlert('✅ Rendez-vous ajouté!', 'Succès');
+    };
+    document.getElementById('closeAppBtn').onclick = () => modal.remove();
+}
+
+function deleteAppointment(index) {
+    if (confirm('Supprimer ce rendez-vous?')) {
+        const appointments = JSON.parse(localStorage.getItem(`appointments_${currentUser.email}`) || '[]');
+        appointments.splice(index, 1);
+        localStorage.setItem(`appointments_${currentUser.email}`, JSON.stringify(appointments));
+        loadAppointments();
+        showCustomAlert('✅ Rendez-vous supprimé', 'Succès');
+    }
+}
+
+// ============================================
+// FONCTION 4: CONSEILS QUOTIDIENS
+// ============================================
+const tipsList = [
+    "🚶 Commencez votre journée par 30 minutes de marche",
+    "💧 Buvez 8-10 verres d'eau par jour",
+    "🥗 Mangez des légumes verts riches en magnésium",
+    "😴 Dormez 7-8 heures par nuit",
+    "📊 Contrôlez régulièrement votre glycémie",
+    "❤️ Mesurez votre tension chaque semaine",
+    "🥑 L'huile d'olive est bonne pour le cœur",
+    "🚫 Évitez les sodas et les sucres raffinés",
+    "🐟 Mangez du poisson 2 fois par semaine",
+    "🧘‍♂️ Pratiquez la respiration profonde"
+];
+
+function newTip() {
+    const randomTip = tipsList[Math.floor(Math.random() * tipsList.length)];
+    const tipDiv = document.getElementById('dailyTip');
+    if (tipDiv) tipDiv.innerHTML = randomTip;
+}
+
+// ============================================
+// FONCTION 5: TÉLÉCHARGEMENTS
+// ============================================
+function downloadFile(content, filename) {
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    showCustomAlert('✅ Téléchargement terminé!', 'Succès');
+}
+
+function telechargerGuide() {
+    downloadFile("GUIDE DE LA CRISE CARDIAQUE SILENCIEUSE\n\nSignes d'alerte:\n- Fatigue soudaine\n- Nausées\n- Douleurs dos/mâchoire\n\nAppelez le 14!", 'guide_cardiaque.txt');
+}
+
+function telechargerCarte() {
+    downloadFile("CARTE PATIENT\n\nNom: ................................\nDiabète: ............................\nUrgence: 14\n⚠️ Patient diabétique", 'carte_patient.txt');
+}
+
+function telechargerAlimentation() {
+    downloadFile("GUIDE NUTRITIONNEL\n\nRégime DASH:\n- 5-6 portions légumes\n- Fruits\n- Céréales complètes\n\nRégime Méditerranéen:\n- Huile d'olive\n- Poisson\n- Fruits frais", 'guide_alimentation.txt');
+}
+
+// ============================================
+// FONCTION 6: STATISTIQUES
+// ============================================
+function loadUserStats() {
+    const loginCount = localStorage.getItem(`loginCount_${currentUser.email}`) || 0;
+    const lastLogin = localStorage.getItem(`lastLogin_${currentUser.email}`) || '';
+    const memberSince = localStorage.getItem(`memberSince_${currentUser.email}`) || new Date().toLocaleDateString();
+    
+    const loginCountEl = document.getElementById('loginCount');
+    const lastLoginEl = document.getElementById('lastLogin');
+    const memberSinceEl = document.getElementById('memberSince');
+    
+    if (loginCountEl) loginCountEl.textContent = loginCount;
+    if (lastLoginEl) lastLoginEl.textContent = lastLogin ? new Date(lastLogin).toLocaleDateString() : 'Aujourd\'hui';
+    if (memberSinceEl) memberSinceEl.textContent = memberSince;
+}
+
+function loadUserReadings() {
+    const data = JSON.parse(localStorage.getItem(`userData_${currentUser.email}`) || '{}');
+    if (document.getElementById('hba1c') && data.hba1c) document.getElementById('hba1c').textContent = data.hba1c;
+    if (document.getElementById('bp') && data.bp) document.getElementById('bp').textContent = data.bp;
+    if (document.getElementById('cholesterol') && data.cholesterol) document.getElementById('cholesterol').textContent = data.cholesterol;
+    if (document.getElementById('fastingSugar') && data.fastingSugar) document.getElementById('fastingSugar').textContent = data.fastingSugar;
+}
+
+function updateLoginStats() {
+    if (currentUser.email === 'guest@example.com') return;
+    let count = parseInt(localStorage.getItem(`loginCount_${currentUser.email}`) || '0');
+    count++;
+    localStorage.setItem(`loginCount_${currentUser.email}`, count);
+    localStorage.setItem(`lastLogin_${currentUser.email}`, new Date().toISOString());
+    if (!localStorage.getItem(`memberSince_${currentUser.email}`)) {
+        localStorage.setItem(`memberSince_${currentUser.email}`, new Date().toLocaleDateString());
+    }
+}
+
+// ============================================
+// URGENCE
+// ============================================
+function emergencyAlert() {
+    showCustomAlert("🚨 URGENCE MÉDICALE 🚨\n\nEn cas de douleur thoracique intense :\n• Arrêter tout effort\n• S'asseoir ou s'allonger\n• Appeler immédiatement les secours\n\n📞 SAMU / Secours : 14\n📞 Protection civile : 14 / 1548", "URGENCE");
+}
+
+// ============================================
+// SCROLL
+// ============================================
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================
+// DÉCONNEXION
+// ============================================
+document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    window.location.href = '../signUp/login.html';
+});
+
+// ============================================
+// BOUTONS DE NAVIGATION
+// ============================================
+document.getElementById('startEvaluationBtn')?.addEventListener('click', () => scrollToSection('evaluation'));
+document.getElementById('discoverSymptomsBtn')?.addEventListener('click', () => scrollToSection('symptomes'));
+document.getElementById('findHelpBtn')?.addEventListener('click', () => scrollToSection('urgence'));
+document.getElementById('calculateRiskBtn')?.addEventListener('click', calculateRisk);
+document.getElementById('restartBtn')?.addEventListener('click', () => scrollToSection('evaluation'));
+document.getElementById('preventionBtn')?.addEventListener('click', () => scrollToSection('prevention'));
+document.getElementById('seeExamsBtn')?.addEventListener('click', () => scrollToSection('examens'));
+document.getElementById('emergencyBtn')?.addEventListener('click', emergencyAlert);
+document.getElementById('emergencyResultBtn')?.addEventListener('click', emergencyAlert);
+document.getElementById('historyBtn')?.addEventListener('click', (e) => { e.preventDefault(); showHistory(); });
+document.getElementById('closeHistoryBtn')?.addEventListener('click', () => document.getElementById('historyModal').style.display = 'none');
+
+// ============================================
+// LIER LES BOUTONS DES FONCTIONNALITÉS
+// ============================================
+document.getElementById('updateReadingsBtn')?.addEventListener('click', updateReadings);
+document.getElementById('bmiBtn')?.addEventListener('click', calculateBMI);
+document.getElementById('addAppointmentBtn')?.addEventListener('click', addAppointment);
+document.getElementById('newTipBtn')?.addEventListener('click', newTip);
+
+document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const type = btn.getAttribute('data-download');
+        if (type === 'guide') telechargerGuide();
+        else if (type === 'carte') telechargerCarte();
+        else if (type === 'alimentation') telechargerAlimentation();
+    });
+});
+
+// ============================================
+// FORMULAIRE DE CONTACT
+// ============================================
+document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    showCustomAlert("✅ Message envoyé avec succès! Notre équipe vous répondra dans les plus brefs délais.", "Confirmation");
+    e.target.reset();
+});
+
+// ============================================
+// NAVIGATION LINKS
+// ============================================
+document.querySelectorAll('.dashboard-nav .nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        scrollToSection(targetId);
+    });
+});
+
+// ============================================
+// ALERTE INTELLIGENTE
+// ============================================
+document.getElementById('douleurSelect')?.addEventListener('change', checkSmartAlert);
+document.getElementById('dyspneeSelect')?.addEventListener('change', checkSmartAlert);
+
+// ============================================
+// INITIALISATION
+// ============================================
+updateLoginStats();
+loadUserStats();
+loadUserReadings();
+loadAppointments();
+newTip();
+checkSmartAlert();
+
+// Rendre les fonctions globales
+window.deleteAppointment = deleteAppointment;
