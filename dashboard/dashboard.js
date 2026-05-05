@@ -625,3 +625,33 @@ document.querySelectorAll('.download-btn').forEach(btn => {
         }
     });
 });
+// ============================================
+// FONCTION DE TÉLÉCHARGEMENT PROFESSIONNELLE
+// ============================================
+
+function downloadFile(fileName) {
+    // مسار الملف (نسبة إلى موقع dashboard.html)
+    let filePath = '';
+    
+    // تحديد المسار الصحيح حسب مكان الملف
+    if (window.location.pathname.includes('/dashboard/')) {
+        filePath = `../downloads/${fileName}`;
+    } else {
+        filePath = `downloads/${fileName}`;
+    }
+    
+    console.log('Tentative de téléchargement:', filePath);
+    
+    // Créer un lien temporaire
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.download = fileName;
+    
+    // Déclencher le téléchargement
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Message de confirmation
+    showCustomAlert(`✅ Téléchargement de "${fileName}" démarré`, 'Téléchargement');
+}
