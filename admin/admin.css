@@ -1006,3 +1006,24 @@ body {
     padding: 15px 12px;
   }
 }
+.language-switcher {
+    display: flex;
+    gap: 5px;
+    background: rgba(255,255,255,0.15);
+    padding: 5px 10px;
+    border-radius: 30px;
+}
+
+.lang-option {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.lang-option:hover {
+    background: rgba(255,255,255,0.25);
+}
