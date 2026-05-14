@@ -1314,3 +1314,56 @@ body {
         height: 120px;
     }
 }
+
+
+
+/* ============================================
+   VIDEO STYLES
+   ============================================ */
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 1.5rem auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: #000;
+}
+
+.video-container iframe,
+.video-container video {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+    display: block;
+    border: none;
+}
+
+.video-caption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Pour les écrans mobiles */
+@media (max-width: 768px) {
+    .video-container iframe,
+    .video-container video {
+        min-height: 200px;
+    }
+    
+    .video-caption {
+        font-size: 0.8rem;
+    }
+}
+
+/* Effet au survol */
+.video-container:hover {
+    transform: scale(1.01);
+    transition: transform 0.3s ease;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
