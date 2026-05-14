@@ -5,8 +5,8 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #fef2f2 0%, #eff6ff 100%);
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
   min-height: 100vh;
 }
 
@@ -17,48 +17,60 @@ body {
 }
 
 /* ============================================
-   Header Styles
+   Header Styles (comme dashboard)
    ============================================ */
 .admin-header {
-  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+  background: linear-gradient(135deg, #1e3c5c 0%, #2a5f6e 100%);
   color: white;
-  padding: 1.5rem 2rem;
-  border-radius: 20px;
+  padding: 1.2rem 2rem;
+  border-radius: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .logo-heart {
-  font-size: 2rem;
+  font-size: 2.2rem;
   animation: heartbeat 1.5s ease infinite;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
 }
 
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50% { transform: scale(1.15); }
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .user-info {
   display: flex;
   align-items: center;
   gap: 15px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   padding: 8px 20px;
   border-radius: 40px;
 }
 
+.user-info i {
+  font-size: 1.2rem;
+}
+
 .logout-btn {
-  background: #dc2626;
+  background: #e74c3c;
   color: white;
   border: none;
   padding: 8px 20px;
@@ -72,12 +84,12 @@ body {
 }
 
 .logout-btn:hover {
-  background: #991b1b;
-  transform: scale(1.05);
+  background: #c0392b;
+  transform: scale(1.02);
 }
 
 /* ============================================
-   Statistics Cards
+   Statistics Cards (comme dashboard)
    ============================================ */
 .stats-grid {
   display: grid;
@@ -91,18 +103,19 @@ body {
   border-radius: 20px;
   padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-  border-top: 4px solid #dc2626;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+  border-top: 4px solid #e74c3c;
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
 .stat-card i {
   font-size: 2rem;
-  background: linear-gradient(135deg, #dc2626, #2563eb);
+  background: linear-gradient(135deg, #e74c3c, #2a5f6e);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -117,10 +130,11 @@ body {
 
 .stat-label {
   color: #64748b;
+  font-size: 0.9rem;
 }
 
 /* ============================================
-   Admin Actions Buttons
+   Admin Actions Buttons (comme dashboard)
    ============================================ */
 .admin-actions {
   display: grid;
@@ -138,10 +152,10 @@ body {
   border: none;
   border-radius: 15px;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -151,24 +165,24 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* زر إدارة المواعيد */
+/* Gestion des rendez-vous */
 #manageAppointmentsBtn {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  background: linear-gradient(135deg, #2a5f6e, #1e3c5c);
   color: white;
-  border-bottom: 3px solid #1e3a8a;
+  border-bottom: 3px solid #0f2c40;
 }
 
 #manageAppointmentsBtn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 8px 20px rgba(42, 95, 110, 0.4);
+  background: linear-gradient(135deg, #3a7f8e, #2a5f6e);
 }
 
 #manageAppointmentsBtn:hover i {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.1);
 }
 
-/* زر تصدير البيانات */
+/* Export data */
 #exportDataBtn {
   background: linear-gradient(135deg, #10b981, #059669);
   color: white;
@@ -181,28 +195,20 @@ body {
   background: linear-gradient(135deg, #34d399, #10b981);
 }
 
-#exportDataBtn:hover i {
-  transform: scale(1.1);
-}
-
-/* زر مسح جميع البيانات */
+/* Clear all data */
 #clearAllDataBtn {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
   color: white;
-  border-bottom: 3px solid #991b1b;
+  border-bottom: 3px solid #a93226;
 }
 
 #clearAllDataBtn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
-  background: linear-gradient(135deg, #f87171, #ef4444);
+  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
-#clearAllDataBtn:hover i {
-  transform: scale(1.1);
-}
-
-/* زر النسخ الاحتياطي */
+/* Backup */
 #backupDataBtn {
   background: linear-gradient(135deg, #8b5cf6, #7c3aed);
   color: white;
@@ -215,11 +221,7 @@ body {
   background: linear-gradient(135deg, #a78bfa, #8b5cf6);
 }
 
-#backupDataBtn:hover i {
-  transform: scale(1.1);
-}
-
-/* تأثير الموجة عند الضغط (Ripple Effect) */
+/* Ripple effect */
 .admin-action-btn::after {
   content: '';
   position: absolute;
@@ -239,29 +241,44 @@ body {
 }
 
 /* ============================================
-   Users Table
+   Users Table (comme dashboard)
    ============================================ */
 .users-table-container {
   background: white;
-  border-radius: 20px;
+  border-radius: 25px;
   padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   margin-bottom: 2rem;
+  transition: transform 0.3s;
+}
+
+.users-table-container:hover {
+  transform: translateY(-3px);
 }
 
 .users-table-container h3 {
   color: #1e293b;
   margin-bottom: 1rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .search-box {
   display: flex;
   align-items: center;
   background: #f8fafc;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 0.5rem 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border: 2px solid #e2e8f0;
+  transition: all 0.3s;
+}
+
+.search-box:focus-within {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
 }
 
 .search-box i {
@@ -275,6 +292,7 @@ body {
   outline: none;
   background: transparent;
   font-size: 1rem;
+  font-family: inherit;
 }
 
 .users-table {
@@ -283,10 +301,11 @@ body {
 }
 
 .users-table th {
-  background: linear-gradient(135deg, #dc2626, #2563eb);
+  background: linear-gradient(135deg, #1e3c5c, #2a5f6e);
   color: white;
   padding: 12px;
   text-align: center;
+  font-weight: 600;
 }
 
 .users-table td {
@@ -303,7 +322,7 @@ body {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #dc2626, #2563eb);
+  background: linear-gradient(135deg, #e74c3c, #2a5f6e);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -312,35 +331,45 @@ body {
 }
 
 .delete-btn {
-  background: #dc2626;
+  background: #e74c3c;
   color: white;
   border: none;
   padding: 6px 15px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s;
+  font-weight: 500;
 }
 
 .delete-btn:hover {
-  background: #991b1b;
+  background: #c0392b;
   transform: scale(1.05);
 }
 
 /* ============================================
-   Activity Log
+   Activity Log (comme dashboard)
    ============================================ */
 .activity-log {
   background: white;
-  border-radius: 20px;
+  border-radius: 25px;
   padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   max-height: 400px;
   overflow-y: auto;
+  transition: transform 0.3s;
+}
+
+.activity-log:hover {
+  transform: translateY(-3px);
 }
 
 .activity-log h3 {
   color: #1e293b;
   margin-bottom: 1rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .activity-item {
@@ -350,6 +379,7 @@ body {
   align-items: center;
   gap: 15px;
   transition: all 0.3s;
+  border-radius: 12px;
 }
 
 .activity-item:hover {
@@ -377,7 +407,7 @@ body {
 
 .activity-icon.delete {
   background: #fee2e2;
-  color: #dc2626;
+  color: #e74c3c;
 }
 
 .activity-icon.edit {
@@ -425,6 +455,15 @@ body {
   
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    padding: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
   }
   
   .users-table {
@@ -434,6 +473,15 @@ body {
   .users-table th,
   .users-table td {
     padding: 8px;
+  }
+  
+  .activity-item {
+    flex-wrap: wrap;
+  }
+  
+  .activity-icon {
+    width: 35px;
+    height: 35px;
   }
 }
 
@@ -450,10 +498,33 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #dc2626, #2563eb);
+  background: linear-gradient(135deg, #e74c3c, #2a5f6e);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #b91c1c, #1d4ed8);
+  background: linear-gradient(135deg, #c0392b, #1e3c5c);
 }
+
+/* ============================================
+   Animations supplémentaires
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-card, .admin-action-btn, .users-table-container, .activity-log {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
