@@ -655,3 +655,28 @@ function downloadFile(fileName) {
     // Message de confirmation
     showCustomAlert(`✅ Téléchargement de "${fileName}" démarré`, 'Téléchargement');
 }
+
+
+
+// ============================================
+// FONCTION DE TÉLÉCHARGEMENT POUR FICHIERS DOCX
+// ============================================
+
+function downloadFile(fileName) {
+    // Déterminer le chemin correct
+    let filePath = `downloads/${fileName}`;
+    
+    // Créer un lien de téléchargement
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.download = fileName;
+    link.target = '_blank';
+    
+    // Déclencher le téléchargement
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Message de confirmation
+    showCustomAlert(`✅ Téléchargement de "${fileName}" démarré`, 'Téléchargement');
+}
