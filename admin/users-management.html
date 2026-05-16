@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des utilisateurs - ABbeats</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="logo">
+                <span class="logo-heart">❤️</span>
+                <div class="logo-text">
+                    <h1>ABbeats</h1>
+                    <p class="tagline">Gestion des utilisateurs</p>
+                </div>
+            </div>
+            <button class="back-btn" onclick="window.location.href='admin.html'">
+                <i class="fas fa-arrow-left"></i> Retour
+            </button>
+        </div>
+        
+        <div class="users-table-container">
+            <h3><i class="fas fa-users"></i> Liste des utilisateurs</h3>
+            <div class="table-wrapper">
+                <table class="users-table">
+                    <thead>
+                        <tr><th>#</th><th>Nom</th><th>Email</th><th>Rôle</th><th>Date inscription</th><th>Statut</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody id="usersList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+    <script>
+        function loadUsers() {
+            const tbody = document.getElementById('usersList');
+            tbody.innerHTML = users.map((u, i) => `
+                <tr>
+                    <td>${i+1}</td><td>${u.name}</td><td>${u.email}</td><td>${u.role}</td>
+                    <td>${u.registeredAt}</td>
+                    <td><span class="status-badge ${u.status === 'active' ? 'status-active' : 'status-inactive'}">${u.status}</span></td>
+                    <td><button class="edit-btn" onclick="editUser(${u.id})"><i class="fas fa-edit"></i></button></td>
+                </tr>
+            `).join('');
+        }
+        loadUsers();
+    </script>
+</body>
+</html>
