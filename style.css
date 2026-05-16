@@ -733,3 +733,79 @@ img:not([src]) + .img-placeholder-text {
   }
 }
 
+/* ============================================
+   LOGO STYLES
+   ============================================ */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logo-heart {
+  font-size: 1.8rem;
+  animation: heartbeat 1.5s ease infinite;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #fff, #fca5a5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+/* Logo petit */
+.logo img {
+  width: 35px;
+  height: 35px;
+}
+
+/* Logo moyen (recommandé) */
+.logo img {
+  width: 45px;
+  height: 45px;
+}
+
+/* Logo grand */
+.logo img {
+  width: 55px;
+  height: 55px;
+}
+@media (max-width: 768px) {
+  .logo img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .logo-text {
+    font-size: 1rem;
+  }
+  
+  .logo-heart {
+    font-size: 1.3rem;
+  }
+}
