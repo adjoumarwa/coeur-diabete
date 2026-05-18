@@ -1061,9 +1061,7 @@ img:not([src]) + .img-placeholder-text {
    ABOUT SIMPLE SECTION
    ============================================ */
 
-/* ============================================
-   ABOUT SIMPLE SECTION - Left to Right
-   ============================================ */
+
 
 .about-simple {
   padding: 3rem 0;
@@ -1115,7 +1113,7 @@ img:not([src]) + .img-placeholder-text {
   background-clip: text;
   color: transparent;
   margin-bottom: 0.3rem;
-  text-align: center;
+  text-align: left;
 }
 
 .about-slogan {
