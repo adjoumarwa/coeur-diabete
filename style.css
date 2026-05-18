@@ -1115,6 +1115,7 @@ img:not([src]) + .img-placeholder-text {
   background-clip: text;
   color: transparent;
   margin-bottom: 0.3rem;
+  text-align: center;
 }
 
 .about-slogan {
@@ -1124,6 +1125,7 @@ img:not([src]) + .img-placeholder-text {
   margin-bottom: 1rem;
   font-weight: 500;
   letter-spacing: 0.5px;
+  text-align: left;
 }
 
 .about-description {
@@ -1131,12 +1133,14 @@ img:not([src]) + .img-placeholder-text {
   line-height: 1.7;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
+  text-align: left;
 }
 
 .about-features {
   display: flex;
   flex-wrap: wrap;
   gap: 1.8rem;
+  text-align: left;
 }
 
 .about-features span {
@@ -1146,6 +1150,7 @@ img:not([src]) + .img-placeholder-text {
   color: #1e293b;
   font-size: 0.9rem;
   font-weight: 500;
+  
 }
 
 .about-features i {
