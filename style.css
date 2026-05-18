@@ -1055,3 +1055,118 @@ img:not([src]) + .img-placeholder-text {
 .footer-section:nth-child(2) { animation-delay: 0.2s; }
 .footer-section:nth-child(3) { animation-delay: 0.3s; }
 .footer-section:nth-child(4) { animation-delay: 0.4s; }
+
+
+/* ============================================
+   ABOUT SIMPLE SECTION
+   ============================================ */
+
+.about-simple {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.about-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+/* Image / Logo */
+.about-image {
+  flex: 1;
+  text-align: center;
+  min-width: 200px;
+}
+
+.about-image img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #e74c3c;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s;
+  background: white;
+  padding: 8px;
+}
+
+.about-image img:hover {
+  transform: scale(1.02);
+  border-color: #c0392b;
+}
+
+/* Texte */
+.about-content {
+  flex: 2;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #1e3c5c, #2a5f6e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.about-slogan {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.about-description {
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.about-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.about-features span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.about-features i {
+  color: #e74c3c;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-simple {
+    padding: 2rem 0;
+  }
+  
+  .about-wrapper {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .about-image img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .about-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .about-features {
+    justify-content: center;
+  }
+}
